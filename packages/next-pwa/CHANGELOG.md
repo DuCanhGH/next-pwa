@@ -1,5 +1,11 @@
 # @ducanh2912/next-pwa
 
+## 7.1.1
+
+### Patch Changes
+
+- 360c94a: Fix @ducanh2912/next-pwa not having a README.md on npm
+
 ## 7.1.0
 
 ### Minor Changes
