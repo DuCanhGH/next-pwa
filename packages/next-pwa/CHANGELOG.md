@@ -1,5 +1,17 @@
 # @ducanh2912/next-pwa
 
+## 7.3.0
+
+### Minor Changes
+
+- f224625: feat(core): added support for /\_offline page in appDir.
+
+  - With this version, app/\_offline/page.tsx will automatically enable the fallback worker just like pages/\_offline.tsx.
+
+  chore(deps): updated all dependencies
+
+  - This version also bumps every dependency to their latest versions. This process is done monthly.
+
 ## 7.2.0
 
 ### Minor Changes
