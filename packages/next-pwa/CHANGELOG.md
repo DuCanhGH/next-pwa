@@ -1,5 +1,25 @@
 # @ducanh2912/next-pwa
 
+## 8.1.0
+
+### Minor Changes
+
+- 172eebf: feat(deps): `next-pwa` no longer requires `swc-loader` to be manually installed
+
+  - This package now installs `swc-loader` on its own, and then resolve it using `require.resolve`.
+
+- 172eebf: chore(docs): isolated parts of README.md into SETUP.md for better docs maintenance
+
+  - I found scrolling through README.md to be quite a pain, so I've isolated parts of it into a new file again.
+
+### Patch Changes
+
+- 172eebf: chore(deps): monthly dependencies maintenance
+
+  - Though I've been quite busy recently with Next.js itself (tons of typedRoutes PRs) and my own stuff, I've promised to always perform a monthly dependencies maintenance.
+
+  - `examples/basic` has migrated from `<head />` to metadata with this.
+
 ## 8.0.0
 
 ### Major Changes
