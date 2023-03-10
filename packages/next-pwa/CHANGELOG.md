@@ -1,5 +1,11 @@
 # @ducanh2912/next-pwa
 
+## 8.1.1
+
+### Patch Changes
+
+- 7e5a838: refactor(core): use .swcrc instead of Next's webpack.config.resolve for path aliases.
+
 ## 8.1.0
 
 ### Minor Changes
