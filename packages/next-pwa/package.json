@@ -1,6 +1,6 @@
 {
   "name": "@ducanh2912/next-pwa",
-  "version": "8.5.0",
+  "version": "8.5.1",
   "type": "module",
   "description": "PWA for Next.js, powered by Workbox.",
   "repository": "https://github.com/DuCanhGH/next-pwa",
