@@ -1,5 +1,19 @@
 # @ducanh2912/next-pwa
 
+## 8.6.0
+
+### Minor Changes
+
+- b9dff21: chore(deps): updated workbox to v7
+
+  - This version updates workbox to v7 and other dependencies to latest. It's nice to see that workbox is finally maintained again :)
+
+### Patch Changes
+
+- b9dff21: feat: documentation
+
+  - Added a new docs website and replaced links.
+
 ## 8.5.1
 
 ### Patch Changes
