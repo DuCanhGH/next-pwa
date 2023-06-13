@@ -23,15 +23,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ matrix.pnpm-version }}
       - name: Use Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
       - name: Install changeset CLI
         run: npm i -g @changesets/cli@$(node -p "require('./package.json').devDependencies['@changesets/cli']")
       - name: Ensure that a changelog is added
