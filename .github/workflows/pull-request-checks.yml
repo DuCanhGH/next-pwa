@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
       - name: Use pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -32,7 +35,7 @@ jobs:
       - name: Install changeset CLI
         run: npm i -g @changesets/cli@$(node -p "require('./package.json').devDependencies['@changesets/cli']")
       - name: Ensure that a changelog is added
-        run: npx changeset status
+        run: npx changeset status --since=origin/master
   test:
     name: ⬣, 🔎, 🔨 Test PR
     uses: ./.github/workflows/build-and-test.yml
