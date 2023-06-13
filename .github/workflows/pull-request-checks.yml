@@ -29,8 +29,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
+      - name: Install changeset CLI
+        run: npm i -g @changesets/cli@$(node -p "require('./package.json').devDependencies['@changesets/cli']")
       - name: Ensure that a changelog is added
-        run: npx changeset status --since=master
+        run: changeset status --since=master
   test:
     name: ⬣, 🔎, 🔨 Test PR
     uses: ./.github/workflows/build-and-test.yml
+    secrets: inherit

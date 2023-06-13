@@ -18,14 +18,14 @@ on:
         required: false
         description: "additional steps to run"
         type: string
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_REMOTE_ONLY: true
 jobs:
   build:
     name: ⬣, 🔎, 🔨 Typecheck, lint, and build on Node ${{ matrix.node-version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-      TURBO_REMOTE_ONLY: true
     strategy:
       matrix:
         node-version: ${{ fromJson(inputs.nodeVersion || '["18.x"]') }}
