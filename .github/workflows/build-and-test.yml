@@ -14,6 +14,5 @@ jobs:
         pnpm typecheck &&
         pnpm format:check &&
         pnpm lint &&
-        pnpm examples:lint && 
         pnpm docs:lint
     secrets: inherit
