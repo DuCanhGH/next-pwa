@@ -1,0 +1,36 @@
+name: Check a pull request
+on:
+  pull_request:
+    types: [opened, synchronize]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_REMOTE_ONLY: true
+jobs:
+  ensure_changelog_exists:
+    name: 🔎 Ensure that .changeset is not empty
+    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        node-version: ["18.x"]
+        pnpm-version: ["8.x"]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ matrix.pnpm-version }}
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: Ensure that a changelog is added
+        run: npx changeset status --since=master
+  test:
+    name: ⬣, 🔎, 🔨 Test PR
+    uses: ./.github/workflows/build-and-test.yml

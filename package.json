@@ -19,6 +19,7 @@
     "examples:dev": "cross-env FORCE_COLOR=1 turbo run dev --parallel --filter=./examples/*",
     "examples:lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./examples/*",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./packages/*",
     "lint-staged": "lint-staged",
     "new-changeset": "changeset",
@@ -27,6 +28,7 @@
     "typecheck": "cross-env FORCE_COLOR=1 turbo run typecheck"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.1",
     "@ducanh2912/next-pwa": "workspace:*",
     "@ducanh2912/next-sw": "workspace:*",

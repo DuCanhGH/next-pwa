@@ -5,7 +5,6 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   close-issues:
     runs-on: ubuntu-latest

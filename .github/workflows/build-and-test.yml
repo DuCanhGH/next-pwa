@@ -1,0 +1,19 @@
+name: Build and test
+on: [workflow_call]
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_REMOTE_ONLY: true
+jobs:
+  # TODO: add tests
+  build_and_test:
+    name: 🔎 Typecheck, check formatting and lint
+    uses: ./.github/workflows/build-reusable.yml
+    with:
+      afterBuild: |
+        pnpm typecheck &&
+        pnpm format:check &&
+        pnpm lint &&
+        pnpm examples:lint && 
+        pnpm docs:lint
+    secrets: inherit
