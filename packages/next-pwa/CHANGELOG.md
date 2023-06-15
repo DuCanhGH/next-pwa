@@ -1,5 +1,16 @@
 # @ducanh2912/next-pwa
 
+## 8.7.0
+
+### Minor Changes
+
+- [`fa08192`](https://github.com/DuCanhGH/next-pwa/commit/fa08192ef4bf993f6ed80cf392ab6cefe9eb366d) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat(next-pwa, experimental): aggressiveFrontEndNavCaching
+
+  - This feature, combined with `cacheFrontEndNav`, will cache `<link rel="stylesheet" href="" />` and `<script src="" />` on frontend navigation. This allows
+    pages which have only been visited through that method to work offline when directly visited.
+
+  - Frontend navigation caching has also been offloaded to a separate worker with this feature.
+
 ## 8.6.0
 
 ### Minor Changes
