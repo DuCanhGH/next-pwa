@@ -16,11 +16,16 @@ export const buildSWEntryWorker = ({
   id,
   destDir,
   minify,
+  shouldGenSWEWorker,
 }: {
   id: string;
   destDir: string;
   minify: boolean;
+  shouldGenSWEWorker: boolean;
 }) => {
+  if (!shouldGenSWEWorker) {
+    return undefined;
+  }
   const name = `sw-entry-worker-${id}.js`;
   const swEntryWorkerEntry = path.join(__dirname, `sw-entry-worker.js`);
 

@@ -159,18 +159,18 @@ const withPWAInit = (pluginOptions: PluginOptions = {}): WithPWA => {
 
         if (!options.isServer) {
           const _dest = path.join(options.dir, dest);
+          const sweWorkerName = buildSWEntryWorker({
+            id: buildId,
+            destDir: _dest,
+            minify: !dev,
+            shouldGenSWEWorker: cacheOnFrontEndNav,
+          });
 
-          if (cacheOnFrontEndNav) {
-            config.plugins.push(
-              new webpack.DefinePlugin({
-                __PWA_SW_ENTRY_WORKER__: `'${buildSWEntryWorker({
-                  id: buildId,
-                  destDir: _dest,
-                  minify: !dev,
-                })}'`,
-              })
-            );
-          }
+          config.plugins.push(
+            new webpack.DefinePlugin({
+              __PWA_SW_ENTRY_WORKER__: sweWorkerName && `'${sweWorkerName}'`,
+            })
+          );
 
           const customWorkerScriptName = buildCustomWorker({
             id: buildId,
