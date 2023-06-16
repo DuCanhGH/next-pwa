@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 8.7.1
+
+### Patch Changes
+
+- [#34](https://github.com/DuCanhGH/next-pwa/pull/34) [`9850306`](https://github.com/DuCanhGH/next-pwa/commit/9850306b8864de0b09ea6573904369237d48b6ab) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed `__PWA_SW_ENTRY_WORKER__` being undefined
+
+  - This happens when `cacheOnFrontEndNav` is not enabled, which causes `webpack.DefinePlugin` to not be called.
+
 ## 8.7.0
 
 ### Minor Changes

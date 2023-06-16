@@ -1,5 +1,12 @@
 # docs
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`9850306`](https://github.com/DuCanhGH/next-pwa/commit/9850306b8864de0b09ea6573904369237d48b6ab)]:
+  - @ducanh2912/next-pwa@8.7.1
+
 ## 1.0.2
 
 ### Patch Changes
