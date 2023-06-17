@@ -15,7 +15,7 @@
     "express": "4.18.2",
     "fastify-compress": "4.1.0",
     "i18next": "22.5.1",
-    "next": "13.4.4",
+    "next": "latest",
     "next-i18next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

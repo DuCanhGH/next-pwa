@@ -5,6 +5,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/.eslintrc.cjs",
-    "**/.ncurc.js"
+    "**/.ncurc.js",
+    "jest.config.ts"
   ]
 }

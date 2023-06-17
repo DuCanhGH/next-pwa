@@ -22,6 +22,7 @@ module.exports = {
       "docs/tsconfig.json",
       "packages/*/tsconfig.json",
       "examples/*/tsconfig.json",
+      "__tests__/tsconfig.json",
     ],
     ecmaVersion: "latest",
     sourceType: "module",

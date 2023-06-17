@@ -1,5 +1,6 @@
 packages:
   - "docs"
+  - "__tests__"
   - "packages/**"
   - "examples/**"
   - "!examples/**/.next"

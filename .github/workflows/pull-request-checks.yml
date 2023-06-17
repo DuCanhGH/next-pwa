@@ -17,6 +17,7 @@ jobs:
       matrix:
         node-version: ["18.x"]
         pnpm-version: ["8.x"]
+    if: ${{ !contains(github.event.pull_request.title, 'Publish packages') }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
