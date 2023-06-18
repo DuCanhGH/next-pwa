@@ -7,6 +7,7 @@ createDescribe(
     it("should render", async () => {
       const $ = await next.render("/");
       expect($("#welcome-text").text()).toBe("This is a Next.js PWA!");
+      expect($("#app-root-text").text()).toBe("This is placed at _app.tsx!");
     });
 
     it("should fetch image", async () => {

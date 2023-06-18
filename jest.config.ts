@@ -11,6 +11,7 @@ const customJestConfig: Config = {
   verbose: true,
   rootDir: "__tests__",
   moduleDirectories: ["node_modules", "<rootDir>/"],
+  setupFilesAfterEnv: ["<rootDir>/jest-setup-after-env.ts"],
 };
 
 export default createJestConfig(customJestConfig);
