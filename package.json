@@ -5,6 +5,7 @@
   "private": true,
   "workspaces": [
     "docs",
+    "__tests__",
     "packages/**",
     "examples/**",
     "!examples/**/.next"
@@ -15,6 +16,7 @@
     "dev": "cross-env FORCE_COLOR=1 turbo run dev --parallel --filter=./packages/*",
     "docs:build": "cross-env FORCE_COLOR=1 turbo run build --filter=./docs",
     "docs:lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./docs",
+    "empty-chset": "changeset --empty",
     "examples:build": "cross-env FORCE_COLOR=1 turbo run build --filter=./examples/*",
     "examples:dev": "cross-env FORCE_COLOR=1 turbo run dev --parallel --filter=./examples/*",
     "examples:lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./examples/*",
@@ -22,7 +24,6 @@
     "format:check": "prettier --check .",
     "lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./packages/*",
     "lint-staged": "lint-staged",
-    "new-changeset": "changeset",
     "prepare": "husky install",
     "publish-packages": "pnpm typecheck && pnpm lint && pnpm build && changeset publish",
     "typecheck": "cross-env FORCE_COLOR=1 turbo run typecheck"

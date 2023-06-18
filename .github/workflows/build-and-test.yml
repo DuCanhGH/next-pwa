@@ -20,12 +20,12 @@ jobs:
     uses: ./.github/workflows/build-reusable.yml
     with:
       afterBuild: |
-        NEXT_TEST_MODE=dev pnpm jest __tests__/e2e
+        NEXT_TEST_MODE=dev pnpm jest __tests__/e2e --ci --runInBand
     secrets: inherit
   test-prod:
     name: ⚫️ Run Jest (production mode) tests
     uses: ./.github/workflows/build-reusable.yml
     with:
       afterBuild: |
-        NEXT_TEST_MODE=start pnpm jest __tests__/e2e
+        NEXT_TEST_MODE=start pnpm jest __tests__/e2e --ci --runInBand
     secrets: inherit

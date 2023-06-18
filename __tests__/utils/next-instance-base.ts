@@ -170,8 +170,15 @@ export abstract class NextInstance {
     await Promise.all(copyFilePromise);
   }
   protected async clean() {
-    await fs.rm(this._appTestDir, { recursive: true, force: true });
-    await fs.rm(this._testDir, { recursive: true, force: true });
+    try {
+      await fs.rm(this._testDir, {
+        recursive: true,
+        force: true,
+        maxRetries: 10,
+      });
+    } catch (err) {
+      console.error(`failed to clean up: ${JSON.stringify(err, null, 2)}`);
+    }
   }
   abstract setup(sourceDir: string): Promise<void>;
   abstract spawn(): Promise<void>;
