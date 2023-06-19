@@ -29,6 +29,5 @@ To develop locally:
 1. When you are ready to push, make a fork and then run:
    ```
    git remote set-url origin https://github.com/YOUR_NAME/next-pwa
-   git branch -m MY_BRANCH_NAME
    git push -u origin MY_BRANCH_NAME
    ```
