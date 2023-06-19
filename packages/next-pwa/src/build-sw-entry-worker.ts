@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,7 +9,6 @@ import webpack from "webpack";
 import swcRc from "./.swcrc.json";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-const require = createRequire(import.meta.url);
 
 export const buildSWEntryWorker = ({
   id,
@@ -55,7 +53,7 @@ export const buildSWEntryWorker = ({
     },
     resolveLoader: {
       alias: {
-        "swc-loader": require.resolve("swc-loader"),
+        "swc-loader": path.join(__dirname, "swc-loader.cjs"),
       },
     },
     module: {

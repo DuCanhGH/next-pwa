@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,7 +11,6 @@ import type { FallbackRoutes } from "../types.js";
 import { getFallbackEnvs } from "./get-fallback-envs.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-const require = createRequire(import.meta.url);
 
 export const buildFallbackWorker = ({
   id,
@@ -63,7 +61,7 @@ export const buildFallbackWorker = ({
     },
     resolveLoader: {
       alias: {
-        "swc-loader": require.resolve("swc-loader"),
+        "swc-loader": path.join(__dirname, "swc-loader.cjs"),
       },
     },
     module: {

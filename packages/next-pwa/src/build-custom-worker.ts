@@ -1,5 +1,4 @@
 import fs from "node:fs";
-import { createRequire } from "node:module";
 import path from "node:path";
 
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
@@ -10,8 +9,6 @@ import type { Configuration } from "webpack";
 import webpack from "webpack";
 
 import swcRc from "./.swcrc.json";
-
-const require = createRequire(import.meta.url);
 
 export const buildCustomWorker = ({
   id,
@@ -103,7 +100,7 @@ export const buildCustomWorker = ({
     },
     resolveLoader: {
       alias: {
-        "swc-loader": require.resolve("swc-loader"),
+        "swc-loader": path.join(__dirname, "swc-loader.cjs"),
       },
     },
     module: {

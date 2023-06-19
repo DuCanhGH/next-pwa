@@ -56,11 +56,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@swc/core": "1.3.62",
+    "babel-loader": "9.1.2",
     "clean-webpack-plugin": "4.0.0",
     "fast-glob": "3.2.12",
     "semver": "7.5.1",
-    "swc-loader": "0.2.3",
     "terser-webpack-plugin": "5.3.9",
     "workbox-build": "7.0.0",
     "workbox-core": "7.0.0",
@@ -73,6 +72,7 @@
     "@rollup/plugin-node-resolve": "15.1.0",
     "@rollup/plugin-terser": "0.4.3",
     "@rollup/plugin-typescript": "11.1.1",
+    "@swc/core": "1.3.62",
     "@types/node": "20.2.6",
     "@types/semver": "7.5.0",
     "chalk": "5.2.0",
