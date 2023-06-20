@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -14,7 +13,6 @@ import { getFallbackEnvs } from "./core-utils.js";
 import { runtimeCachingConverter } from "./runtime-caching-converter.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-const require = createRequire(import.meta.url);
 
 export type ImportScripts = string[] | undefined;
 
@@ -94,7 +92,7 @@ export const generateSW = ({
     },
     resolveLoader: {
       alias: {
-        "swc-loader": require.resolve("swc-loader"),
+        "swc-loader": path.join(__dirname, "swc-loader.cjs"),
       },
     },
     module: {

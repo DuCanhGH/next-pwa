@@ -52,6 +52,14 @@ const files = [
     },
     external: ["workbox-window"],
   },
+  {
+    input: "src/swc-loader.ts",
+    output: {
+      file: "dist/swc-loader.cjs",
+      format: "cjs",
+    },
+    external: ["semver"],
+  },
 ];
 
 /** @type {FileEntry[]} */
