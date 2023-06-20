@@ -1,5 +1,27 @@
 # @ducanh2912/next-pwa
 
+## 9.0.0
+
+### Major Changes
+
+- [#38](https://github.com/DuCanhGH/next-pwa/pull/38) [`7bd3ba7`](https://github.com/DuCanhGH/next-pwa/commit/7bd3ba7023f5088a1e8bd7a8779cb99cd2bf369d) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - BREAKING CHANGE(next-pwa, next-sw): use next's swc bindings instead of swc/core
+
+  What: From now on we will try to resolve `next/dist/build/swc` in `swc-loader` (needed to use `cacheOnFrontEndNav`, custom workers and offline fallbacks). If it can't be resolved, we will fallback to `@swc/core` (needed to be installed manually).
+
+  Why: This is to save disk space (we don't need two `@swc/core`) and avoid exceeding Vercel's serverless size limit.
+
+  Why use Next's `next/dist/build/swc`: it seems that `@next/mdx` is also doing the same for their `mdx` Rust compiler.
+
+  How to upgrade: Usually you don't need to do anything. But if you see this line when you build your Next app: `Using @swc/core to compile next-pwa's features. Please install it if you haven't.`, please do as instructed.
+
+- [#38](https://github.com/DuCanhGH/next-pwa/pull/38) [`7bd3ba7`](https://github.com/DuCanhGH/next-pwa/commit/7bd3ba7023f5088a1e8bd7a8779cb99cd2bf369d) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - BREAKING CHANGE(requirements): bump minimum Next.js version to v11
+
+  What: `next-pwa`'s minimum supported Next.js version is now 11.0.0.
+
+  Why: I noticed that `workbox-webpack-plugin` no longer works with Next.js 9 and 10, so this bumps the minimum supported Next.js version to v11.
+
+  How to upgrade: Bump `next` to at least 11.0.0.
+
 ## 8.7.1
 
 ### Patch Changes
