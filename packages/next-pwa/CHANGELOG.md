@@ -1,5 +1,17 @@
 # @ducanh2912/next-pwa
 
+## 9.0.1
+
+### Patch Changes
+
+- [`8cb59af`](https://github.com/DuCanhGH/next-pwa/commit/8cb59afd18d057708adb364623101b4a7cf78cf9) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(swc-loader): only log when both swc sources can't be resolved
+
+  - Previously, swc-loader used to always log "Using @swc/core to compile next-pwa's features. Please install it if you haven't." if `next/dist/build/swc` can't be resolved. This can get annoying, so this changes it so that it only logs when both sources can't be resolved.
+
+- [`8cb59af`](https://github.com/DuCanhGH/next-pwa/commit/8cb59afd18d057708adb364623101b4a7cf78cf9) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - chore(next-pwa): removed `app/_offline/page.js` auto-detect for offline fallbacks
+
+  - A part of `v9`'s breaking changes.
+
 ## 9.0.0
 
 ### Major Changes
