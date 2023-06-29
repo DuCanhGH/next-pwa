@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.1.0
+
+### Minor Changes
+
+- [`0178390`](https://github.com/DuCanhGH/next-pwa/commit/0178390cea97bcbae31bf9ae9da587b93b0e97e5) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat(next-pwa): minify custom workers, sw-entry's workers and fallback workers using swc
+
+  - `next-pwa` should now use swc instead of terser to minify these.
+
 ## 9.0.1
 
 ### Patch Changes
