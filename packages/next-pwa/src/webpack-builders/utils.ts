@@ -4,15 +4,17 @@ import { fileURLToPath } from "node:url";
 import TerserPlugin from "terser-webpack-plugin";
 import type { Configuration } from "webpack";
 
-import swcRc from "../.swcrc.json";
+import defaultSwcRc from "../.swcrc.json";
 import { TERSER_OPTIONS } from "./constants.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export const getSharedWebpackConfig = ({
   shouldMinify = true,
+  swcRc = defaultSwcRc,
 }: {
   shouldMinify?: boolean;
+  swcRc?: Record<string, any>;
 }): Configuration => {
   const optimization = shouldMinify && {
     minimize: true,
@@ -25,7 +27,7 @@ export const getSharedWebpackConfig = ({
   };
   return {
     resolve: {
-      extensions: [".js"],
+      extensions: [".js", ".ts"],
       fallback: {
         module: false,
         dgram: false,

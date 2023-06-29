@@ -7,7 +7,7 @@ import { addPathAliasesToSWC, logger } from "utils";
 import type { Configuration } from "webpack";
 import webpack from "webpack";
 
-import swcRc from "../.swcrc.json";
+import defaultSwcRc from "../.swcrc.json";
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
@@ -61,6 +61,8 @@ export const buildCustomWorker = ({
   logger.info(`Custom worker found: ${customWorkerEntry}`);
   logger.info(`Building custom worker: ${path.join(destDir, name)}...`);
 
+  const swcRc = defaultSwcRc;
+
   if (tsconfig && tsconfig.compilerOptions && tsconfig.compilerOptions.paths) {
     addPathAliasesToSWC(
       swcRc,
@@ -78,7 +80,10 @@ export const buildCustomWorker = ({
   }
 
   webpack({
-    ...getSharedWebpackConfig({ shouldMinify: NextPWAContext.shouldMinify }),
+    ...getSharedWebpackConfig({
+      swcRc,
+      shouldMinify: NextPWAContext.shouldMinify,
+    }),
     mode: NextPWAContext.shouldMinify ? "production" : "development",
     target: "webworker",
     entry: {

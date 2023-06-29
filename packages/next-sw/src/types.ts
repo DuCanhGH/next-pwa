@@ -1,6 +1,6 @@
 import type { Asset, Compilation } from "webpack";
 
-import type { ImportScripts } from "./build/generate-sw/core.js";
+export type ImportScripts = string[] | undefined;
 
 export type FilterEntry =
   | string

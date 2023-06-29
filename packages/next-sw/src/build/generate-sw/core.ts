@@ -8,13 +8,15 @@ import type { Configuration, default as Webpack } from "webpack";
 
 import swcRc from "../../.swcrc.json";
 import type { ManifestEntry } from "../../private-types.js";
-import type { FallbackRoutes, RuntimeCaching } from "../../types.js";
+import type {
+  FallbackRoutes,
+  ImportScripts,
+  RuntimeCaching,
+} from "../../types.js";
 import { getFallbackEnvs } from "./core-utils.js";
 import { runtimeCachingConverter } from "./runtime-caching-converter.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-
-export type ImportScripts = string[] | undefined;
 
 export interface GenerateSWConfig {
   id: string;
