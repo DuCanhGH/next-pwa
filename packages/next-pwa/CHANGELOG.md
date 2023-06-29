@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.1.1
+
+### Patch Changes
+
+- [#44](https://github.com/DuCanhGH/next-pwa/pull/44) [`8feffa0`](https://github.com/DuCanhGH/next-pwa/commit/8feffa0073ccf0a50a290ebe111953078b8877a6) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed `next-pwa` not being minified properly
+
+  - This is due to the change done in 9.1.0. I forgot to configure `jsc.minify`, so `next-pwa` is minified using the default options.
+
 ## 9.1.0
 
 ### Minor Changes
