@@ -52,7 +52,7 @@
     "rimraf": "5.0.1",
     "shell-quote": "1.8.1",
     "tslib": "2.6.0",
-    "turbo": "1.10.6",
+    "turbo": "1.10.3",
     "typescript": "5.2.0-dev.20230628",
     "webpack": "5.88.1"
   },
