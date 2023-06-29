@@ -538,6 +538,12 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
 
+  packages/constants:
+    devDependencies:
+      '@swc/core':
+        specifier: 1.3.67
+        version: 1.3.67
+
   packages/next-pwa:
     dependencies:
       clean-webpack-plugin:
@@ -589,6 +595,9 @@ importers:
       chalk:
         specifier: 5.2.0
         version: 5.2.0
+      constants:
+        specifier: workspace:*
+        version: link:../constants
       next:
         specifier: 13.4.7
         version: 13.4.7(@babel/core@7.20.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -656,6 +665,9 @@ importers:
       chalk:
         specifier: 5.2.0
         version: 5.2.0
+      constants:
+        specifier: workspace:*
+        version: link:../constants
       next:
         specifier: 13.4.7
         version: 13.4.7(@babel/core@7.20.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -718,6 +730,9 @@ importers:
       '@types/semver':
         specifier: 7.5.0
         version: 7.5.0
+      constants:
+        specifier: workspace:*
+        version: link:../constants
       rollup:
         specifier: 3.25.3
         version: 3.25.3

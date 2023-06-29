@@ -49,6 +49,7 @@
     "@rollup/plugin-typescript": "11.1.2",
     "@types/node": "20.3.2",
     "chalk": "5.2.0",
+    "constants": "workspace:*",
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",

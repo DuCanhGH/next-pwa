@@ -10,6 +10,7 @@ import json from "@rollup/plugin-json";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
 import typescript from "@rollup/plugin-typescript";
+import { swcConfig } from "constants/swc-config";
 import { defineConfig } from "rollup";
 import dts from "rollup-plugin-dts";
 
@@ -113,25 +114,8 @@ for (const { input, output, external, plugins } of files) {
           }),
         swc({
           swc: {
-            module: {
-              type: "nodenext",
-              lazy: true,
-              importInterop: "swc",
-            },
-            jsc: {
-              parser: {
-                syntax: "typescript",
-                tsx: false,
-                dynamicImport: true,
-                decorators: false,
-              },
-              transform: {
-                react: undefined,
-              },
-              target: "esnext",
-              loose: false,
-            },
-            minify: true,
+            ...swcConfig,
+            minify: !isDev,
           },
         }),
         ...[plugins ?? []],

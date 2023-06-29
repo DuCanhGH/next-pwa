@@ -1,0 +1,24 @@
+{
+  "name": "constants",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      "swc-config": [
+        "./src/swc-config.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    "./swc-config": {
+      "types": "./src/swc-config.d.ts",
+      "default": "./src/swc-config.js"
+    }
+  },
+  "devDependencies": {
+    "@swc/core": "1.3.67"
+  }
+}

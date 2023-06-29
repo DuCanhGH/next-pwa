@@ -7,6 +7,7 @@
  */
 import nodeResolve from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
+import { swcConfig } from "constants/swc-config";
 import { defineConfig } from "rollup";
 
 /** @type {FileEntry[]} */
@@ -35,24 +36,7 @@ export default files.map(({ input, output, external, plugins }) =>
       }),
       swc({
         swc: {
-          module: {
-            type: "nodenext",
-            lazy: true,
-            importInterop: "swc",
-          },
-          jsc: {
-            parser: {
-              syntax: "typescript",
-              tsx: false,
-              dynamicImport: true,
-              decorators: false,
-            },
-            transform: {
-              react: undefined,
-            },
-            target: "esnext",
-            loose: false,
-          },
+          ...swcConfig,
           minify: true,
         },
       }),
