@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.1.3
+
+### Patch Changes
+
+- [`4d13948`](https://github.com/DuCanhGH/next-pwa/commit/4d13948375d144a89bed858d36aee561bc987ca4) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed swc-minify crashing build when all swc sources can't be resolved
+
+  - The new behaviour should now be using `terser-webpack-plugin`'s `terserMinify` when they can't be found.
+
 ## 9.1.2
 
 ### Patch Changes
