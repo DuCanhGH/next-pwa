@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.1.2
+
+### Patch Changes
+
+- [`33282e1`](https://github.com/DuCanhGH/next-pwa/commit/33282e1fb59a66a1e91af1679d1dae9c2b388645) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed `@swc/core` not found
+
+  - This is due to our change to `terser-webpack-plugin`'s `TerserPlugin.swcMinify`, which tries to resolve `@swc/core`. It is not installed by default in our case.
+
 ## 9.1.1
 
 ### Patch Changes
