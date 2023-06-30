@@ -3,7 +3,7 @@ import type { Compiler } from "@swc/core";
 export const resolveSwc = () => {
   let swc: Compiler | undefined;
 
-  for (const swcSource of ["next/dist/build/swc", "@swc/core"]) {
+  for (const swcSource of ["@swc/core", "next/dist/build/swc"]) {
     try {
       swc = require(swcSource);
       break;

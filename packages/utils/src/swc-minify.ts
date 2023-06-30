@@ -50,14 +50,23 @@ export const swcMinify = async (
     };
   };
 
+  const fallbackToTerser = () => {
+    return (
+      require("terser-webpack-plugin") as typeof TerserWebpack
+    ).terserMinify(input, sourceMap, minimizerOptions, false);
+  };
+
   let swc: Compiler;
   try {
     swc = resolveSwc();
   } catch {
     // swc might not be available, fallback to terser
-    return (
-      require("terser-webpack-plugin") as typeof TerserWebpack
-    ).terserMinify(input, sourceMap, minimizerOptions, false);
+    return fallbackToTerser();
+  }
+
+  if (!swc.minify) {
+    // turns out that older versions of Next had `next/dist/build/swc` with no `swc.minify`...
+    return fallbackToTerser();
   }
 
   // Copy `swc` options
