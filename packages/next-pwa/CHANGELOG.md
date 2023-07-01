@@ -1,5 +1,11 @@
 # @ducanh2912/next-pwa
 
+## 9.1.4
+
+### Patch Changes
+
+- [#49](https://github.com/DuCanhGH/next-pwa/pull/49) [`b53cf03`](https://github.com/DuCanhGH/next-pwa/commit/b53cf034bbc6013ac94ebbb63bc88b633ff51102) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed build crashing when swcMinify is set to false
+
 ## 9.1.3
 
 ### Patch Changes
