@@ -5,4 +5,4 @@ export { loadTSConfig } from "./load-tsconfig.js";
 export * as logger from "./logger.js";
 export { resolveSwc } from "./resolve-swc.js";
 export { swcLoader } from "./swc-loader.js";
-export { swcMinify } from "./swc-minify.js";
+export { terserMinify } from "./terser-minify.js";

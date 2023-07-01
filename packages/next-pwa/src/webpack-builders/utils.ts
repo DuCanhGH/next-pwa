@@ -1,15 +1,37 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import type { MinimizerOptions, TerserOptions } from "terser-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
-import { swcMinify } from "utils";
+import { resolveSwc, terserMinify } from "utils";
 import type { Configuration } from "webpack";
 
 import defaultSwcRc from "../.swcrc.json";
-import { TERSER_OPTIONS } from "./constants.js";
 import { NextPWAContext } from "./context.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+const resolveTerserOptions = (): MinimizerOptions<TerserOptions> & {
+  resolveSwc: typeof resolveSwc;
+  useSwcMinify: boolean | undefined;
+} => ({
+  compress: {
+    ecma: 5,
+    comparisons: false,
+    inline: 2,
+  },
+  mangle: {
+    safari10: true,
+  },
+  format: {
+    ecma: 5,
+    safari10: true,
+    comments: false,
+    ascii_only: true,
+  },
+  resolveSwc,
+  useSwcMinify: NextPWAContext.useSwcMinify,
+});
 
 export const getSharedWebpackConfig = ({
   swcRc = defaultSwcRc,
@@ -20,10 +42,8 @@ export const getSharedWebpackConfig = ({
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        minify: NextPWAContext.useSwcMinify
-          ? swcMinify
-          : TerserPlugin.terserMinify,
-        terserOptions: TERSER_OPTIONS,
+        minify: terserMinify,
+        terserOptions: resolveTerserOptions(),
       }),
     ],
   };
