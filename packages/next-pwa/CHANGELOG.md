@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.2.0
+
+### Minor Changes
+
+- [#53](https://github.com/DuCanhGH/next-pwa/pull/53) [`165f4c3`](https://github.com/DuCanhGH/next-pwa/commit/165f4c398ae5f58e6586501db778a0a0ca8ade2c) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat: use Next's webpack instead of importing a new one
+
+  - `next-pwa` should now use Next's webpack instance to avoid having multiple webpack copies.
+
 ## 9.1.4
 
 ### Patch Changes
