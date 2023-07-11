@@ -46,7 +46,7 @@ export abstract class NextInstance {
       tmpDir,
       `next-pwa-test-${Date.now()}-${(Math.random() * 1000) | 0}`
     );
-    this._appTestDir = path.join(this._testDir, "__tests__");
+    this._appTestDir = path.join(this._testDir, "next-pwa-e2e-test");
 
     if (!existsSync(this._testDir)) {
       await fs.mkdir(this._testDir);
@@ -66,6 +66,8 @@ export abstract class NextInstance {
     }
 
     this._dependencies = {
+      "@ducanh2912/next-pwa": "workspace:*",
+      "@ducanh2912/next-sw": "workspace:*",
       next: "latest",
       react: "latest",
       "react-dom": "latest",
