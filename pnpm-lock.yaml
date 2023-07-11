@@ -47,6 +47,9 @@ importers:
       eslint-config-turbo:
         specifier: 1.10.6
         version: 1.10.6(eslint@8.43.0)
+      eslint-plugin-import:
+        specifier: 2.27.5
+        version: 2.27.5(@typescript-eslint/parser@5.60.1)(eslint-import-resolver-typescript@3.5.3)(eslint@8.43.0)
       eslint-plugin-simple-import-sort:
         specifier: 10.0.0
         version: 10.0.0(eslint@8.43.0)
@@ -86,9 +89,6 @@ importers:
       typescript:
         specifier: 5.2.0-dev.20230628
         version: 5.2.0-dev.20230628
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   docs:
     dependencies:
@@ -247,9 +247,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/custom-server:
     dependencies:
@@ -299,9 +296,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1(@swc/core@1.3.67)
 
   examples/custom-worker:
     dependencies:
@@ -330,9 +324,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/lifecycle:
     dependencies:
@@ -361,9 +352,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/next-i18next:
     dependencies:
@@ -410,9 +398,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/next-image:
     dependencies:
@@ -441,9 +426,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/offline-fallback-v2:
     dependencies:
@@ -475,9 +457,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/web-push:
     dependencies:
@@ -512,9 +491,6 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
-      webpack:
-        specifier: 5.88.1
-        version: 5.88.1
 
   examples/workboxless:
     dependencies:
@@ -577,6 +553,12 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
     devDependencies:
+      '@ducanh2912/constants':
+        specifier: workspace:*
+        version: link:../constants
+      '@ducanh2912/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@rollup/plugin-alias':
         specifier: 5.0.0
         version: 5.0.0(rollup@3.25.3)
@@ -601,9 +583,6 @@ importers:
       chalk:
         specifier: 5.2.0
         version: 5.2.0
-      constants:
-        specifier: workspace:*
-        version: link:../constants
       next:
         specifier: 13.4.7
         version: 13.4.7(@babel/core@7.20.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -625,9 +604,6 @@ importers:
       typescript:
         specifier: 5.2.0-dev.20230628
         version: 5.2.0-dev.20230628
-      utils:
-        specifier: workspace:*
-        version: link:../utils
       webpack:
         specifier: 5.88.1
         version: 5.88.1(@swc/core@1.3.67)
@@ -653,6 +629,12 @@ importers:
         specifier: 5.3.9
         version: 5.3.9(@swc/core@1.3.67)(webpack@5.88.1)
     devDependencies:
+      '@ducanh2912/constants':
+        specifier: workspace:*
+        version: link:../constants
+      '@ducanh2912/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@rollup/plugin-json':
         specifier: 6.0.0
         version: 6.0.0(rollup@3.25.3)
@@ -671,9 +653,6 @@ importers:
       chalk:
         specifier: 5.2.0
         version: 5.2.0
-      constants:
-        specifier: workspace:*
-        version: link:../constants
       next:
         specifier: 13.4.7
         version: 13.4.7(@babel/core@7.20.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -692,9 +671,6 @@ importers:
       typescript:
         specifier: 5.2.0-dev.20230628
         version: 5.2.0-dev.20230628
-      utils:
-        specifier: workspace:*
-        version: link:../utils
       webpack:
         specifier: 5.88.1
         version: 5.88.1(@swc/core@1.3.67)
@@ -714,6 +690,9 @@ importers:
       '@types/fs-extra':
         specifier: 11.0.1
         version: 11.0.1
+      '@types/jest':
+        specifier: 29.5.3
+        version: 29.5.3
 
   packages/utils:
     dependencies:
@@ -724,6 +703,9 @@ importers:
         specifier: 7.5.3
         version: 7.5.3
     devDependencies:
+      '@ducanh2912/constants':
+        specifier: workspace:*
+        version: link:../constants
       '@rollup/plugin-node-resolve':
         specifier: 15.1.0
         version: 15.1.0(rollup@3.25.3)
@@ -736,9 +718,6 @@ importers:
       '@types/semver':
         specifier: 7.5.0
         version: 7.5.0
-      constants:
-        specifier: workspace:*
-        version: link:../constants
       rollup:
         specifier: 3.25.3
         version: 3.25.3
@@ -3886,6 +3865,13 @@ packages:
     resolution: {integrity: sha512-c3mAZEuK0lvBp8tmuL74XRKn1+y2dcwOUpH7x4WrF6gk1GIgiluDRgMYQtw2OFcBvAJWlt6ASU3tSqxp0Uu0Aw==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.0
+    dev: true
+
+  /@types/jest@29.5.3:
+    resolution: {integrity: sha512-1Nq7YrO/vJE/FYnqYyw0FS8LdrjExSgIiHyKg7xPpn+yi8Q4huZryKnkJatN1ZRH89Kw2v33/8ZMB7DuZeSLlA==}
+    dependencies:
+      expect: 29.5.0
+      pretty-format: 29.5.0
     dev: true
 
   /@types/json-schema@7.0.11:
@@ -11871,30 +11857,6 @@ packages:
       terser: 5.17.6
       webpack: 5.88.1(@swc/core@1.3.67)
 
-  /terser-webpack-plugin@5.3.9(webpack@5.88.1):
-    resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
-    engines: {node: '>= 10.13.0'}
-    peerDependencies:
-      '@swc/core': '*'
-      esbuild: '*'
-      uglify-js: '*'
-      webpack: ^5.1.0
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      esbuild:
-        optional: true
-      uglify-js:
-        optional: true
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.17
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.1
-      terser: 5.17.6
-      webpack: 5.88.1
-    dev: true
-
   /terser@5.17.6:
     resolution: {integrity: sha512-V8QHcs8YuyLkLHsJO5ucyff1ykrLVsR4dNnS//L5Y3NiSXpbK1J+WMVUs67eI0KTxs9JtHhgEQpXQVHlHI92DQ==}
     engines: {node: '>=10'}
@@ -12614,46 +12576,6 @@ packages:
   /webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
-
-  /webpack@5.88.1:
-    resolution: {integrity: sha512-FROX3TxQnC/ox4N+3xQoWZzvGXSuscxR32rbzjpXgEzWudJFEJBpdlkkob2ylrv5yzzufD1zph1OoFsLtm6stQ==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    peerDependencies:
-      webpack-cli: '*'
-    peerDependenciesMeta:
-      webpack-cli:
-        optional: true
-    dependencies:
-      '@types/eslint-scope': 3.7.4
-      '@types/estree': 1.0.0
-      '@webassemblyjs/ast': 1.11.5
-      '@webassemblyjs/wasm-edit': 1.11.5
-      '@webassemblyjs/wasm-parser': 1.11.5
-      acorn: 8.8.1
-      acorn-import-assertions: 1.9.0(acorn@8.8.1)
-      browserslist: 4.21.6
-      chrome-trace-event: 1.0.3
-      enhanced-resolve: 5.15.0
-      es-module-lexer: 1.2.1
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.0
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 3.3.0
-      tapable: 2.2.1
-      terser-webpack-plugin: 5.3.9(webpack@5.88.1)
-      watchpack: 2.4.0
-      webpack-sources: 3.2.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-    dev: true
 
   /webpack@5.88.1(@swc/core@1.3.67):
     resolution: {integrity: sha512-FROX3TxQnC/ox4N+3xQoWZzvGXSuscxR32rbzjpXgEzWudJFEJBpdlkkob2ylrv5yzzufD1zph1OoFsLtm6stQ==}

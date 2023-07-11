@@ -5,9 +5,9 @@
  *   "input" | "output" | "external" | "plugins"
  * >} FileEntry
  */
+import { swcConfig } from "@ducanh2912/constants/swc-config";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
-import { swcConfig } from "constants/swc-config";
 import { defineConfig } from "rollup";
 
 /** @type {FileEntry[]} */

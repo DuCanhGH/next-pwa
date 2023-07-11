@@ -1,9 +1,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { logger } from "@ducanh2912/utils";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import { logger } from "utils";
-import webpack from "webpack";
+import type Webpack from "webpack";
 
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
@@ -11,10 +11,12 @@ import { getSharedWebpackConfig } from "./utils.js";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export const buildSWEntryWorker = ({
+  webpack,
   id,
   destDir,
   shouldGenSWEWorker,
 }: {
+  webpack: typeof Webpack;
   id: string;
   destDir: string;
   shouldGenSWEWorker: boolean;

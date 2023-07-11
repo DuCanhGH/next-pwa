@@ -30,6 +30,6 @@ export const FEATURES_LIST: Feature[] = [
     icon: "🚀",
     label: "Developer experience",
     description:
-      "Built-in Typescript definitions and JSDoc to enable the best DX.",
+      "Built-in TypeScript definitions and JSDoc to enable the best DX.",
   },
 ];

@@ -2,13 +2,14 @@ import crypto from "node:crypto";
 import path from "node:path";
 
 import type { Asset, Compilation } from "webpack";
-import { ModuleFilenameHelpers, WebpackError } from "webpack";
+import type Webpack from "webpack";
 
 import type { ManifestEntry } from "../../private-types.js";
 import type { FilterEntry } from "../../types.js";
 import type { GenerateSWWebpackConfig } from "./webpack-plugin.js";
 
 const checkConditions = (
+  webpack: typeof Webpack,
   asset: Asset,
   compilation: Compilation,
   conditions: FilterEntry[] = []
@@ -17,7 +18,7 @@ const checkConditions = (
     if (typeof condition === "function") {
       return condition({ asset, compilation });
     }
-    if (ModuleFilenameHelpers.matchPart(asset.name, condition)) {
+    if (webpack.ModuleFilenameHelpers.matchPart(asset.name, condition)) {
       return true;
     }
   }
@@ -71,6 +72,10 @@ export const getManifestEntriesFromCompilation = async (
   compilation: Compilation,
   config: GenerateSWWebpackConfig
 ) => {
+  if (!config.webpackInstance) {
+    return undefined;
+  }
+  
   const assets = compilation.getAssets();
 
   const { publicPath } = compilation.options.output;
@@ -80,12 +85,12 @@ export const getManifestEntriesFromCompilation = async (
   })[] = [];
 
   for (const asset of assets) {
-    const isExcluded = checkConditions(asset, compilation, config.exclude);
+    const isExcluded = checkConditions(config.webpackInstance, asset, compilation, config.exclude);
     if (isExcluded) {
       continue;
     }
     const isIncluded =
-      !!config.include && checkConditions(asset, compilation, config.include);
+      !!config.include && checkConditions(config.webpackInstance, asset, compilation, config.include);
 
     if (!isIncluded) {
       continue;
@@ -103,7 +108,7 @@ export const getManifestEntriesFromCompilation = async (
   });
 
   for (const warning of warnings) {
-    compilation.warnings.push(new WebpackError(warning));
+    compilation.warnings.push(new config.webpackInstance.WebpackError(warning));
   }
 
   // Ensure that the entries are properly sorted by URL.

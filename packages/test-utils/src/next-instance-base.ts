@@ -121,7 +121,7 @@ export abstract class NextInstance {
 
     await new Promise<void>((resolve, reject) => {
       exec(
-        `pnpm i --no-frozen-lockfile`,
+        `pnpm i --no-frozen-lockfile --production`,
         { cwd: this._testDir },
         (error, stdout, stderr) => {
           if (error) {

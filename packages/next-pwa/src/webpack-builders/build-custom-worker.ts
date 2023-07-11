@@ -1,17 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { addPathAliasesToSWC, logger } from "@ducanh2912/utils";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import type { TsConfigJson as TSConfigJSON } from "type-fest";
-import { addPathAliasesToSWC, logger } from "utils";
-import type { Configuration } from "webpack";
-import webpack from "webpack";
+import type { Configuration, default as Webpack } from "webpack";
 
 import defaultSwcRc from "../.swcrc.json";
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
 export const buildCustomWorker = ({
+  webpack,
   id,
   baseDir,
   customWorkerDir,
@@ -19,6 +19,7 @@ export const buildCustomWorker = ({
   plugins = [],
   tsconfig,
 }: {
+  webpack: typeof Webpack;
   id: string;
   baseDir: string;
   customWorkerDir: string;

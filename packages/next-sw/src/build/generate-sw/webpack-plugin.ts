@@ -15,12 +15,11 @@ const generatedAssetNames = new Set<string>();
 export interface GenerateSWWebpackConfig extends GenerateSWConfig {
   include?: FilterEntry[];
   exclude?: FilterEntry[];
+  webpackInstance?: typeof Webpack;
 }
 
 export class GenerateSW {
-  protected config: GenerateSWWebpackConfig & {
-    webpackInstance?: typeof Webpack;
-  };
+  protected config: GenerateSWWebpackConfig;
 
   protected propagateConfigWithCompiler(compiler: Compiler): void {
     // Properties that are already set take precedence over derived
@@ -48,10 +47,10 @@ export class GenerateSW {
     // instance of this plugin.
     config.exclude.push(({ asset }) => generatedAssetNames.has(asset.name));
 
-    const { sortedEntries } = await getManifestEntriesFromCompilation(
+    const { sortedEntries = [] } = await getManifestEntriesFromCompilation(
       compilation,
       config
-    );
+    ) ?? {};
 
     config.manifestEntries = sortedEntries;
 

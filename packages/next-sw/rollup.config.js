@@ -5,11 +5,11 @@
  *   "input" | "output" | "external" | "plugins"
  * >} FileEntry
  */
+import { swcConfig } from "@ducanh2912/constants/swc-config";
 import json from "@rollup/plugin-json";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
 import typescript from "@rollup/plugin-typescript";
-import { swcConfig } from "constants/swc-config";
 import { defineConfig } from "rollup";
 import dts from "rollup-plugin-dts";
 
@@ -32,12 +32,7 @@ const files = [
       },
     ],
     // chalk should be bundled with the package to work with CJS.
-    external: [
-      "clean-webpack-plugin",
-      "terser-webpack-plugin",
-      "webpack",
-      "semver",
-    ],
+    external: ["clean-webpack-plugin", "terser-webpack-plugin", "semver"],
   },
   {
     input: "src/build/generate-sw/base-sw.ts",

@@ -43,6 +43,7 @@
     "eslint-config-next": "13.4.7",
     "eslint-config-prettier": "8.8.0",
     "eslint-config-turbo": "1.10.6",
+    "eslint-plugin-import": "2.27.5",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "fast-glob": "3.2.12",
     "husky": "8.0.3",
@@ -55,8 +56,7 @@
     "shell-quote": "1.8.1",
     "tslib": "2.6.0",
     "turbo": "1.10.3",
-    "typescript": "5.2.0-dev.20230628",
-    "webpack": "5.88.1"
+    "typescript": "5.2.0-dev.20230628"
   },
   "packageManager": "pnpm@8.6.2"
 }

@@ -67,6 +67,8 @@
     "workbox-window": "7.0.0"
   },
   "devDependencies": {
+    "@ducanh2912/constants": "workspace:*",
+    "@ducanh2912/utils": "workspace:*",
     "@rollup/plugin-alias": "5.0.0",
     "@rollup/plugin-json": "6.0.0",
     "@rollup/plugin-node-resolve": "15.1.0",
@@ -75,7 +77,6 @@
     "@types/node": "20.3.2",
     "@types/semver": "7.5.0",
     "chalk": "5.2.0",
-    "constants": "workspace:*",
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -83,11 +84,9 @@
     "rollup-plugin-dts": "5.3.0",
     "type-fest": "3.12.0",
     "typescript": "5.2.0-dev.20230628",
-    "utils": "workspace:*",
     "webpack": "5.88.1"
   },
   "peerDependencies": {
-    "next": ">=11.0.0",
-    "webpack": ">=5.9.0"
+    "next": ">=11.0.0"
   }
 }

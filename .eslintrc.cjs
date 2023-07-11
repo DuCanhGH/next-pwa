@@ -1,4 +1,24 @@
 // @ts-check
+const path = require("node:path");
+
+const fg = require("fast-glob");
+
+const TSCONFIG_SOURCES = /** @type {const} */ ([
+  "tsconfig.json",
+  "tsconfig.eslint.json",
+  "docs/tsconfig.json",
+  "packages/*/tsconfig.json",
+  "packages/*/__tests__/tsconfig.json",
+  "examples/*/tsconfig.json",
+]);
+
+let packageDirs = fg
+  .sync("packages/*", {
+    cwd: __dirname,
+    onlyDirectories: true,
+  })
+  .map((dir) => path.join(__dirname, dir));
+
 /** @type {import("eslint").Linter.BaseConfig} */
 module.exports = {
   parser: "@typescript-eslint/parser",
@@ -11,21 +31,17 @@ module.exports = {
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "turbo",
     "prettier",
   ],
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: [
-      "tsconfig.json",
-      "tsconfig.eslint.json",
-      "docs/tsconfig.json",
-      "packages/*/tsconfig.json",
-      "packages/*/__tests__/tsconfig.json",
-      "examples/*/tsconfig.json",
-    ],
+    project: TSCONFIG_SOURCES,
     ecmaVersion: "latest",
     sourceType: "module",
+    warnOnUnsupportedTypeScriptVersion: false,
   },
   plugins: ["@typescript-eslint", "simple-import-sort"],
   rules: {
@@ -33,7 +49,19 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/consistent-type-imports": "warn",
-    "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        ignoreRestSiblings: true,
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
+      },
+    ],
+    "import/no-extraneous-dependencies": "off",
+    // Doesn't really work with VSCode...
+    "import/no-unresolved": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
     "no-unused-vars": "off",
     "no-extra-boolean-cast": "off",
     "simple-import-sort/imports": "warn",
@@ -45,4 +73,46 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx", ".mjs", ".cjs", ".js"],
+    },
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+        project: TSCONFIG_SOURCES,
+      },
+    },
+    "import/internal-regex": "^@ducanh2912/",
+    "import/external-module-folders": [
+      "packages/next-pwa",
+      "packages/next-sw",
+      "packages/utils",
+      "packages/constants",
+      "node_modules",
+    ],
+    next: {
+      rootDir: ["./docs/", "./examples/*/"],
+    },
+  },
+  overrides: [
+    {
+      files: ["packages/*/__tests__/**"],
+      env: {
+        jest: true,
+      },
+    },
+    {
+      files: ["packages/**"],
+      rules: {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            devDependencies: ["__tests__/**", "**/*.config.{cjs,mjs,js,ts}"],
+            packageDir: [__dirname, ...packageDirs],
+          },
+        ],
+      },
+    },
+  ],
 };

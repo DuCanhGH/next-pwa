@@ -5,12 +5,12 @@
  *   "input" | "output" | "external" | "plugins"
  * >} FileEntry
  */
+import { swcConfig } from "@ducanh2912/constants/swc-config";
 import alias from "@rollup/plugin-alias";
 import json from "@rollup/plugin-json";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
 import typescript from "@rollup/plugin-typescript";
-import { swcConfig } from "constants/swc-config";
 import { defineConfig } from "rollup";
 import dts from "rollup-plugin-dts";
 
@@ -39,7 +39,6 @@ const files = [
       "terser-webpack-plugin",
       "workbox-webpack-plugin",
       "typescript",
-      "webpack",
       "crypto",
       "fs",
       "path",

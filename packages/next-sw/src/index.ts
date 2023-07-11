@@ -1,7 +1,7 @@
 import path from "node:path";
 
+import { logger } from "@ducanh2912/utils";
 import type { NextConfig } from "next";
-import { logger } from "utils";
 import type { Configuration, default as Webpack } from "webpack";
 
 import { getDefaultDocumentPage } from "./build/generate-sw/core-utils.js";

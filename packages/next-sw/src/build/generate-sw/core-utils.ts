@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { findFirstTruthy, logger } from "@ducanh2912/utils";
 import type { NextConfig } from "next";
-import { findFirstTruthy, logger } from "utils";
 
 import type { FallbackRoutes } from "../../types.js";
 

@@ -13,7 +13,7 @@ This plugin is powered by [Workbox](https://developer.chrome.com/docs/workbox/) 
 - 🎈 Easy-to-understand examples.
 - 📴 Offline support [(you can also provide fallbacks for when fetching fails)](/examples/offline-fallback-v2).
 - 🔉 Default range requests for audios and videos.
-- 📐 [Custom worker to run your own code (also supports path aliases, Typescript and code splitting!).](/examples/custom-worker)
+- 📐 [Custom worker to run your own code (also supports path aliases, TypeScript and code splitting!).](/examples/custom-worker)
 - 📜 [Public environment variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables) are available in custom workers.
 - 🐞 Debug service worker in development mode.
 - 🌏 [Internationalization support with `next-i18next`.](/examples/next-i18next)

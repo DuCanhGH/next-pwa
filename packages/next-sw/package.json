@@ -43,20 +43,20 @@
     "terser-webpack-plugin": "5.3.9"
   },
   "devDependencies": {
+    "@ducanh2912/constants": "workspace:*",
+    "@ducanh2912/utils": "workspace:*",
     "@rollup/plugin-json": "6.0.0",
     "@rollup/plugin-node-resolve": "15.1.0",
     "@rollup/plugin-swc": "0.1.1",
     "@rollup/plugin-typescript": "11.1.2",
     "@types/node": "20.3.2",
     "chalk": "5.2.0",
-    "constants": "workspace:*",
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rollup": "3.25.3",
     "rollup-plugin-dts": "5.3.0",
     "typescript": "5.2.0-dev.20230628",
-    "utils": "workspace:*",
     "webpack": "5.88.1"
   },
   "peerDependencies": {

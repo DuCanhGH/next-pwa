@@ -1,9 +1,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { logger } from "@ducanh2912/utils";
 import type { NextConfig } from "next";
 import TerserPlugin from "terser-webpack-plugin";
-import { logger } from "utils";
 import type { Configuration, default as Webpack } from "webpack";
 
 import swcRc from "../../.swcrc.json";

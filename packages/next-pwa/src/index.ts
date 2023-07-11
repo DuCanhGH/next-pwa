@@ -3,12 +3,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { loadTSConfig, logger } from "@ducanh2912/utils";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import fg from "fast-glob";
 import type { NextConfig } from "next";
 import type NextConfigShared from "next/dist/server/config-shared.js";
-import { loadTSConfig, logger } from "utils";
-import type { Configuration, default as WebpackType } from "webpack";
+import type { Configuration, default as Webpack } from "webpack";
 import type { RuntimeCaching } from "workbox-build";
 import WorkboxPlugin from "workbox-webpack-plugin";
 
@@ -51,7 +51,7 @@ const withPWAInit = (
         nextDefConfig?.experimental?.appDir ??
         true;
 
-      const webpack: typeof WebpackType = options.webpack;
+      const webpack: typeof Webpack = options.webpack;
       const {
         buildId,
         dev,
@@ -176,6 +176,7 @@ const withPWAInit = (
 
         const _dest = path.join(options.dir, dest);
         const sweWorkerName = buildSWEntryWorker({
+          webpack,
           id: buildId,
           destDir: _dest,
           shouldGenSWEWorker: cacheOnFrontEndNav,
@@ -188,6 +189,7 @@ const withPWAInit = (
         );
 
         const customWorkerScriptName = buildCustomWorker({
+          webpack,
           id: buildId,
           baseDir: options.dir,
           customWorkerDir,
@@ -288,6 +290,7 @@ const withPWAInit = (
             );
           }
           const res = buildFallbackWorker({
+            webpack,
             id: buildId,
             fallbacks,
             destDir: _dest,
