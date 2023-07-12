@@ -1,4 +1,5 @@
 import fg from "fast-glob";
+import path from "path";
 import { createDescribe } from "tests-utils";
 
 createDescribe(
@@ -14,10 +15,10 @@ createDescribe(
         ).toBe(true);
 
         const fallbackWorkerFiles = (
-          await fg("public/fallback-*.js", {
-            cwd: next.appTestDir,
+          await fg("fallback-*.js", {
+            cwd: path.join(next.appTestDir, "public"),
           })
-        ).map((page) => page.slice(page.indexOf("public") + 1));
+        ).map((page) => `/${page}`);
 
         expect(fallbackWorkerFiles.length > 0).toBe(true);
 
