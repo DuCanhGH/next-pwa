@@ -14,11 +14,15 @@ const slugs = new Slugger();
  * Plugin to add `id`s to headings.
  */
 const rehypeSlug: Plugin<any[], Root> = () => {
-  return (tree: any) => {
+  return (tree: Root) => {
     slugs.reset();
 
     visit(tree, "element", (node) => {
-      if (headingRank(node) && node.properties && !hasProperty(node, "id")) {
+      if (
+        headingRank(node as any) &&
+        node.properties &&
+        !hasProperty(node, "id")
+      ) {
         node.properties.id = slugs.slug(getNodeAsString(node));
       }
     });
