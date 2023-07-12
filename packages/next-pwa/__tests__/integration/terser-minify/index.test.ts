@@ -9,7 +9,7 @@ createDescribe(
       it("should build offline worker", async () => {
         expect(
           next.cliOutput.includes(
-            "This app will fallback to these precached routes when fetching from cache or network fails"
+            "This app will fallback to these precached routes when fetching from the cache and the network fails"
           )
         ).toBe(true);
 

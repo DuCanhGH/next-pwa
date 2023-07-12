@@ -14,7 +14,7 @@ const slugs = new Slugger();
  * Plugin to add `id`s to headings.
  */
 const rehypeSlug: Plugin<any[], Root> = () => {
-  return (tree) => {
+  return (tree: any) => {
     slugs.reset();
 
     visit(tree, "element", (node) => {
