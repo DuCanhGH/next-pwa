@@ -1,5 +1,14 @@
 # @ducanh2912/next-pwa
 
+## 9.2.1
+
+### Patch Changes
+
+- [#55](https://github.com/DuCanhGH/next-pwa/pull/55) [`c8523d5`](https://github.com/DuCanhGH/next-pwa/commit/c8523d56b640ce86ba5bf468b1716b42a538b09e) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - chore(deps): updated dependencies, moved webpack to "dependencies"
+
+  - `webpack` is now a dependency rather than a peer dependency.
+  - Reverted the change where we replaced `webpack` with Next's `webpack` instance.
+
 ## 9.2.0
 
 ### Minor Changes
