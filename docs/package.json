@@ -42,7 +42,7 @@
     "hast-util-heading-rank": "2.1.1",
     "hast-util-to-string": "2.0.0",
     "mdast-util-mdx": "2.0.1",
-    "mdast-util-to-markdown": "2.0.0",
+    "mdast-util-to-markdown": "1.5.0",
     "mdast-util-to-string": "4.0.0",
     "mdx-bundler": "9.2.1",
     "postcss": "8.4.25",

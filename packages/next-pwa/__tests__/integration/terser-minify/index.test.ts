@@ -4,34 +4,36 @@ import { createDescribe } from "tests-utils";
 createDescribe(
   "integration terser",
   { sourceDir: __dirname, skipInstall: false },
-  ({ next }) => {
-    it("should build offline worker", async () => {
-      expect(
-        next.cliOutput.includes(
-          "This app will fallback to these precached routes when fetching from cache or network fails"
-        )
-      ).toBe(true);
+  ({ next, testMode }) => {
+    if (testMode === "start") {
+      it("should build offline worker", async () => {
+        expect(
+          next.cliOutput.includes(
+            "This app will fallback to these precached routes when fetching from cache or network fails"
+          )
+        ).toBe(true);
 
-      const fallbackWorkerFiles = (
-        await fg("public/fallback-*.js", {
-          cwd: __dirname,
-        })
-      ).map((page) => page.slice(page.indexOf("public") + 1));
+        const fallbackWorkerFiles = (
+          await fg("public/fallback-*.js", {
+            cwd: __dirname,
+          })
+        ).map((page) => page.slice(page.indexOf("public") + 1));
 
-      expect(fallbackWorkerFiles.length > 0).toBe(true);
+        expect(fallbackWorkerFiles.length > 0).toBe(true);
 
-      await Promise.all(
-        fallbackWorkerFiles.map(async (page) => {
-          const worker = await next.fetch(page);
-          expect(worker.status).toBe(200);
-          expect(
-            worker.headers
-              .get("Content-Type")
-              ?.includes("application/javascript")
-          ).toBe(true);
-        })
-      );
-    });
+        await Promise.all(
+          fallbackWorkerFiles.map(async (page) => {
+            const worker = await next.fetch(page);
+            expect(worker.status).toBe(200);
+            expect(
+              worker.headers
+                .get("Content-Type")
+                ?.includes("application/javascript")
+            ).toBe(true);
+          })
+        );
+      });
+    }
 
     it("should render pages dir", async () => {
       const $ = await next.render("/");
