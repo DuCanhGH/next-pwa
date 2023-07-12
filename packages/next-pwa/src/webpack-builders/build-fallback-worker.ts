@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { logger } from "@ducanh2912/utils";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import type Webpack from "webpack";
+import webpack from "webpack";
 
 import type { FallbackRoutes } from "../types.js";
 import { NextPWAContext } from "./context.js";
@@ -13,12 +13,10 @@ import { getSharedWebpackConfig } from "./utils.js";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export const buildFallbackWorker = ({
-  webpack,
   id,
   fallbacks,
   destDir,
 }: {
-  webpack: typeof Webpack;
   id: string;
   fallbacks: FallbackRoutes;
   destDir: string;

@@ -97,21 +97,24 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["packages/*/__tests__/**"],
-      env: {
-        jest: true,
-      },
-    },
-    {
       files: ["packages/**"],
       rules: {
         "import/no-extraneous-dependencies": [
           "error",
           {
-            devDependencies: ["__tests__/**", "**/*.config.{cjs,mjs,js,ts}"],
+            devDependencies: ["**/*.config.{cjs,mjs,js,ts}"],
             packageDir: [__dirname, ...packageDirs],
           },
         ],
+      },
+    },
+    {
+      files: ["packages/*/__tests__/**"],
+      env: {
+        jest: true,
+      },
+      rules: {
+        "import/no-extraneous-dependencies": "off",
       },
     },
   ],

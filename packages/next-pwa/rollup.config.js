@@ -1,9 +1,11 @@
 // @ts-check
 /**
  * @typedef {Pick<
- *   import("rollup").RollupOptions,
- *   "input" | "output" | "external" | "plugins"
- * >} FileEntry
+ *  import("rollup").RollupOptions,
+ *  "input" | "output" | "plugins"
+ * > & {
+ *   external?: (string | RegExp)[] | string | RegExp;
+ * }} FileEntry
  */
 import { swcConfig } from "@ducanh2912/constants/swc-config";
 import alias from "@rollup/plugin-alias";
@@ -14,8 +16,14 @@ import typescript from "@rollup/plugin-typescript";
 import { defineConfig } from "rollup";
 import dts from "rollup-plugin-dts";
 
+import packageJson from "./package.json" assert { type: "json" };
+
 const isDev = process.env.NODE_ENV !== "production";
 const shouldEmitDeclaration = !isDev;
+const forcedExternals = [
+  ...Object.keys(packageJson.dependencies),
+  ...Object.keys(packageJson.peerDependencies),
+];
 
 /** @type {FileEntry[]} */
 const files = [
@@ -32,20 +40,6 @@ const files = [
         format: "esm",
       },
     ],
-    external: [
-      "next",
-      "semver",
-      "clean-webpack-plugin",
-      "terser-webpack-plugin",
-      "workbox-webpack-plugin",
-      "typescript",
-      "crypto",
-      "fs",
-      "path",
-      "url",
-      "fast-glob",
-      "workbox-window",
-    ],
   },
   {
     input: "src/fallback.ts",
@@ -60,7 +54,6 @@ const files = [
       file: "dist/sw-entry.js",
       format: "esm",
     },
-    external: ["workbox-window"],
   },
   {
     input: "src/sw-entry-worker.ts",
@@ -75,7 +68,6 @@ const files = [
       file: "dist/swc-loader.cjs",
       format: "cjs",
     },
-    external: ["semver"],
   },
 ];
 
@@ -84,12 +76,15 @@ const files = [
  */
 const rollupEntries = [];
 
-for (const { input, output, external, plugins } of files) {
+for (const { input, output, external = [], plugins } of files) {
   rollupEntries.push(
     defineConfig({
       input,
       output,
-      external,
+      external: [
+        ...(Array.isArray(external) ? external : [external]),
+        ...forcedExternals,
+      ],
       plugins: [
         nodeResolve({
           exportConditions: ["node"],
@@ -142,12 +137,15 @@ if (shouldEmitDeclaration) {
     },
   ];
 
-  for (const { input, output, external, plugins } of declarations) {
+  for (const { input, output, external = [], plugins } of declarations) {
     rollupEntries.push(
       defineConfig({
         input,
         output,
-        external,
+        external: [
+          ...(Array.isArray(external) ? external : [external]),
+          ...forcedExternals,
+        ],
         plugins: [dts(), ...[plugins ?? []]],
       })
     );

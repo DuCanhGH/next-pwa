@@ -176,7 +176,6 @@ const withPWAInit = (
 
         const _dest = path.join(options.dir, dest);
         const sweWorkerName = buildSWEntryWorker({
-          webpack,
           id: buildId,
           destDir: _dest,
           shouldGenSWEWorker: cacheOnFrontEndNav,
@@ -189,7 +188,6 @@ const withPWAInit = (
         );
 
         const customWorkerScriptName = buildCustomWorker({
-          webpack,
           id: buildId,
           baseDir: options.dir,
           customWorkerDir,
@@ -290,7 +288,6 @@ const withPWAInit = (
             );
           }
           const res = buildFallbackWorker({
-            webpack,
             id: buildId,
             fallbacks,
             destDir: _dest,

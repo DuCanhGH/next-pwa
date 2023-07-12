@@ -58,9 +58,10 @@
   },
   "dependencies": {
     "clean-webpack-plugin": "4.0.0",
-    "fast-glob": "3.2.12",
-    "semver": "7.5.3",
+    "fast-glob": "3.3.0",
+    "semver": "7.5.4",
     "terser-webpack-plugin": "5.3.9",
+    "webpack": "5.88.1",
     "workbox-build": "7.0.0",
     "workbox-core": "7.0.0",
     "workbox-webpack-plugin": "7.0.0",
@@ -74,17 +75,16 @@
     "@rollup/plugin-node-resolve": "15.1.0",
     "@rollup/plugin-swc": "0.1.1",
     "@rollup/plugin-typescript": "11.1.2",
-    "@types/node": "20.3.2",
+    "@types/node": "20.4.1",
     "@types/semver": "7.5.0",
-    "chalk": "5.2.0",
-    "next": "13.4.7",
+    "chalk": "5.3.0",
+    "next": "13.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rollup": "3.25.3",
+    "rollup": "3.26.2",
     "rollup-plugin-dts": "5.3.0",
-    "type-fest": "3.12.0",
-    "typescript": "5.2.0-dev.20230628",
-    "webpack": "5.88.1"
+    "type-fest": "3.13.0",
+    "typescript": "5.2.0-dev.20230711"
   },
   "peerDependencies": {
     "next": ">=11.0.0"

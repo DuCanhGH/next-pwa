@@ -29,7 +29,7 @@ export const getFallbackEnvs = ({
   if (Object.values(envs).filter((v) => !!v).length === 0) return;
 
   logger.info(
-    "This app will fallback to these precached routes when fetching from cache or network fails:"
+    "This app will fallback to these precached routes when fetching from the cache and the network fails:"
   );
 
   if (envs.__PWA_FALLBACK_DOCUMENT__) {
