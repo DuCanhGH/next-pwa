@@ -36,6 +36,9 @@ export abstract class NextInstance {
   public get cliOutput() {
     return this._cliOutput;
   }
+  public get appTestDir() {
+    return this._appTestDir;
+  }
   protected async createTestDir(sourceDir: string) {
     if (this._isDestroyed) {
       throw new Error("next instance already destroyed");

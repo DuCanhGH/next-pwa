@@ -50,7 +50,7 @@ export const search = (
     }
 
     // Our opening heading.
-    if (position !== null && expression && !index && expression.test(value)) {
+    if (position && expression && !index && expression.test(value)) {
       index = position + 1;
       opening = node;
       return;

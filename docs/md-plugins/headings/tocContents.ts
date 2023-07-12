@@ -1,10 +1,5 @@
 import extend from "extend";
-import type {
-  List,
-  ListItem,
-  PhrasingContent,
-  StaticPhrasingContent,
-} from "mdast";
+import type { List, ListItem, PhrasingContent } from "mdast";
 
 import type { ContentsOptions, SearchEntry } from "./types.js";
 
@@ -86,7 +81,7 @@ const insert = (
  * @returns
  */
 const all = (nodes?: PhrasingContent[]) => {
-  let result: StaticPhrasingContent[] = [];
+  let result: PhrasingContent[] = [];
   let index = -1;
 
   if (nodes) {
@@ -102,18 +97,12 @@ const all = (nodes?: PhrasingContent[]) => {
  * @param node
  * @returns
  */
-const one = (
-  node: PhrasingContent
-): StaticPhrasingContent | StaticPhrasingContent[] => {
+const one = (node: PhrasingContent): PhrasingContent | PhrasingContent[] => {
   if (node.type === "footnoteReference") {
     return [];
   }
 
-  if (
-    node.type === "link" ||
-    node.type === "linkReference" ||
-    node.type === "footnote"
-  ) {
+  if (node.type === "link" || node.type === "linkReference") {
     return all(node.children);
   }
 

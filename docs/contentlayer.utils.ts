@@ -26,7 +26,7 @@ export const generateToc = async (markdownContent: string) => {
             }
 
             headings = toMarkdown(result.map, {
-              extensions: [mdxToMarkdown()],
+              extensions: [mdxToMarkdown() as any],
             });
           };
         },

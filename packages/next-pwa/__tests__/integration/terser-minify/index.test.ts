@@ -15,7 +15,7 @@ createDescribe(
 
         const fallbackWorkerFiles = (
           await fg("public/fallback-*.js", {
-            cwd: __dirname,
+            cwd: next.appTestDir,
           })
         ).map((page) => page.slice(page.indexOf("public") + 1));
 
