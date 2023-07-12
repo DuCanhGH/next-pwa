@@ -18,6 +18,8 @@ createDescribe(
         })
       ).map((page) => page.slice(page.indexOf("public") + 1));
 
+      expect(fallbackWorkerFiles.length > 0).toBe(true);
+
       await Promise.all(
         fallbackWorkerFiles.map(async (page) => {
           const worker = await next.fetch(page);
