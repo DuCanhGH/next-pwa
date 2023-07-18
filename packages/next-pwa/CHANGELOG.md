@@ -1,5 +1,16 @@
 # @ducanh2912/next-pwa
 
+## 9.3.0
+
+### Minor Changes
+
+- [#58](https://github.com/DuCanhGH/next-pwa/pull/58) [`b88526a`](https://github.com/DuCanhGH/next-pwa/commit/b88526add09463eb6038a8e86d96449886b2c2ea) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - chore: revert adding `webpack` to `dependencies`
+
+  - This version reverts that now that Next 13.4.10 has been released, which fixes the issue in which `workbox-webpack-plugin` fails to resolve `webpack` in
+    development mode.
+  - **Note**: If you are using Next 13.4.9, you will need to install `webpack` as a `devDependency` to avoid the aforementioned issue. This is quite a breaking
+    change, but it is due to a bug and I've decided against making a major jump. It is recommended to just upgrade to Next 13.4.10 (and still have `webpack` installed, as it is one of our `peerDependencies`).
+
 ## 9.2.1
 
 ### Patch Changes
