@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@ducanh2912/next-sw": "latest",
-    "next": "13.4.9",
+    "next": "13.4.10",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "20.4.1",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
     "typescript": "5.1.6"
   }
 }

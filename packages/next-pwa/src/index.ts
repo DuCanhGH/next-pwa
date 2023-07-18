@@ -61,12 +61,7 @@ const withPWAInit = (
         },
       } = options;
 
-      let basePath = options.config.basePath;
-
-      // basePath can be an empty string.
-      if (!basePath) {
-        basePath = "/";
-      }
+      const basePath = options.config.basePath || "/";
 
       const tsConfigJSON = loadTSConfig(
         options.dir,

@@ -19,17 +19,17 @@ type: Docs
 
 ```bash
 # title npm
-npm i @ducanh2912/next-pwa
+npm i @ducanh2912/next-pwa && npm i -D webpack
 ```
 
 ```bash
 # title yarn
-yarn add @ducanh2912/next-pwa
+yarn add @ducanh2912/next-pwa && yarn add -D webpack
 ```
 
 ```bash
 # title pnpm
-pnpm add @ducanh2912/next-pwa
+pnpm add @ducanh2912/next-pwa && pnpm add -D webpack
 ```
 
 </Tabs>
@@ -68,7 +68,8 @@ export default withPWA({
 
 </Tabs>
 
-If your deployment platform requires your production image's size to not exceed a certain limit, you can also do this:
+If your deployment platform requires your production image's size to not exceed a certain limit, you can also install `@ducanh2912/next-pwa` as a `devDependency`
+and do this:
 
 <Tabs>
 
@@ -123,9 +124,9 @@ export default nextConfigFunction;
 </Tabs>
 
 <Callout>
-  **Note**: This plugin is written in TypeScript and supports JSDoc. It is
-  recommended to add `// @ts-check` to the top of your `next.config.js` file to
-  leverage typechecking. This is especially useful when you use
+  This plugin is written in TypeScript and supports JSDoc. It is recommended to
+  add `// @ts-check` to the top of your `next.config.js` file to leverage
+  typechecking. This is especially useful when you use
   `PluginOptions.workboxOptions`, as you may unknowningly mix
   InjectManifest-specific and GenerateSW-specific options up.
 </Callout>
@@ -191,11 +192,11 @@ app.prepare().then(() => {
 ```
 
 <Callout>
-  **Note**: it is recommended to upgrade your Next.js version instead. Usually,
-  Next.js will provide codemods needed to migrate between major versions (see
-  [Next.js codemods](https://nextjs.org/docs/advanced-features/codemods)). Its
-  releases are often packed with a lot of awesome features, and you shouldn't
-  miss out on them.
+  It is recommended to upgrade your Next.js version instead. Usually, Next.js
+  will provide codemods needed to migrate between major versions (see [Next.js
+  codemods](https://nextjs.org/docs/advanced-features/codemods)). Its releases
+  are often packed with a lot of awesome features, and you shouldn't miss out on
+  them.
 </Callout>
 
 ### Step 2: Add a manifest.json file
