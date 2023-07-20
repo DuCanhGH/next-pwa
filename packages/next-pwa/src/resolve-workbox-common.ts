@@ -7,7 +7,7 @@ import type { GenerateSWConfig } from "workbox-webpack-plugin";
 import type { SharedWorkboxOptionsKeys } from "./private-types.js";
 import type { PluginOptions } from "./types.js";
 
-interface ResolveWorkboxCommonOptions {
+export interface ResolveWorkboxCommonOptions {
   dest: string;
   sw: string;
   dev: boolean;
@@ -19,6 +19,8 @@ interface ResolveWorkboxCommonOptions {
   publicPath: NonNullable<Configuration["output"]>["publicPath"];
 }
 
+export type WorkboxCommon = Pick<GenerateSWConfig, SharedWorkboxOptionsKeys>;
+
 export const resolveWorkboxCommon = ({
   dest,
   sw,
@@ -29,10 +31,7 @@ export const resolveWorkboxCommon = ({
   manifestTransforms,
   modifyURLPrefix,
   publicPath,
-}: ResolveWorkboxCommonOptions): Pick<
-  GenerateSWConfig,
-  SharedWorkboxOptionsKeys
-> => ({
+}: ResolveWorkboxCommonOptions): WorkboxCommon => ({
   swDest: path.join(dest, sw),
   additionalManifestEntries: dev ? [] : manifestEntries,
   exclude: [

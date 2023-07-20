@@ -1,5 +1,3 @@
-import crypto from "node:crypto";
-import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,26 +7,21 @@ import fg from "fast-glob";
 import type { NextConfig } from "next";
 import type NextConfigShared from "next/dist/server/config-shared.js";
 import type { Configuration, default as Webpack } from "webpack";
-import type { RuntimeCaching } from "workbox-build";
-import WorkboxPlugin from "workbox-webpack-plugin";
 
 import defaultCache from "./cache.js";
-import { resolveRuntimeCaching } from "./resolve-runtime-caching.js";
 import { resolveWorkboxCommon } from "./resolve-workbox-common.js";
+import { resolveWorkboxPlugin } from "./resolve-workbox-plugin.js";
 import type { PluginOptions } from "./types.js";
-import { isInjectManifestConfig, overrideAfterCalledMethod } from "./utils.js";
+import { getRevision } from "./utils.js";
+import { buildCustomWorker } from "./webpack-builders/build-custom-worker.js";
 import { setDefaultContext } from "./webpack-builders/context.js";
 import {
-  buildCustomWorker,
   buildFallbackWorker,
   buildSWEntryWorker,
   getDefaultDocumentPage,
 } from "./webpack-builders/index.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-
-const getRevision = (file: fs.PathOrFileDescriptor) =>
-  crypto.createHash("md5").update(fs.readFileSync(file)).digest("hex");
 
 const withPWAInit = (
   pluginOptions: PluginOptions = {}
@@ -91,28 +84,8 @@ const withPWAInit = (
         swcMinify = nextConfig.swcMinify ?? nextDefConfig?.swcMinify ?? false,
       } = pluginOptions;
 
-      const {
-        swSrc,
-        additionalManifestEntries,
-        modifyURLPrefix = {},
-        manifestTransforms = [],
-        // @ts-expect-error removed from types
-        exclude,
-        ...workbox
-      } = workboxOptions;
-
       if (typeof nextConfig.webpack === "function") {
         config = nextConfig.webpack(config, options);
-      }
-
-      Object.keys(workbox).forEach(
-        (key) => workbox[key] === undefined && delete workbox[key]
-      );
-
-      const importScripts: string[] = [];
-
-      if (!config.plugins) {
-        config.plugins = [];
       }
 
       if (disable) {
@@ -120,328 +93,270 @@ const withPWAInit = (
         return config;
       }
 
-      logger.info(
-        `Compiling for ${options.isServer ? "server" : "client (static)"}...`
-      );
+      (async () => {
+        const importScripts: string[] = [];
 
-      const _scope = path.posix.join(scope, "/");
+        if (!config.plugins) {
+          config.plugins = [];
+        }
 
-      // inject register script to main.js
-      const _sw = path.posix.join(basePath, sw.startsWith("/") ? sw : `/${sw}`);
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          __PWA_SW__: `'${_sw}'`,
-          __PWA_SCOPE__: `'${_scope}'`,
-          __PWA_ENABLE_REGISTER__: `${Boolean(register)}`,
-          __PWA_START_URL__: dynamicStartUrl ? `'${basePath}'` : undefined,
-          __PWA_CACHE_ON_FRONT_END_NAV__: `${Boolean(cacheOnFrontEndNav)}`,
-          __PWA_AGGRFEN_CACHE__: `${Boolean(aggressiveFrontEndNavCaching)}`,
-          __PWA_RELOAD_ON_ONLINE__: `${Boolean(reloadOnOnline)}`,
-        })
-      );
+        logger.info(
+          `Compiling for ${options.isServer ? "server" : "client (static)"}...`
+        );
 
-      const swEntryJs = path.join(__dirname, "sw-entry.js");
-      const entry = config.entry as () => Promise<
-        Record<string, string[] | string>
-      >;
-      config.entry = () =>
-        entry().then((entries) => {
-          if (entries["main.js"] && !entries["main.js"].includes(swEntryJs)) {
-            if (Array.isArray(entries["main.js"])) {
-              entries["main.js"].unshift(swEntryJs);
-            } else if (typeof entries["main.js"] === "string") {
-              entries["main.js"] = [swEntryJs, entries["main.js"]];
-            }
-          }
-          if (entries["main-app"] && !entries["main-app"].includes(swEntryJs)) {
-            if (Array.isArray(entries["main-app"])) {
-              entries["main-app"].unshift(swEntryJs);
-            } else if (typeof entries["main-app"] === "string") {
-              entries["main-app"] = [swEntryJs, entries["main-app"]];
-            }
-          }
-          return entries;
-        });
+        const requiredUrls: string[] = [];
 
-      if (!options.isServer) {
-        setDefaultContext({
-          shouldMinify: !dev,
-          useSwcMinify: swcMinify,
-        });
+        const _sw = path.posix.join(basePath, sw);
+        const _scope = path.posix.join(scope, "/");
 
-        const _dest = path.join(options.dir, dest);
-        const sweWorkerName = buildSWEntryWorker({
-          id: buildId,
-          destDir: _dest,
-          shouldGenSWEWorker: cacheOnFrontEndNav,
-        });
+        requiredUrls.push(_sw);
 
         config.plugins.push(
           new webpack.DefinePlugin({
-            __PWA_SW_ENTRY_WORKER__: sweWorkerName && `'${sweWorkerName}'`,
+            __PWA_SW__: `'${_sw}'`,
+            __PWA_SCOPE__: `'${_scope}'`,
+            __PWA_ENABLE_REGISTER__: `${Boolean(register)}`,
+            __PWA_START_URL__: dynamicStartUrl ? `'${basePath}'` : undefined,
+            __PWA_CACHE_ON_FRONT_END_NAV__: `${Boolean(cacheOnFrontEndNav)}`,
+            __PWA_AGGRFEN_CACHE__: `${Boolean(aggressiveFrontEndNavCaching)}`,
+            __PWA_RELOAD_ON_ONLINE__: `${Boolean(reloadOnOnline)}`,
           })
         );
 
-        const customWorkerScriptName = buildCustomWorker({
-          id: buildId,
-          baseDir: options.dir,
-          customWorkerDir,
-          destDir: _dest,
-          plugins: config.plugins.filter(
-            (plugin) => plugin instanceof webpack.DefinePlugin
-          ),
-          tsconfig: tsConfigJSON,
-        });
-
-        if (!!customWorkerScriptName) {
-          importScripts.unshift(customWorkerScriptName);
-        }
-
-        if (!register) {
-          logger.info(
-            `Service worker won't be automatically registered as per the config, please call the following code in a componentDidMount callback or useEffect hook:`
-          );
-          logger.info(`  window.workbox.register()`);
-          if (
-            !tsConfigJSON?.compilerOptions?.types?.includes(
-              "@ducanh2912/next-pwa/workbox"
-            )
-          ) {
-            logger.info(
-              "You may also want to add @ducanh2912/next-pwa/workbox to compilerOptions.types in your tsconfig.json/jsconfig.json."
-            );
-          }
-        }
-
-        logger.info(`Service worker: ${path.join(dest, sw)}`);
-        logger.info(`  URL: ${_sw}`);
-        logger.info(`  Scope: ${_scope}`);
-
-        config.plugins.push(
-          new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [
-              path.join(_dest, "workbox-*.js"),
-              path.join(_dest, "workbox-*.js.map"),
-              path.join(_dest, sw),
-              path.join(_dest, `${sw}.map`),
-            ],
-          })
-        );
-
-        // precache files in public folder
-        let manifestEntries = additionalManifestEntries ?? [];
-        if (!manifestEntries) {
-          manifestEntries = fg
-            .sync(
-              [
-                "**/*",
-                "!workbox-*.js",
-                "!workbox-*.js.map",
-                "!worker-*.js",
-                "!worker-*.js.map",
-                "!fallback-*.js",
-                "!fallback-*.js.map",
-                `!${sw.replace(/^\/+/, "")}`,
-                `!${sw.replace(/^\/+/, "")}.map`,
-                ...publicExcludes,
-              ],
-              {
-                cwd: "public",
+        const swEntryJs = path.join(__dirname, "sw-entry.js");
+        const entry = config.entry as () => Promise<
+          Record<string, string[] | string>
+        >;
+        config.entry = () =>
+          entry().then((entries) => {
+            if (entries["main.js"] && !entries["main.js"].includes(swEntryJs)) {
+              if (Array.isArray(entries["main.js"])) {
+                entries["main.js"].unshift(swEntryJs);
+              } else if (typeof entries["main.js"] === "string") {
+                entries["main.js"] = [swEntryJs, entries["main.js"]];
               }
-            )
-            .map((f) => ({
-              url: path.posix.join(basePath, `/${f}`),
-              revision: getRevision(`public/${f}`),
-            }));
-        }
+            }
+            if (
+              entries["main-app"] &&
+              !entries["main-app"].includes(swEntryJs)
+            ) {
+              if (Array.isArray(entries["main-app"])) {
+                entries["main-app"].unshift(swEntryJs);
+              } else if (typeof entries["main-app"] === "string") {
+                entries["main-app"] = [swEntryJs, entries["main-app"]];
+              }
+            }
+            return entries;
+          });
 
-        if (cacheStartUrl) {
-          if (!dynamicStartUrl) {
-            manifestEntries.push({
-              url: basePath,
-              revision: buildId,
-            });
-          } else if (
-            typeof dynamicStartUrlRedirect === "string" &&
-            dynamicStartUrlRedirect.length > 0
-          ) {
-            manifestEntries.push({
-              url: dynamicStartUrlRedirect,
-              revision: buildId,
-            });
-          }
-        }
+        if (!options.isServer) {
+          setDefaultContext("shouldMinify", !dev);
+          setDefaultContext("useSwcMinify", swcMinify);
 
-        let hasFallbacks = false;
-
-        if (fallbacks) {
-          if (!fallbacks.document) {
-            fallbacks.document = getDefaultDocumentPage(
-              options.dir,
-              pageExtensions,
-              isAppDirEnabled
-            );
-          }
-          const res = buildFallbackWorker({
-            id: buildId,
-            fallbacks,
+          const _dest = path.join(options.dir, dest);
+          const sweWorkerPath = await buildSWEntryWorker({
             destDir: _dest,
+            shouldGenSWEWorker: cacheOnFrontEndNav,
+            basePath,
           });
 
-          if (res) {
-            hasFallbacks = true;
-            importScripts.unshift(res.name);
-            res.precaches.forEach((route) => {
-              if (
-                route &&
-                typeof route !== "boolean" &&
-                !manifestEntries.find(
-                  (entry) =>
-                    typeof entry !== "string" && entry.url.startsWith(route)
-                )
-              ) {
-                manifestEntries.push({
-                  url: route,
-                  revision: buildId,
-                });
-              }
-            });
-          }
-        }
+          config.plugins.push(
+            new webpack.DefinePlugin({
+              __PWA_SW_ENTRY_WORKER__:
+                sweWorkerPath &&
+                (requiredUrls.push(sweWorkerPath), `'${sweWorkerPath}'`),
+            })
+          );
 
-        const workboxCommon = resolveWorkboxCommon({
-          dest: _dest,
-          sw,
-          dev,
-          buildId,
-          buildExcludes,
-          manifestEntries,
-          manifestTransforms,
-          modifyURLPrefix,
-          publicPath: config.output?.publicPath,
-        });
+          if (!register) {
+            logger.info(
+              "Service worker won't be automatically registered as per the config, please call the following code in componentDidMount or useEffect:"
+            );
 
-        if (isInjectManifestConfig(workboxOptions)) {
-          const swSrc = path.join(options.dir, workboxOptions.swSrc);
-          logger.info(`Using InjectManifest with ${swSrc}`);
-          const workboxPlugin = new WorkboxPlugin.InjectManifest({
-            ...workboxCommon,
-            ...workbox,
-            swSrc,
-          });
-          if (dev) {
-            overrideAfterCalledMethod(workboxPlugin);
-          }
-          config.plugins.push(workboxPlugin);
-        } else {
-          const {
-            skipWaiting = true,
-            clientsClaim = true,
-            cleanupOutdatedCaches = true,
-            ignoreURLParametersMatching = [],
-            importScripts: userSpecifiedImportScripts,
-            runtimeCaching: userSpecifiedRuntimeCaching,
-          } = workboxOptions;
+            logger.info(`  window.workbox.register()`);
 
-          let runtimeCaching: RuntimeCaching[];
-
-          if (userSpecifiedImportScripts) {
-            for (const script of userSpecifiedImportScripts) {
-              importScripts.push(script);
+            if (
+              !tsConfigJSON?.compilerOptions?.types?.includes(
+                "@ducanh2912/next-pwa/workbox"
+              )
+            ) {
+              logger.info(
+                "You may also want to add @ducanh2912/next-pwa/workbox to compilerOptions.types in your tsconfig.json/jsconfig.json."
+              );
             }
           }
 
-          let shutWorkboxAfterCalledUp = false;
+          logger.info(`Service worker: ${path.join(_dest, sw)}`);
+          logger.info(`  URL: ${_sw}`);
+          logger.info(`  Scope: ${_scope}`);
 
-          if (dev) {
-            logger.info(
-              "Building in development mode, caching and precaching are disabled for the most part. This means that offline support is disabled, but you can continue developing other functions in service worker."
-            );
-            ignoreURLParametersMatching.push(/ts/);
-            runtimeCaching = [
-              {
-                urlPattern: /.*/i,
-                handler: "NetworkOnly",
-                options: {
-                  cacheName: "dev",
-                },
-              },
-            ];
-            shutWorkboxAfterCalledUp = true;
-          } else {
-            runtimeCaching = resolveRuntimeCaching(
-              userSpecifiedRuntimeCaching,
-              extendDefaultRuntimeCaching
-            );
-          }
+          config.plugins.push(
+            new CleanWebpackPlugin({
+              cleanOnceBeforeBuildPatterns: [
+                path.join(_dest, "workbox-*.js"),
+                path.join(_dest, "workbox-*.js.map"),
+                path.join(_dest, sw),
+                path.join(_dest, `${sw}.map`),
+                path.join(_dest, "pwa-chunks/**"),
+              ],
+            })
+          );
 
-          if (dynamicStartUrl) {
-            runtimeCaching.unshift({
-              urlPattern: basePath,
-              handler: "NetworkFirst",
-              options: {
-                cacheName: "start-url",
-                plugins: [
-                  {
-                    cacheWillUpdate: async ({ response }) => {
-                      if (response && response.type === "opaqueredirect") {
-                        return new Response(response.body, {
-                          status: 200,
-                          statusText: "OK",
-                          headers: response.headers,
-                        });
-                      }
-                      return response;
-                    },
-                  },
-                ],
-              },
-            });
-          }
-
-          if (hasFallbacks) {
-            runtimeCaching.forEach((cacheEntry) => {
-              if (!cacheEntry.options) return;
-              if (cacheEntry.options.precacheFallback) return;
-              if (
-                Array.isArray(cacheEntry.options.plugins) &&
-                cacheEntry.options.plugins.find(
-                  (plugin) => "handlerDidError" in plugin
-                )
-              )
-                return;
-              if (!cacheEntry.options.plugins) {
-                cacheEntry.options.plugins = [];
-              }
-              cacheEntry.options.plugins.push({
-                handlerDidError: async ({ request }) => {
-                  if (typeof self !== "undefined") {
-                    return self.fallback(request);
-                  }
-                  return Response.error();
-                },
-              });
-            });
-          }
-
-          const workboxPlugin = new WorkboxPlugin.GenerateSW({
-            ...workboxCommon,
-            skipWaiting,
-            clientsClaim,
-            cleanupOutdatedCaches,
-            ignoreURLParametersMatching,
-            importScripts,
-            ...workbox,
-            runtimeCaching,
+          const customWorkerScriptName = await buildCustomWorker({
+            baseDir: options.dir,
+            customWorkerDir,
+            destDir: _dest,
+            plugins: config.plugins.filter(
+              (plugin) => plugin instanceof webpack.DefinePlugin
+            ),
+            tsconfig: tsConfigJSON,
+            basePath,
           });
 
-          if (shutWorkboxAfterCalledUp) {
-            overrideAfterCalledMethod(workboxPlugin);
+          if (!!customWorkerScriptName) {
+            importScripts.unshift(customWorkerScriptName);
+            requiredUrls.push(customWorkerScriptName);
           }
 
+          const {
+            additionalManifestEntries,
+            modifyURLPrefix = {},
+            manifestTransforms = [],
+            // @ts-expect-error removed from types
+            exclude,
+            ...workbox
+          } = workboxOptions;
+
+          // Precache files in public folder
+          let manifestEntries = additionalManifestEntries ?? [];
+
+          if (!manifestEntries) {
+            manifestEntries = (
+              await fg(
+                [
+                  "**/*",
+                  "!workbox-*.js",
+                  "!workbox-*.js.map",
+                  "!worker-*.js",
+                  "!worker-*.js.map",
+                  "!fallback-*.js",
+                  "!fallback-*.js.map",
+                  `!${sw.replace(/^\/+/, "")}`,
+                  `!${sw.replace(/^\/+/, "")}.map`,
+                  ...publicExcludes,
+                ],
+                {
+                  cwd: "public",
+                }
+              )
+            ).map((f) => ({
+              url: path.posix.join(basePath, f),
+              revision: getRevision(`public/${f}`),
+            }));
+          }
+
+          if (cacheStartUrl) {
+            if (!dynamicStartUrl) {
+              manifestEntries.push({
+                url: basePath,
+                revision: buildId,
+              });
+            } else if (
+              typeof dynamicStartUrlRedirect === "string" &&
+              dynamicStartUrlRedirect.length > 0
+            ) {
+              manifestEntries.push({
+                url: dynamicStartUrlRedirect,
+                revision: buildId,
+              });
+            }
+          }
+
+          Object.keys(workbox).forEach(
+            (key) => workbox[key] === undefined && delete workbox[key]
+          );
+
+          let hasFallbacks = false;
+
+          if (fallbacks) {
+            if (!fallbacks.document) {
+              fallbacks.document = getDefaultDocumentPage(
+                options.dir,
+                pageExtensions,
+                isAppDirEnabled
+              );
+            }
+            const fallbackWorker = await buildFallbackWorker({
+              buildId,
+              fallbacks,
+              destDir: _dest,
+              basePath,
+            });
+
+            if (fallbackWorker) {
+              hasFallbacks = true;
+              importScripts.unshift(fallbackWorker.name);
+              requiredUrls.push(fallbackWorker.name);
+
+              fallbackWorker.precaches.forEach((route) => {
+                if (
+                  route &&
+                  typeof route !== "boolean" &&
+                  !manifestEntries.find(
+                    (entry) =>
+                      typeof entry !== "string" && entry.url.startsWith(route)
+                  )
+                ) {
+                  manifestEntries.push({
+                    url: route,
+                    revision: buildId,
+                  });
+                }
+              });
+            }
+          }
+
+          const workboxCommon = resolveWorkboxCommon({
+            dest: _dest,
+            sw,
+            dev,
+            buildId,
+            buildExcludes,
+            manifestEntries,
+            manifestTransforms,
+            modifyURLPrefix,
+            publicPath: config.output?.publicPath,
+          });
+
+          const workboxPlugin = resolveWorkboxPlugin({
+            rootDir: options.dir,
+            basePath,
+            isDev: dev,
+
+            workboxCommon,
+            workboxOptions: workbox,
+            importScripts,
+
+            extendDefaultRuntimeCaching,
+            dynamicStartUrl,
+
+            hasFallbacks,
+          });
+
           config.plugins.push(workboxPlugin);
+
+          if (_dest !== path.join(options.dir, "public")) {
+            logger.info(
+              `Successfully built the service worker. ${requiredUrls.join(
+                ", "
+              )} ${
+                requiredUrls.length === 1 ? "is" : "are"
+              } expected to be manually served.`
+            );
+          }
         }
-      }
+      })();
+
       return config;
     },
   });

@@ -11,20 +11,20 @@ import defaultSwcRc from "../.swcrc.json";
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
-export const buildCustomWorker = ({
-  id,
+export const buildCustomWorker = async ({
   baseDir,
   customWorkerDir,
   destDir,
   plugins = [],
   tsconfig,
+  basePath,
 }: {
-  id: string;
   baseDir: string;
   customWorkerDir: string;
   destDir: string;
   plugins: Configuration["plugins"];
   tsconfig: TSConfigJSON | undefined;
+  basePath: string;
 }) => {
   let workerDir = "";
 
@@ -38,16 +38,15 @@ export const buildCustomWorker = ({
   }
 
   if (!workerDir) {
-    return;
+    return undefined;
   }
 
-  const name = `worker-${id}.js`;
   const customWorkerEntries = ["ts", "js"]
     .map((ext) => path.join(workerDir, `index.${ext}`))
     .filter((entry) => fs.existsSync(entry));
 
   if (customWorkerEntries.length === 0) {
-    return;
+    return undefined;
   }
 
   const customWorkerEntry = customWorkerEntries[0];
@@ -59,7 +58,6 @@ export const buildCustomWorker = ({
   }
 
   logger.info(`Custom worker found: ${customWorkerEntry}`);
-  logger.info(`Building custom worker: ${path.join(destDir, name)}...`);
 
   const swcRc = defaultSwcRc;
 
@@ -79,35 +77,49 @@ export const buildCustomWorker = ({
     );
   }
 
-  webpack({
-    ...getSharedWebpackConfig({
-      swcRc,
-    }),
-    mode: NextPWAContext.shouldMinify ? "production" : "development",
-    target: "webworker",
-    entry: {
-      main: customWorkerEntry,
-    },
-    output: {
-      path: destDir,
-      filename: name,
-    },
-    plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [
-          path.join(destDir, "worker-*.js"),
-          path.join(destDir, "worker-*.js.map"),
-        ],
+  return new Promise<string | undefined>((resolve) => {
+    webpack({
+      ...getSharedWebpackConfig({
+        swcRc,
       }),
-      ...plugins,
-    ],
-  }).run((error, status) => {
-    if (error || status?.hasErrors()) {
-      logger.error(`Failed to build custom worker.`);
-      logger.error(status?.toString({ colors: true }));
-      process.exit(-1);
-    }
-  });
+      mode: NextPWAContext.shouldMinify ? "production" : "development",
+      target: "webworker",
+      entry: {
+        main: customWorkerEntry,
+      },
+      output: {
+        path: destDir,
+        filename: "worker-[contenthash].js",
+        chunkFilename: "pwa-chunks/[id]-[chunkhash].js",
+      },
+      plugins: [
+        new CleanWebpackPlugin({
+          cleanOnceBeforeBuildPatterns: [
+            path.join(destDir, "worker-*.js"),
+            path.join(destDir, "worker-*.js.map"),
+          ],
+        }),
+        ...plugins,
+      ],
+    }).run((error, status) => {
+      if (error || status?.hasErrors()) {
+        logger.error("Failed to build custom worker.");
+        logger.error(status?.toString({ colors: true }));
+        process.exit(-1);
+      }
 
-  return name;
+      const name = status
+        ?.toJson()
+        .assetsByChunkName?.main?.find((file) => file.startsWith("worker-"));
+
+      if (!name) {
+        logger.error("Expected custom worker's name, found none.");
+        process.exit(-1);
+      }
+
+      logger.info(`Built custom worker to ${path.join(destDir, name)}.`);
+
+      resolve(path.posix.join(basePath, name));
+    });
+  });
 };

@@ -141,8 +141,9 @@ export interface PluginOptions {
    */
   aggressiveFrontEndNavCaching?: boolean;
   /**
-   * URL scope for PWA. Defaults to `basePath` in `next.config.js`. Set to
-   * `/foo` so that paths under `/foo` are PWA while others are not.
+   * URL scope for PWA. Set to `/foo` so that paths under `/foo` are PWA while others
+   * are not.
+   * @default nextConfig.basePath
    */
   scope?: string;
   /**

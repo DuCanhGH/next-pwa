@@ -6,15 +6,15 @@ import type { FallbackRoutes } from "../types.js";
 
 export const getFallbackEnvs = ({
   fallbacks,
-  id,
+  buildId,
 }: {
   fallbacks: FallbackRoutes;
-  id: string;
+  buildId: string;
 }) => {
   let data = fallbacks.data;
 
   if (data && data.endsWith(".json")) {
-    data = path.posix.join("/_next/data", id, data);
+    data = path.posix.join("/_next/data", buildId, data);
   }
 
   const envs = {

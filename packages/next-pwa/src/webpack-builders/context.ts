@@ -19,16 +19,15 @@ export const NextPWAContext = {
 };
 
 /**
- * Set default values for `NextPWAContext`.
- * @param defaultValues The default values
+ * Set default value for a key in `NextPWAContext`.
+ * @param key The key in `NextPWAContext`
+ * @param value The value
  */
-export const setDefaultContext = ({
-  shouldMinify: _minify,
-  useSwcMinify: _swcMinify,
-}: Partial<typeof NextPWAContext>) => {
-  NextPWAContext.shouldMinify === undefined &&
-    (NextPWAContext.shouldMinify = _minify);
-
-  NextPWAContext.useSwcMinify === undefined &&
-    (NextPWAContext.useSwcMinify = _swcMinify);
+export const setDefaultContext = <T extends keyof typeof NextPWAContext>(
+  key: T,
+  value: (typeof NextPWAContext)[T]
+) => {
+  if (NextPWAContext[key] === undefined) {
+    NextPWAContext[key] = value;
+  }
 };
