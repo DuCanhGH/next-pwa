@@ -64,7 +64,6 @@ export const buildFallbackWorker = ({
         cleanOnceBeforeBuildPatterns: [
           path.join(destDir, "fallback-*.js"),
           path.join(destDir, "fallback-*.js.map"),
-          path.join(destDir, "fallback/**"),
         ],
       }),
       new webpack.EnvironmentPlugin(envs),
