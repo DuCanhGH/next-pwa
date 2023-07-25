@@ -81,6 +81,7 @@ const withPWAInit = (
         customWorkerDir = "worker",
         customWorkerSrc = customWorkerDir,
         customWorkerDest = dest,
+        customWorkerPrefix = "worker",
         workboxOptions = {},
         extendDefaultRuntimeCaching = false,
         swcMinify = nextConfig.swcMinify ?? nextDefConfig?.swcMinify ?? false,
@@ -152,6 +153,7 @@ const withPWAInit = (
         setDefaultContext("useSwcMinify", swcMinify);
 
         const _dest = path.join(options.dir, dest);
+        const _cwdest = path.join(options.dir, customWorkerDest);
         const sweWorkerPath = buildSWEntryWorker({
           isDev: dev,
           destDir: _dest,
@@ -206,7 +208,8 @@ const withPWAInit = (
           baseDir: options.dir,
           swDest: _dest,
           customWorkerSrc,
-          customWorkerDest,
+          customWorkerDest: _cwdest,
+          customWorkerPrefix,
           plugins: config.plugins.filter(
             (plugin) => plugin instanceof webpack.DefinePlugin
           ),

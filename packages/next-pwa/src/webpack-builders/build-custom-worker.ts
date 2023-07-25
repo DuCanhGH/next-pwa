@@ -21,6 +21,7 @@ export const buildCustomWorker = ({
   baseDir,
   customWorkerSrc,
   customWorkerDest,
+  customWorkerPrefix,
   plugins = [],
   tsconfig,
   basePath,
@@ -30,6 +31,7 @@ export const buildCustomWorker = ({
   baseDir: string;
   customWorkerSrc: string;
   customWorkerDest: string;
+  customWorkerPrefix: string;
   plugins: Configuration["plugins"];
   tsconfig: TSConfigJSON | undefined;
   basePath: string;
@@ -37,7 +39,7 @@ export const buildCustomWorker = ({
   const customWorkerEntry = findFirstTruthy(
     [customWorkerSrc, path.join("src", customWorkerSrc)],
     (dir) => {
-      dir = path.join(baseDir, "src", dir);
+      dir = path.join(baseDir, dir);
 
       const customWorkerEntries = ["ts", "js"]
         .map((ext) => path.join(dir, `index.${ext}`))
@@ -63,7 +65,7 @@ export const buildCustomWorker = ({
     return undefined;
   }
 
-  logger.info(`Custom worker found: ${customWorkerEntry}`);
+  logger.info(`Found a custom worker implementation at ${customWorkerEntry}.`);
 
   const swcRc = defaultSwcRc;
 
@@ -75,7 +77,14 @@ export const buildCustomWorker = ({
     );
   }
 
-  const name = `worker-${getFilename(customWorkerEntry, isDev)}.js`;
+  const name = `${customWorkerPrefix}-${getFilename(
+    customWorkerEntry,
+    isDev
+  )}.js`;
+
+  logger.info(
+    `Building custom worker to ${path.join(customWorkerDest, name)}...`
+  );
 
   webpack({
     ...getSharedWebpackConfig({
@@ -94,8 +103,8 @@ export const buildCustomWorker = ({
     plugins: [
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: [
-          path.join(customWorkerDest, "worker-*.js"),
-          path.join(customWorkerDest, "worker-*.js.map"),
+          path.join(customWorkerDest, `${customWorkerPrefix}-*.js`),
+          path.join(customWorkerDest, `${customWorkerPrefix}-*.js.map`),
         ],
       }),
       ...plugins,

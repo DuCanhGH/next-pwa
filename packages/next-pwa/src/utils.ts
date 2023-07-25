@@ -60,5 +60,5 @@ export const getFilename = (file: fs.PathOrFileDescriptor, isDev: boolean) => {
   if (isDev) {
     return "development";
   }
-  return getFileHash(file);
+  return getFileHash(file).slice(0, 16);
 };
