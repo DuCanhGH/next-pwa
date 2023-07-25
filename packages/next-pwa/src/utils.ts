@@ -53,5 +53,12 @@ export const convertBoolean = (value: unknown, strict = true) => {
   }
 };
 
-export const getRevision = (file: fs.PathOrFileDescriptor) =>
+export const getFileHash = (file: fs.PathOrFileDescriptor) =>
   crypto.createHash("md5").update(fs.readFileSync(file)).digest("hex");
+
+export const getFilename = (file: fs.PathOrFileDescriptor, isDev: boolean) => {
+  if (isDev) {
+    return "development";
+  }
+  return getFileHash(file);
+};

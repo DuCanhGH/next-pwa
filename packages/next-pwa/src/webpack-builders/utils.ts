@@ -1,12 +1,13 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import type { SwcOptions } from "@ducanh2912/utils";
 import { resolveSwc, terserMinify } from "@ducanh2912/utils";
 import type { MinimizerOptions, TerserOptions } from "terser-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import type { Configuration } from "webpack";
 
-import defaultSwcRc from "../.swcrc.json";
+import { defaultSwcRc } from "../.swcrc.js";
 import { NextPWAContext } from "./context.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -36,7 +37,7 @@ const resolveTerserOptions = (): MinimizerOptions<TerserOptions> & {
 export const getSharedWebpackConfig = ({
   swcRc = defaultSwcRc,
 }: {
-  swcRc?: Record<string, any>;
+  swcRc?: SwcOptions;
 }): Configuration => {
   const optimization = NextPWAContext.shouldMinify && {
     minimize: true,

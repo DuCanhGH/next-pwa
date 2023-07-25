@@ -6,3 +6,4 @@ export * as logger from "./logger.js";
 export { resolveSwc } from "./resolve-swc.js";
 export { swcLoader } from "./swc-loader.js";
 export { terserMinify } from "./terser-minify.js";
+export type { Options as SwcOptions } from "@swc/core";

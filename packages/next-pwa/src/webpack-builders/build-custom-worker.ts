@@ -1,60 +1,66 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { addPathAliasesToSWC, logger } from "@ducanh2912/utils";
+import {
+  addPathAliasesToSWC,
+  findFirstTruthy,
+  logger,
+} from "@ducanh2912/utils";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import type { TsConfigJson as TSConfigJSON } from "type-fest";
 import type { Configuration } from "webpack";
 import webpack from "webpack";
 
-import defaultSwcRc from "../.swcrc.json";
+import { defaultSwcRc } from "../.swcrc.js";
+import { getFilename } from "../utils.js";
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
-export const buildCustomWorker = async ({
+export const buildCustomWorker = ({
+  isDev,
   baseDir,
-  customWorkerDir,
-  destDir,
+  customWorkerSrc,
+  customWorkerDest,
   plugins = [],
   tsconfig,
   basePath,
 }: {
+  isDev: boolean;
+  swDest: string;
   baseDir: string;
-  customWorkerDir: string;
-  destDir: string;
+  customWorkerSrc: string;
+  customWorkerDest: string;
   plugins: Configuration["plugins"];
   tsconfig: TSConfigJSON | undefined;
   basePath: string;
 }) => {
-  let workerDir = "";
+  const customWorkerEntry = findFirstTruthy(
+    [customWorkerSrc, path.join("src", customWorkerSrc)],
+    (dir) => {
+      dir = path.join(baseDir, "src", dir);
 
-  const rootWorkerDir = path.join(baseDir, customWorkerDir);
-  const srcWorkerDir = path.join(baseDir, "src", customWorkerDir);
+      const customWorkerEntries = ["ts", "js"]
+        .map((ext) => path.join(dir, `index.${ext}`))
+        .filter((entry) => fs.existsSync(entry));
 
-  if (fs.existsSync(rootWorkerDir)) {
-    workerDir = rootWorkerDir;
-  } else if (fs.existsSync(srcWorkerDir)) {
-    workerDir = srcWorkerDir;
-  }
+      if (customWorkerEntries.length === 0) {
+        return undefined;
+      }
 
-  if (!workerDir) {
+      const customWorkerEntry = customWorkerEntries[0];
+
+      if (customWorkerEntries.length > 1) {
+        logger.info(
+          `More than one custom worker found, ${customWorkerEntry} will be used.`
+        );
+      }
+
+      return customWorkerEntry;
+    }
+  );
+
+  if (!customWorkerEntry) {
     return undefined;
-  }
-
-  const customWorkerEntries = ["ts", "js"]
-    .map((ext) => path.join(workerDir, `index.${ext}`))
-    .filter((entry) => fs.existsSync(entry));
-
-  if (customWorkerEntries.length === 0) {
-    return undefined;
-  }
-
-  const customWorkerEntry = customWorkerEntries[0];
-
-  if (customWorkerEntries.length > 1) {
-    logger.info(
-      `More than one custom worker found, ${customWorkerEntry} will be used.`
-    );
   }
 
   logger.info(`Custom worker found: ${customWorkerEntry}`);
@@ -69,57 +75,38 @@ export const buildCustomWorker = async ({
     );
   }
 
-  if (tsconfig && tsconfig.compilerOptions && tsconfig.compilerOptions.paths) {
-    addPathAliasesToSWC(
+  const name = `worker-${getFilename(customWorkerEntry, isDev)}.js`;
+
+  webpack({
+    ...getSharedWebpackConfig({
       swcRc,
-      path.join(baseDir, tsconfig.compilerOptions.baseUrl ?? "."),
-      tsconfig.compilerOptions.paths
-    );
-  }
-
-  return new Promise<string | undefined>((resolve) => {
-    webpack({
-      ...getSharedWebpackConfig({
-        swcRc,
+    }),
+    mode: NextPWAContext.shouldMinify ? "production" : "development",
+    target: "webworker",
+    entry: {
+      main: customWorkerEntry,
+    },
+    output: {
+      path: customWorkerDest,
+      filename: name,
+      chunkFilename: "sw-chunks/[id]-[chunkhash].js",
+    },
+    plugins: [
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          path.join(customWorkerDest, "worker-*.js"),
+          path.join(customWorkerDest, "worker-*.js.map"),
+        ],
       }),
-      mode: NextPWAContext.shouldMinify ? "production" : "development",
-      target: "webworker",
-      entry: {
-        main: customWorkerEntry,
-      },
-      output: {
-        path: destDir,
-        filename: "worker-[contenthash].js",
-        chunkFilename: "pwa-chunks/[id]-[chunkhash].js",
-      },
-      plugins: [
-        new CleanWebpackPlugin({
-          cleanOnceBeforeBuildPatterns: [
-            path.join(destDir, "worker-*.js"),
-            path.join(destDir, "worker-*.js.map"),
-          ],
-        }),
-        ...plugins,
-      ],
-    }).run((error, status) => {
-      if (error || status?.hasErrors()) {
-        logger.error("Failed to build custom worker.");
-        logger.error(status?.toString({ colors: true }));
-        process.exit(-1);
-      }
-
-      const name = status
-        ?.toJson()
-        .assetsByChunkName?.main?.find((file) => file.startsWith("worker-"));
-
-      if (!name) {
-        logger.error("Expected custom worker's name, found none.");
-        process.exit(-1);
-      }
-
-      logger.info(`Built custom worker to ${path.join(destDir, name)}.`);
-
-      resolve(path.posix.join(basePath, name));
-    });
+      ...plugins,
+    ],
+  }).run((error, status) => {
+    if (error || status?.hasErrors()) {
+      logger.error("Failed to build custom worker.");
+      logger.error(status?.toString({ colors: true }));
+      process.exit(-1);
+    }
   });
+
+  return path.posix.join(basePath, name);
 };

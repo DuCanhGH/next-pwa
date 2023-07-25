@@ -6,18 +6,21 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import webpack from "webpack";
 
 import type { FallbackRoutes } from "../types.js";
+import { getFilename } from "../utils.js";
 import { NextPWAContext } from "./context.js";
 import { getFallbackEnvs } from "./get-fallback-envs.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-export const buildFallbackWorker = async ({
+export const buildFallbackWorker = ({
+  isDev,
   buildId,
   fallbacks,
   destDir,
   basePath,
 }: {
+  isDev: boolean;
   buildId: string;
   fallbacks: FallbackRoutes;
   destDir: string;
@@ -42,53 +45,40 @@ export const buildFallbackWorker = async ({
 
   const fallbackJs = path.join(__dirname, `fallback.js`);
 
-  return new Promise<{ name: string; precaches: (string | boolean)[] }>(
-    (resolve) => {
-      webpack({
-        ...getSharedWebpackConfig({}),
-        mode: NextPWAContext.shouldMinify ? "production" : "development",
-        target: "webworker",
-        entry: {
-          main: fallbackJs,
-        },
-        output: {
-          path: destDir,
-          filename: "fallback-[contenthash].js",
-          chunkFilename: "pwa-chunks/[id]-[chunkhash].js",
-        },
-        plugins: [
-          new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [
-              path.join(destDir, "fallback-*.js"),
-              path.join(destDir, "fallback-*.js.map"),
-              path.join(destDir, "fallback/**"),
-            ],
-          }),
-          new webpack.EnvironmentPlugin(envs),
+  const name = `fallback-${getFilename(fallbackJs, isDev)}.js`;
+
+  webpack({
+    ...getSharedWebpackConfig({}),
+    mode: NextPWAContext.shouldMinify ? "production" : "development",
+    target: "webworker",
+    entry: {
+      main: fallbackJs,
+    },
+    output: {
+      path: destDir,
+      filename: name,
+      chunkFilename: "sw-chunks/[id]-[chunkhash].js",
+    },
+    plugins: [
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          path.join(destDir, "fallback-*.js"),
+          path.join(destDir, "fallback-*.js.map"),
+          path.join(destDir, "fallback/**"),
         ],
-      }).run((error, status) => {
-        if (error || status?.hasErrors()) {
-          logger.error("Failed to build fallback worker.");
-          logger.error(status?.toString({ colors: true }));
-          process.exit(-1);
-        }
-
-        const name = status
-          ?.toJson()
-          .assetsByChunkName?.main?.find((file) =>
-            file.startsWith("fallback-")
-          );
-
-        if (!name) {
-          logger.error("Expected fallback worker's name, found none.");
-          process.exit(-1);
-        }
-
-        resolve({
-          name: path.posix.join(basePath, name),
-          precaches: Object.values(envs).filter((v) => !!v),
-        });
-      });
+      }),
+      new webpack.EnvironmentPlugin(envs),
+    ],
+  }).run((error, status) => {
+    if (error || status?.hasErrors()) {
+      logger.error("Failed to build fallback worker.");
+      logger.error(status?.toString({ colors: true }));
+      process.exit(-1);
     }
-  );
+  });
+
+  return {
+    name: path.posix.join(basePath, name),
+    precaches: Object.values(envs).filter((v) => !!v),
+  };
 };
