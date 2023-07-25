@@ -1,5 +1,15 @@
 # @ducanh2912/next-pwa
 
+## 9.4.0
+
+### Minor Changes
+
+- [#62](https://github.com/DuCanhGH/next-pwa/pull/62) [`771de70`](https://github.com/DuCanhGH/next-pwa/commit/771de70851616c4ffe78ab556084c55389c9dd2b) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat(next-pwa): added `customWorkerDest`, `customWorkerPrefix`, use file hashing for workers' output filenames' suffix
+
+  - `customWorkerPrefix` works like our `sw` option, except that it is just a prefix and not the whole name to allow having a hash at the end of the custom worker's output filename.
+  - This also deprecates `customWorkerDir` and replaces it with `customWorkerSrc` to align with `customWorkerDest` so as to avoid confusion.
+  - We now use file hashing instead of `buildId` for our workers' output filenames' suffix.
+
 ## 9.3.0
 
 ### Minor Changes
