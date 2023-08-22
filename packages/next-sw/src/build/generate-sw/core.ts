@@ -121,8 +121,8 @@ export const generateSW = ({
         __PWA_MANIFEST_ENTRIES__: JSON.stringify(manifestEntries),
         __PWA_SKIP_WAITING__: skipWaiting.toString(),
       }),
-      new webpack.EnvironmentPlugin(envs),
-    ],
+      !!envs ? new webpack.EnvironmentPlugin(envs) : undefined,
+    ].filter(Boolean),
     optimization: minify
       ? {
           minimize: true,

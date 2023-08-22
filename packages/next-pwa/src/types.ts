@@ -77,7 +77,7 @@ export interface PluginOptions {
    */
   cacheStartUrl?: boolean;
   /**
-   * If your start URL returns different HTML document under different states
+   * If your start URL returns different HTML documents under different states
    * (such as logged in and not logged in), this should be set to true if you
    * also use `cacheStartUrl`. Effective only when `cacheStartUrl` is set to `true`.
    * Set to `false` if your start URL always returns same HTML document, in which case

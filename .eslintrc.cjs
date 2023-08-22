@@ -66,12 +66,7 @@ module.exports = {
     "no-extra-boolean-cast": "off",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "turbo/no-undeclared-env-vars": [
-      "error",
-      {
-        allowList: ["^__PWA_FALLBACK_(.*)__+$", "^NEXT_PWA_(.*)+$"],
-      },
-    ],
+    "turbo/no-undeclared-env-vars": "off",
   },
   settings: {
     "import/parsers": {
@@ -104,6 +99,12 @@ module.exports = {
           {
             devDependencies: ["**/*.config.{cjs,mjs,js,ts}"],
             packageDir: [__dirname, ...packageDirs],
+          },
+        ],
+        "turbo/no-undeclared-env-vars": [
+          "error",
+          {
+            allowList: ["^__PWA_FALLBACK_(.*)__+$", "^NEXT_PWA_(.*)+$"],
           },
         ],
       },
