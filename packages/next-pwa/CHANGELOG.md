@@ -1,5 +1,15 @@
 # @ducanh2912/next-pwa
 
+## 9.5.0
+
+### Minor Changes
+
+- [#74](https://github.com/DuCanhGH/next-pwa/pull/74) [`158ebe1`](https://github.com/DuCanhGH/next-pwa/commit/158ebe1f8de13d8da806650b992a7e2c0d54bcb7) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - refactor: removed `'activated'` event listeners in `sw-entry.ts`
+
+  - These listeners seem to be unnecessary as we already have `runtimeCaching`. Though, this is merely an assumption and might cause issues for some people.
+    Do open a new issue if you are one of them :)
+  - This also updates every dependency to their latest versions.
+
 ## 9.4.0
 
 ### Minor Changes
