@@ -4,6 +4,10 @@ import { lt as semverLt } from "semver";
 import { getPackageVersion } from "./get-package-version.js";
 
 const nextPackageJson = getPackageVersion("next");
+const isNextOlderThan13_4_1 =
+    !!nextPackageJson && semverLt(nextPackageJson, "13.4.1"),
+  isNextOlderThan13_4_20 =
+    !!nextPackageJson && semverLt(nextPackageJson, "13.4.20");
 
 const LOGGING_METHOD = ["wait", "error", "warn", "info", "event"] as const;
 
@@ -22,11 +26,6 @@ const mapLoggingMethodToConsole: Record<
   event: "log",
 };
 
-const isNextOlderThan13_4_1 =
-    !!nextPackageJson && semverLt(nextPackageJson, "13.4.1"),
-  isNextOlderThan13_4_20 =
-    !!nextPackageJson && semverLt(nextPackageJson, "13.4.20");
-
 /**
  * Get logging prefixes.
  * @returns
@@ -43,11 +42,11 @@ const getPrefixes = (): Prefixes => {
   }
   if (isNextOlderThan13_4_20) {
     return {
-      wait: `${chalk.cyan("wait")} (pwa)`,
-      error: `${chalk.red("error")} (pwa)`,
-      warn: `${chalk.yellow("warn")} (pwa)`,
-      info: `${chalk.cyan("info")} (pwa)`,
-      event: `${chalk.cyan("info")} (pwa)`,
+      wait: `- ${chalk.cyan("wait")} (pwa)`,
+      error: `- ${chalk.red("error")} (pwa)`,
+      warn: `- ${chalk.yellow("warn")} (pwa)`,
+      info: `- ${chalk.cyan("info")} (pwa)`,
+      event: `- ${chalk.cyan("info")} (pwa)`,
     };
   }
   return {
