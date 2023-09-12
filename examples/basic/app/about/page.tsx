@@ -1,12 +1,9 @@
-import Link from "next/link";
-
 import { Button } from "./Button";
 
 export default function Page() {
   return (
     <>
-      <h1>This is the basic example.</h1>
-      <Link href="/appdir">Home page</Link>
+      <h1>This is the most basic example of using next-pwa.</h1>
       <Button />
     </>
   );

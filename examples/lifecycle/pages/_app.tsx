@@ -1,6 +1,8 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
+import { PWALifeCycle } from "../components/PWALifecycle";
+
 const APP_NAME = "next-pwa example";
 const APP_DESCRIPTION = "This is an example of using next-pwa";
 
@@ -25,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
+      <PWALifeCycle />
       <Component {...pageProps} />
     </>
   );

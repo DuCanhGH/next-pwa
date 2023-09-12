@@ -1,7 +1,7 @@
-import Head from "next/head";
+"use client";
 import { useEffect } from "react";
 
-export default function Index() {
+export function PWALifeCycle() {
   // This hook only run once in browser after the component is rendered for the first time.
   // It has same effect as the old componentDidMount lifecycle callback.
   useEffect(() => {
@@ -27,12 +27,11 @@ export default function Index() {
             "A newer version of this web app is available, reload to update?"
           )
         ) {
+          // Send a message to the waiting service worker, instructing it to activate.
+          wb.messageSkipWaiting();
           wb.addEventListener("controlling", () => {
             window.location.reload();
           });
-
-          // Send a message to the waiting service worker, instructing it to activate.
-          wb.messageSkipWaiting();
         } else {
           console.log(
             "User rejected to update SW, keeping the old version. New version will be automatically loaded when the app is opened next time."
@@ -50,17 +49,9 @@ export default function Index() {
         console.log(event);
       });
 
-      // never forget to call register as automatic registration is turned off in next.config.js
+      // Don't forget to call register as automatic registration is disabled.
       wb.register();
     }
   }, []);
-
-  return (
-    <>
-      <Head>
-        <title>next-pwa example</title>
-      </Head>
-      <h1>Next.js + PWA = AWESOME!!</h1>
-    </>
-  );
+  return <></>;
 }
