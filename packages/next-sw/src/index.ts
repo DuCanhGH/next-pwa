@@ -52,11 +52,11 @@ const withPWAInit = (
         }
 
         if (disable) {
-          context.isServer && logger.info("PWA support is disabled.");
+          context.isServer && logger.event("PWA support is disabled.");
           return config;
         }
 
-        logger.info(
+        logger.event(
           `Compiling for ${context.isServer ? "server" : "client (static)"}...`
         );
 

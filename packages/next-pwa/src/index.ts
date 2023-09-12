@@ -36,12 +36,12 @@ const withPWAInit = (
           require("next/dist/server/config-shared") as typeof NextConfigShared
         ).defaultConfig;
       } catch {
-        // do nothing - we are using Next's internals.
+        // do nothing - we are using Next's internals and they might not be available.
       }
 
       const isAppDirEnabled =
-        nextConfig.experimental?.appDir ??
-        nextDefConfig?.experimental?.appDir ??
+        (nextConfig.experimental as any)?.appDir ??
+        (nextDefConfig?.experimental as any)?.appDir ??
         true;
 
       const webpack: typeof Webpack = options.webpack;
@@ -102,7 +102,7 @@ const withPWAInit = (
         config.plugins = [];
       }
 
-      logger.info(
+      logger.event(
         `Compiling for ${options.isServer ? "server" : "client (static)"}...`
       );
 

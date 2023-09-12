@@ -40,7 +40,7 @@ export const resolveWorkboxPlugin = ({
 } & PluginCompleteOptions) => {
   if (isInjectManifestConfig(workboxOptions)) {
     const swSrc = path.join(rootDir, workboxOptions.swSrc);
-    logger.info(`Using InjectManifest with ${swSrc}`);
+    logger.event(`Using InjectManifest with ${swSrc}`);
     const workboxPlugin = new WorkboxPlugin.InjectManifest({
       ...workboxCommon,
       ...workboxOptions,

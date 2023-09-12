@@ -1,8 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import type { SwcOptions } from "@ducanh2912/utils";
 import { resolveSwc, terserMinify } from "@ducanh2912/utils";
+import type { Options as SwcOptions } from "@swc/core";
 import type { MinimizerOptions, TerserOptions } from "terser-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import type { Configuration } from "webpack";

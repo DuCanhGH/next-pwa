@@ -1,44 +1,102 @@
 import chalk from "chalk";
-import { gte as semverGte } from "semver";
+import { lt as semverLt } from "semver";
 
 import { getPackageVersion } from "./get-package-version.js";
 
 const nextPackageJson = getPackageVersion("next");
 
-const isNextNewerThan13_4_1 =
-  !!nextPackageJson && semverGte(nextPackageJson, "13.4.1");
+const LOGGING_METHOD = ["wait", "error", "warn", "info", "event"] as const;
 
-/**
- * Get logging prefix
- * @param color
- * @param oldStyleSpace
- * @returns
- */
-const getPrefix = (color: string, oldStyleSpace = 0) => {
-  return isNextNewerThan13_4_1
-    ? `- ${color} (pwa)`
-    : `${color}${" ".repeat(oldStyleSpace)}- (PWA)`;
+type LoggingMethods = (typeof LOGGING_METHOD)[number];
+
+type Prefixes = Record<LoggingMethods, string>;
+
+const mapLoggingMethodToConsole: Record<
+  LoggingMethods,
+  "log" | "error" | "warn" | "log"
+> = {
+  wait: "log",
+  error: "error",
+  warn: "warn",
+  info: "log",
+  event: "log",
 };
 
-export const prefixes = {
-  wait: getPrefix(chalk.cyan("wait"), 2),
-  error: getPrefix(chalk.red("error"), 1),
-  warn: getPrefix(chalk.yellow("warn"), 2),
-  info: getPrefix(chalk.cyan("info"), 2),
-} as const;
+const isNextOlderThan13_4_1 =
+    !!nextPackageJson && semverLt(nextPackageJson, "13.4.1"),
+  isNextOlderThan13_4_20 =
+    !!nextPackageJson && semverLt(nextPackageJson, "13.4.20");
+
+/**
+ * Get logging prefixes.
+ * @returns
+ */
+const getPrefixes = (): Prefixes => {
+  if (isNextOlderThan13_4_1) {
+    return {
+      wait: `${chalk.cyan("wait")}  - (PWA)`,
+      error: `${chalk.red("error")} - (PWA)`,
+      warn: `${chalk.yellow("warn")}  - (PWA)`,
+      info: `${chalk.cyan("info")}  - (PWA)`,
+      event: `${chalk.cyan("info")}  - (PWA)`,
+    };
+  }
+  if (isNextOlderThan13_4_20) {
+    return {
+      wait: `${chalk.cyan("wait")} (pwa)`,
+      error: `${chalk.red("error")} (pwa)`,
+      warn: `${chalk.yellow("warn")} (pwa)`,
+      info: `${chalk.cyan("info")} (pwa)`,
+      event: `${chalk.cyan("info")}  (pwa)`,
+    };
+  }
+  return {
+    wait: `${chalk.white(chalk.bold("○"))} (pwa)`,
+    error: `${chalk.red(chalk.bold("x"))} (pwa)`,
+    warn: `${chalk.yellow(chalk.bold("⚠"))} (pwa)`,
+    info: `${chalk.white(chalk.bold("○"))} (pwa)`,
+    event: `${chalk.green(chalk.bold("✓"))} (pwa)`,
+  };
+};
+
+const prefixes = getPrefixes();
+
+const prefixedLog = (prefixType: LoggingMethods, ...message: any[]) => {
+  const consoleMethod = mapLoggingMethodToConsole[prefixType];
+  const prefix = prefixes[prefixType];
+
+  if (isNextOlderThan13_4_20) {
+    return console[consoleMethod](prefix, ...message);
+  }
+
+  if ((message[0] === "" || message[0] === undefined) && message.length === 1) {
+    message.shift();
+  }
+
+  // If there's no message, don't print the prefix but a new line
+  if (message.length === 0) {
+    console[consoleMethod]("");
+  } else {
+    console[consoleMethod](" " + prefix, ...message);
+  }
+};
 
 export const wait = (...message: any[]) => {
-  console.log(prefixes.wait, ...message);
+  prefixedLog("wait", ...message);
 };
 
 export const error = (...message: any[]) => {
-  console.error(prefixes.error, ...message);
+  prefixedLog("error", ...message);
 };
 
 export const warn = (...message: any[]) => {
-  console.warn(prefixes.warn, ...message);
+  prefixedLog("warn", ...message);
 };
 
 export const info = (...message: any[]) => {
-  console.log(prefixes.info, ...message);
+  prefixedLog("info", ...message);
+};
+
+export const event = (...message: any[]) => {
+  prefixedLog("event", ...message);
 };

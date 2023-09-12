@@ -16,7 +16,6 @@ const withPWA = withPWAInit({
 const nextConfig = {
   output: "export",
   experimental: {
-    appDir: true,
     extensionAlias: {
       ".js": [".js", ".ts", ".tsx"],
     },

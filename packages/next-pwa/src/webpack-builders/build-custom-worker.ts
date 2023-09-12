@@ -65,7 +65,7 @@ export const buildCustomWorker = ({
     return undefined;
   }
 
-  logger.info(`Found a custom worker implementation at ${customWorkerEntry}.`);
+  logger.event(`Found a custom worker implementation at ${customWorkerEntry}.`);
 
   const swcRc = defaultSwcRc;
 
@@ -82,7 +82,7 @@ export const buildCustomWorker = ({
     isDev
   )}.js`;
 
-  logger.info(
+  logger.event(
     `Building custom worker to ${path.join(customWorkerDest, name)}...`
   );
 
