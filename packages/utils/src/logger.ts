@@ -47,7 +47,7 @@ const getPrefixes = (): Prefixes => {
       error: `${chalk.red("error")} (pwa)`,
       warn: `${chalk.yellow("warn")} (pwa)`,
       info: `${chalk.cyan("info")} (pwa)`,
-      event: `${chalk.cyan("info")}  (pwa)`,
+      event: `${chalk.cyan("info")} (pwa)`,
     };
   }
   return {
