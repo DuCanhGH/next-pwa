@@ -87,7 +87,9 @@ export const buildCustomWorker = ({
   );
 
   webpack({
-    ...getSharedWebpackConfig({}),
+    ...getSharedWebpackConfig({
+      swcRc,
+    }),
     mode: NextPWAContext.shouldMinify ? "production" : "development",
     target: "webworker",
     entry: {
