@@ -1,5 +1,19 @@
 # @ducanh2912/next-pwa
 
+## 9.6.0
+
+### Minor Changes
+
+- [#84](https://github.com/DuCanhGH/next-pwa/pull/84) [`12a6542`](https://github.com/DuCanhGH/next-pwa/commit/12a6542c07d09ccaf2ececaed6e548a534c7ddc9) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat: added `PluginOptions.browserslist`
+
+  - This defaults to `"chrome >= 56"`, same with Workbox's default.
+  - Note that `.browserslistrc`, `package.json.browserslist`, etc. are not supported (yet), and the only way to pass the config to `next-pwa` is `PluginOptions.browserslist`, but you can read the file yourself, parse it, then pass it to `next-pwa`.
+  - This allows you to configure which browsers you want to target your workers for. This tells `next-pwa` to add `PluginOptions.workboxOptions.babelPresetEnvTargets` if that option is not defined, which means that the service worker will, too, be bundled to target these browsers, but you can change that by adding the option.
+
+- [#84](https://github.com/DuCanhGH/next-pwa/pull/84) [`12a6542`](https://github.com/DuCanhGH/next-pwa/commit/12a6542c07d09ccaf2ececaed6e548a534c7ddc9) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat: support Next's new logging style
+
+  - So Next changed its logging style again, and I'm wondering if trying to match its logging style is even a good idea.
+
 ## 9.5.0
 
 ### Minor Changes
