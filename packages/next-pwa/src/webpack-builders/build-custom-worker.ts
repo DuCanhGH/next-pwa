@@ -11,8 +11,8 @@ import type { TsConfigJson as TSConfigJSON } from "type-fest";
 import type { Configuration } from "webpack";
 import webpack from "webpack";
 
-import { defaultSwcRc } from "../.swcrc.js";
 import { getContentHash } from "../utils.js";
+import { defaultSwcRc } from "./.swcrc.js";
 import { NextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
@@ -87,9 +87,7 @@ export const buildCustomWorker = ({
   );
 
   webpack({
-    ...getSharedWebpackConfig({
-      swcRc,
-    }),
+    ...getSharedWebpackConfig({}),
     mode: NextPWAContext.shouldMinify ? "production" : "development",
     target: "webworker",
     entry: {

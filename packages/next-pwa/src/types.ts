@@ -1,6 +1,6 @@
 import type { GenerateSWConfig } from "workbox-webpack-plugin";
 
-import type { WorkboxTypes } from "./private-types.js";
+import type { BrowserslistOptions, WorkboxTypes } from "./private-types.js";
 
 export interface PluginOptions {
   /**
@@ -187,6 +187,11 @@ export interface PluginOptions {
    * @default nextConfig.swcMinify
    */
   swcMinify?: boolean;
+  /**
+   * Configure supported browsers using Browserslist.
+   * @default "chrome >= 56"
+   */
+  browserslist?: BrowserslistOptions;
 }
 
 export interface FallbackRoutes {

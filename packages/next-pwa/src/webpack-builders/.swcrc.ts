@@ -18,7 +18,6 @@ export const defaultSwcRc: Options = {
         runtime: "automatic",
       },
     },
-    target: "es2022",
     loose: false,
   },
   minify: false,

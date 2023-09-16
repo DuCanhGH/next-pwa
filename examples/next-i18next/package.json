@@ -22,7 +22,7 @@
     "react-i18next": "13.2.2"
   },
   "devDependencies": {
-    "@types/node": "20.6.0",
+    "@types/node": "20.6.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "typescript": "5.2.2"

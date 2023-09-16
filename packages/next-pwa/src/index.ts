@@ -1,3 +1,4 @@
+// eslint-disable-next-line simple-import-sort/imports
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -85,6 +86,7 @@ const withPWAInit = (
         workboxOptions = {},
         extendDefaultRuntimeCaching = false,
         swcMinify = nextConfig.swcMinify ?? nextDefConfig?.swcMinify ?? false,
+        browserslist = "chrome >= 56",
       } = pluginOptions;
 
       if (typeof nextConfig.webpack === "function") {
@@ -147,6 +149,7 @@ const withPWAInit = (
       if (!options.isServer) {
         setDefaultContext("shouldMinify", !dev);
         setDefaultContext("useSwcMinify", swcMinify);
+        setDefaultContext("browserslist", browserslist);
 
         const _dest = path.join(options.dir, dest);
         const _cwdest = path.join(options.dir, customWorkerDest);

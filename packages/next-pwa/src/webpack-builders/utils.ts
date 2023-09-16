@@ -2,12 +2,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { resolveSwc, terserMinify } from "@ducanh2912/utils";
-import type { Options as SwcOptions } from "@swc/core";
+import type { Config as SwcConfig } from "@swc/core";
 import type { MinimizerOptions, TerserOptions } from "terser-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import type { Configuration } from "webpack";
 
-import { defaultSwcRc } from "../.swcrc.js";
+import { assertValue } from "../utils.js";
+import { defaultSwcRc } from "./.swcrc.js";
 import { NextPWAContext } from "./context.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -34,11 +35,13 @@ const resolveTerserOptions = (): MinimizerOptions<TerserOptions> & {
   useSwcMinify: NextPWAContext.useSwcMinify,
 });
 
+interface SharedWebpackConfigOptions {
+  swcRc?: SwcConfig;
+}
+
 export const getSharedWebpackConfig = ({
   swcRc = defaultSwcRc,
-}: {
-  swcRc?: SwcOptions;
-}): Configuration => {
+}: SharedWebpackConfigOptions): Configuration => {
   const optimization = NextPWAContext.shouldMinify && {
     minimize: true,
     minimizer: [
@@ -48,6 +51,14 @@ export const getSharedWebpackConfig = ({
       }),
     ],
   };
+  assertValue(
+    NextPWAContext.browserslist !== undefined,
+    "Browserslist config is not defined. This is most likely a bug."
+  );
+  if (!swcRc.env) {
+    swcRc.env = {};
+  }
+  swcRc.env.targets = NextPWAContext.browserslist;
   return {
     resolve: {
       extensions: [".js", ".ts"],

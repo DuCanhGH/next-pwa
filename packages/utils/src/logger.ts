@@ -1,9 +1,9 @@
 import chalk from "chalk";
-import { lt as semverLt } from "semver";
+import { coerce as semverCoerce, lt as semverLt } from "semver";
 
 import { getPackageVersion } from "./get-package-version.js";
 
-const nextPackageJson = getPackageVersion("next");
+const nextPackageJson = semverCoerce(getPackageVersion("next"));
 const isNextOlderThan13_4_1 =
     !!nextPackageJson && semverLt(nextPackageJson, "13.4.1"),
   isNextOlderThan13_4_20 =

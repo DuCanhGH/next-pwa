@@ -1,3 +1,4 @@
+import type { BrowserslistOptions } from "../private-types.js";
 import { convertBoolean } from "../utils.js";
 
 const resolveContextEnv = <T>(
@@ -10,12 +11,19 @@ const resolveContextEnv = <T>(
   return undefined;
 };
 
-export const NextPWAContext = {
+interface NextPWAContext {
+  shouldMinify: boolean | undefined;
+  useSwcMinify: boolean | undefined;
+  browserslist: BrowserslistOptions | undefined;
+}
+
+export const NextPWAContext: NextPWAContext = {
   shouldMinify: resolveContextEnv(process.env.NEXT_PWA_MINIFY, convertBoolean),
   useSwcMinify: resolveContextEnv(
     process.env.NEXT_PWA_SWC_MINIFY,
     convertBoolean
   ),
+  browserslist: undefined,
 };
 
 /**
@@ -27,7 +35,7 @@ export const setDefaultContext = <T extends keyof typeof NextPWAContext>(
   key: T,
   value: (typeof NextPWAContext)[T]
 ) => {
-  if (NextPWAContext[key] === undefined) {
+  if (NextPWAContext[key] === undefined || NextPWAContext[key] === null) {
     NextPWAContext[key] = value;
   }
 };

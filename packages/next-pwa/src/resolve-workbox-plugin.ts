@@ -9,6 +9,7 @@ import { resolveRuntimeCaching } from "./resolve-runtime-caching.js";
 import type { WorkboxCommon } from "./resolve-workbox-common.js";
 import type { PluginOptions } from "./types.js";
 import { isInjectManifestConfig, overrideAfterCalledMethod } from "./utils.js";
+import { NextPWAContext } from "./webpack-builders/context.js";
 
 type PluginCompleteOptions = Required<
   Pick<PluginOptions, "extendDefaultRuntimeCaching" | "dynamicStartUrl">
@@ -38,6 +39,30 @@ export const resolveWorkboxPlugin = ({
 
   hasFallbacks: boolean;
 } & PluginCompleteOptions) => {
+  if (!workboxOptions.babelPresetEnvTargets) {
+    switch (typeof NextPWAContext.browserslist) {
+      case "string":
+        workboxOptions.babelPresetEnvTargets = [NextPWAContext.browserslist];
+        break;
+      case "object": {
+        if (Array.isArray(NextPWAContext.browserslist)) {
+          workboxOptions.babelPresetEnvTargets = NextPWAContext.browserslist;
+        } else {
+          workboxOptions.babelPresetEnvTargets = [];
+          for (const [browser, minimumVersion] of Object.entries(
+            NextPWAContext.browserslist
+          )) {
+            workboxOptions.babelPresetEnvTargets.push(
+              `${browser} >= ${minimumVersion}`
+            );
+          }
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }
   if (isInjectManifestConfig(workboxOptions)) {
     const swSrc = path.join(rootDir, workboxOptions.swSrc);
     logger.event(`Using InjectManifest with ${swSrc}`);

@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * @type {import("@swc/core").Config}
  */
