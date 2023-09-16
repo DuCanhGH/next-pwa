@@ -69,6 +69,7 @@ export const getContentHash = (
 
 export function assertValue(value: unknown, message: string): asserts value {
   if (!value) {
-    throw logger.error(message);
+    logger.error(message);
+    throw new Error(message);
   }
 }
