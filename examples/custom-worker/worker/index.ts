@@ -1,5 +1,5 @@
 import { message } from "@shared/constants.ts";
-import { util } from "@shared/utils/index.ts";
+import { utils } from "@shared/utils/index.ts";
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -8,7 +8,7 @@ declare const self: ServiceWorkerGlobalScope;
 //
 // self.__WB_DISABLE_DEV_LOGS = true
 
-util(message);
+utils(message);
 
 // listen to message event from window
 self.addEventListener("message", (event) => {

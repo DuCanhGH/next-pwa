@@ -9,7 +9,7 @@ import { resolveRuntimeCaching } from "./resolve-runtime-caching.js";
 import type { WorkboxCommon } from "./resolve-workbox-common.js";
 import type { PluginOptions } from "./types.js";
 import { isInjectManifestConfig, overrideAfterCalledMethod } from "./utils.js";
-import { NextPWAContext } from "./webpack-builders/context.js";
+import { nextPWAContext } from "./webpack-builders/context.js";
 
 type PluginCompleteOptions = Required<
   Pick<PluginOptions, "extendDefaultRuntimeCaching" | "dynamicStartUrl">
@@ -40,17 +40,17 @@ export const resolveWorkboxPlugin = ({
   hasFallbacks: boolean;
 } & PluginCompleteOptions) => {
   if (!workboxOptions.babelPresetEnvTargets) {
-    switch (typeof NextPWAContext.browserslist) {
+    switch (typeof nextPWAContext.browserslist) {
       case "string":
-        workboxOptions.babelPresetEnvTargets = [NextPWAContext.browserslist];
+        workboxOptions.babelPresetEnvTargets = [nextPWAContext.browserslist];
         break;
       case "object": {
-        if (Array.isArray(NextPWAContext.browserslist)) {
-          workboxOptions.babelPresetEnvTargets = NextPWAContext.browserslist;
+        if (Array.isArray(nextPWAContext.browserslist)) {
+          workboxOptions.babelPresetEnvTargets = nextPWAContext.browserslist;
         } else {
           workboxOptions.babelPresetEnvTargets = [];
           for (const [browser, minimumVersion] of Object.entries(
-            NextPWAContext.browserslist
+            nextPWAContext.browserslist
           )) {
             workboxOptions.babelPresetEnvTargets.push(
               `${browser} >= ${minimumVersion}`

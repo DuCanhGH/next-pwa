@@ -13,7 +13,7 @@ import webpack from "webpack";
 
 import { getContentHash } from "../utils.js";
 import { defaultSwcRc } from "./.swcrc.js";
-import { NextPWAContext } from "./context.js";
+import { nextPWAContext } from "./context.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
 export const buildCustomWorker = ({
@@ -77,6 +77,9 @@ export const buildCustomWorker = ({
     );
   }
 
+  // We'd like to use Webpack's `[hash]`, but we can't determine that hash without
+  // Promise (Next doesn't allow Promise in webpack(config, context), but even if we
+  // use Promise we will block the build until our stuff is done)
   const name = `${customWorkerPrefix}-${getContentHash(
     customWorkerEntry,
     isDev
@@ -86,11 +89,12 @@ export const buildCustomWorker = ({
     `Building custom worker to ${path.join(customWorkerDest, name)}...`
   );
 
-  webpack({
+  const webpackConfig: Configuration = {
     ...getSharedWebpackConfig({
       swcRc,
     }),
-    mode: NextPWAContext.shouldMinify ? "production" : "development",
+    watch: isDev && nextPWAContext.devWatchWorkers,
+    mode: nextPWAContext.shouldMinify ? "production" : "development",
     target: "webworker",
     entry: {
       main: customWorkerEntry,
@@ -109,11 +113,23 @@ export const buildCustomWorker = ({
       }),
       ...plugins,
     ],
-  }).run((error, status) => {
+  };
+
+  webpack(webpackConfig, (error, status) => {
     if (error || status?.hasErrors()) {
-      logger.error("Failed to build custom worker.");
-      logger.error(status?.toString({ colors: true }));
-      process.exit(-1);
+      logger.error("Failed to compile the custom worker.");
+      logger.error(
+        status?.toString({ colors: true }) ?? error?.message ?? "Unknown error"
+      );
+      if (!isDev) {
+        process.exit(-1);
+      }
+    } else {
+      logger.event(
+        `Compiled the custom worker successfully! (${
+          status?.compilation.modules.size ?? 0
+        } modules)`
+      );
     }
   });
 

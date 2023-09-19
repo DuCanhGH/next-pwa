@@ -87,6 +87,7 @@ const withPWAInit = (
         extendDefaultRuntimeCaching = false,
         swcMinify = nextConfig.swcMinify ?? nextDefConfig?.swcMinify ?? false,
         browserslist = "chrome >= 56",
+        watchWorkersInDev = false,
       } = pluginOptions;
 
       if (typeof nextConfig.webpack === "function") {
@@ -150,6 +151,7 @@ const withPWAInit = (
         setDefaultContext("shouldMinify", !dev);
         setDefaultContext("useSwcMinify", swcMinify);
         setDefaultContext("browserslist", browserslist);
+        setDefaultContext("devWatchWorkers", watchWorkersInDev);
 
         const _dest = path.join(options.dir, dest);
         const _cwdest = path.join(options.dir, customWorkerDest);

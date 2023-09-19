@@ -15,27 +15,32 @@ interface NextPWAContext {
   shouldMinify: boolean | undefined;
   useSwcMinify: boolean | undefined;
   browserslist: BrowserslistOptions | undefined;
+  devWatchWorkers: boolean | undefined;
 }
 
-export const NextPWAContext: NextPWAContext = {
+export const nextPWAContext: NextPWAContext = {
   shouldMinify: resolveContextEnv(process.env.NEXT_PWA_MINIFY, convertBoolean),
   useSwcMinify: resolveContextEnv(
     process.env.NEXT_PWA_SWC_MINIFY,
     convertBoolean
   ),
   browserslist: undefined,
+  devWatchWorkers: resolveContextEnv(
+    process.env.NEXT_PWA_DEV_WATCH,
+    convertBoolean
+  ),
 };
 
 /**
- * Set default value for a key in `NextPWAContext`.
- * @param key The key in `NextPWAContext`
+ * Set default value for a key in `nextPWAContext`.
+ * @param key The key in `nextPWAContext`
  * @param value The value
  */
-export const setDefaultContext = <T extends keyof typeof NextPWAContext>(
+export const setDefaultContext = <T extends keyof NextPWAContext>(
   key: T,
-  value: (typeof NextPWAContext)[T]
+  value: NextPWAContext[T]
 ) => {
-  if (NextPWAContext[key] === undefined || NextPWAContext[key] === null) {
-    NextPWAContext[key] = value;
+  if (nextPWAContext[key] === undefined || nextPWAContext[key] === null) {
+    nextPWAContext[key] = value;
   }
 };

@@ -7,7 +7,7 @@ import webpack from "webpack";
 
 import type { FallbackRoutes } from "../types.js";
 import { getContentHash } from "../utils.js";
-import { NextPWAContext } from "./context.js";
+import { nextPWAContext } from "./context.js";
 import { getFallbackEnvs } from "./get-fallback-envs.js";
 import { getSharedWebpackConfig } from "./utils.js";
 
@@ -45,11 +45,14 @@ export const buildFallbackWorker = ({
 
   const fallbackJs = path.join(__dirname, `fallback.js`);
 
+  // We'd like to use Webpack's `[hash]`, but we can't determine that hash without
+  // Promise (Next doesn't allow Promise in webpack(config, context), but even if we
+  // use Promise we will block the build until our stuff is done)
   const name = `fallback-${getContentHash(fallbackJs, isDev)}.js`;
 
   webpack({
     ...getSharedWebpackConfig({}),
-    mode: NextPWAContext.shouldMinify ? "production" : "development",
+    mode: nextPWAContext.shouldMinify ? "production" : "development",
     target: "webworker",
     entry: {
       main: fallbackJs,
@@ -70,8 +73,10 @@ export const buildFallbackWorker = ({
     ],
   }).run((error, status) => {
     if (error || status?.hasErrors()) {
-      logger.error("Failed to build fallback worker.");
-      logger.error(status?.toString({ colors: true }));
+      logger.error("Failed to build the fallback worker.");
+      logger.error(
+        status?.toString({ colors: true }) ?? error?.message ?? "Unknown error"
+      );
       process.exit(-1);
     }
   });
