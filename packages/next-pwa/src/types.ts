@@ -117,6 +117,22 @@ export interface PluginOptions {
    */
   publicExcludes?: string[];
   /**
+   * URL scope for PWA. Set to `/foo/` so that paths under `/foo/` are PWA while others
+   * are not.
+   * @default nextConfig.basePath
+   */
+  scope?: string;
+  /**
+   * The service worker's output filename.
+   * @default "/sw.js"
+   */
+  sw?: string;
+  /**
+   * Use [`swc`](https://swc.rs) to minify the custom worker, the fallback worker, and more.
+   * @default nextConfig.swcMinify
+   */
+  swcMinify?: boolean;
+  /**
    * Allow this plugin to automatically register the service worker for you. Set
    * this to `false` if you want to register the service worker yourself, which
    * can be done by running `window.workbox.register()` in
@@ -170,22 +186,6 @@ export interface PluginOptions {
    * @default true
    */
   reloadOnOnline?: boolean;
-  /**
-   * URL scope for PWA. Set to `/foo/` so that paths under `/foo/` are PWA while others
-   * are not.
-   * @default nextConfig.basePath
-   */
-  scope?: string;
-  /**
-   * The service worker's output filename.
-   * @default "/sw.js"
-   */
-  sw?: string;
-  /**
-   * Use [`swc`](https://swc.rs) to minify the custom worker, the fallback worker, and more.
-   * @default nextConfig.swcMinify
-   */
-  swcMinify?: boolean;
   /**
    * Watch certain workers for file changes in development mode. This currently includes the
    * custom worker.
