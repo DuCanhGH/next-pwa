@@ -1,5 +1,17 @@
 # @ducanh2912/next-pwa
 
+## 9.7.0
+
+### Minor Changes
+
+- [#90](https://github.com/DuCanhGH/next-pwa/pull/90) [`c24e175`](https://github.com/DuCanhGH/next-pwa/commit/c24e17530ae759de1541f9f96c765a82ab17ed41) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat: added `watchWorkersInDev`
+
+  - Note that this feature is disabled by default, and can be enabled by setting `PluginOptions.watchWorkersInDev` to `true`. After a change is detected and `webpack` rebuilds the custom worker, you have to reload the page for it to take effect.
+
+- [#90](https://github.com/DuCanhGH/next-pwa/pull/90) [`c24e175`](https://github.com/DuCanhGH/next-pwa/commit/c24e17530ae759de1541f9f96c765a82ab17ed41) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat: added `.webm` to `defaultCache`'s `static-video-assets`
+
+  - I think it'd be nice to support this extension as well, and this shouldn't cause a breaking change (if there is another entry that matches `.webm` files in `workboxOptions.runtimeCaching` and `extendDefaultRuntimeCaching`, then Workbox will still pick that entry).
+
 ## 9.6.0
 
 ### Minor Changes
