@@ -81,7 +81,7 @@ const defaultCache: RuntimeCaching[] = [
     },
   },
   {
-    urlPattern: /\.(?:mp4)$/i,
+    urlPattern: /\.(?:mp4|webm)$/i,
     handler: "CacheFirst",
     options: {
       rangeRequests: true,
