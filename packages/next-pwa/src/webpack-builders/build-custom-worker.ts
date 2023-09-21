@@ -86,7 +86,7 @@ export const buildCustomWorker = ({
   )}.js`;
 
   logger.event(
-    `Compiling the custom worker to ${path.join(customWorkerDest, name)}...`
+    `Building the custom worker to ${path.join(customWorkerDest, name)}...`
   );
 
   const webpackConfig: Configuration = {
