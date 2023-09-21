@@ -28,7 +28,7 @@ export const buildSWEntryWorker = ({
 
   const swEntryWorkerEntry = path.join(__dirname, `sw-entry-worker.js`);
 
-  // We'd like to use Webpack's `[hash]`, but we can't determine that hash without
+  // We'd like to use webpack's `[hash]`, but we can't determine that hash without
   // Promise (Next doesn't allow Promise in webpack(config, context), but even if we
   // use Promise we will block the build until our stuff is done)
   const name = `swe-worker-${getContentHash(swEntryWorkerEntry, isDev)}.js`;
@@ -55,11 +55,13 @@ export const buildSWEntryWorker = ({
     ],
   }).run((error, status) => {
     if (error || status?.hasErrors()) {
-      logger.error("Failed to build the service worker's sub-worker.");
+      logger.error("Failed to build `next-pwa`'s worker.");
       logger.error(
         status?.toString({ colors: true }) ?? error?.message ?? "Unknown error"
       );
-      process.exit(-1);
+      throw new Error(
+        "Failed to build `next-pwa`'s worker due to webpack errors."
+      );
     }
   });
 

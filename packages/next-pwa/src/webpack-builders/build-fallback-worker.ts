@@ -45,7 +45,7 @@ export const buildFallbackWorker = ({
 
   const fallbackJs = path.join(__dirname, `fallback.js`);
 
-  // We'd like to use Webpack's `[hash]`, but we can't determine that hash without
+  // We'd like to use webpack's `[hash]`, but we can't determine that hash without
   // Promise (Next doesn't allow Promise in webpack(config, context), but even if we
   // use Promise we will block the build until our stuff is done)
   const name = `fallback-${getContentHash(fallbackJs, isDev)}.js`;
@@ -77,7 +77,9 @@ export const buildFallbackWorker = ({
       logger.error(
         status?.toString({ colors: true }) ?? error?.message ?? "Unknown error"
       );
-      process.exit(-1);
+      throw new Error(
+        "Failed to build the fallback worker due to webpack errors."
+      );
     }
   });
 

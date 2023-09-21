@@ -1,22 +1,19 @@
 import type { Options } from "@swc/core";
 
+/**
+ * Our default `.swcrc`. Manually inject `env.targets` before use (this is done
+ * automatically if you use `getSharedWebpackConfig`).
+ */
 export const defaultSwcRc: Options = {
   module: {
     type: "es6",
-    lazy: true,
-    noInterop: true,
   },
   jsc: {
     parser: {
       syntax: "typescript",
-      tsx: true,
+      tsx: false,
       dynamicImport: true,
       decorators: false,
-    },
-    transform: {
-      react: {
-        runtime: "automatic",
-      },
     },
     loose: false,
   },

@@ -16,7 +16,7 @@ export interface PluginOptions {
   browserslist?: BrowserslistOptions;
   /**
    * One or more specifiers used to exclude assets from the precache manifest.
-   * This is interpreted following the same rules as Webpack's standard `exclude`
+   * This is interpreted following the same rules as webpack's standard `exclude`
    * option. Relative to `.next/static` or your custom build folder. Defaults to
    * [].
    * @example

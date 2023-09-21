@@ -19,7 +19,7 @@ export function swcLoader(this: any, source: string, inputSourceMap: string) {
       ? this.getOptions()
       : require("loader-utils").getOptions(this)) || {};
 
-  // Standardize on 'sourceMaps' as the key passed through to Webpack, so that
+  // Standardize on 'sourceMaps' as the key passed through to webpack, so that
   // users may safely use either one alongside our default use of
   // 'this.sourceMap' below without getting error about conflicting aliases.
   if (
@@ -40,14 +40,14 @@ export function swcLoader(this: any, source: string, inputSourceMap: string) {
     filename,
     inputSourceMap: inputSourceMap || undefined,
 
-    // Set the default sourcemap behavior based on Webpack's mapping flag,
+    // Set the default sourcemap behavior based on webpack's mapping flag,
     // but allow users to override if they want.
     sourceMaps:
       loaderOptions.sourceMaps === undefined
         ? this.sourceMap
         : loaderOptions.sourceMaps,
 
-    // Ensure that Webpack will get a full absolute path in the sourcemap
+    // Ensure that webpack will get a full absolute path in the sourcemap
     // so that it can properly map the module back to its internal cached
     // modules.
     sourceFileName: filename,
@@ -88,8 +88,8 @@ export function swcLoader(this: any, source: string, inputSourceMap: string) {
     // Babel has this weird behavior where if you set "inline", we
     // inline the sourcemap, and set 'result.map = null'. This results
     // in bad behavior from Babel since the maps get put into the code,
-    // which Webpack does not expect, and because the map we return to
-    // Webpack is null, which is also bad. To avoid that, we override the
+    // which webpack does not expect, and because the map we return to
+    // webpack is null, which is also bad. To avoid that, we override the
     // behavior here so "inline" just behaves like 'true'.
     programmaticOptions.sourceMaps = true;
   }

@@ -18,7 +18,7 @@ const withPWAInit = (
     ...nextConfig,
     ...{
       webpack(config: Configuration, context) {
-        const isAppDirEnabled = !!nextConfig.experimental?.appDir;
+        const isAppDirEnabled = !!(nextConfig.experimental as any)?.appDir;
         const {
           buildId,
           dev,

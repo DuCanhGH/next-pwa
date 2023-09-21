@@ -61,7 +61,7 @@ export const generateSW = ({
   });
 
   if (!webpack) {
-    logger.error("Webpack instance is not provided to generateSW.");
+    logger.error("webpack instance is not provided to generateSW.");
     return;
   }
 

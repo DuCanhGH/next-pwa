@@ -5,8 +5,6 @@
 export const swcConfig = {
   module: {
     type: "nodenext",
-    lazy: true,
-    importInterop: "swc",
   },
   jsc: {
     minify: {
@@ -30,9 +28,6 @@ export const swcConfig = {
       tsx: false,
       dynamicImport: true,
       decorators: false,
-    },
-    transform: {
-      react: undefined,
     },
     target: "esnext",
     loose: false,

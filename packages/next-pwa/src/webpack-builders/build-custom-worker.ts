@@ -77,7 +77,7 @@ export const buildCustomWorker = ({
     );
   }
 
-  // We'd like to use Webpack's `[hash]`, but we can't determine that hash without
+  // We'd like to use webpack's `[hash]`, but we can't determine that hash without
   // Promise (Next doesn't allow Promise in webpack(config, context), but even if we
   // use Promise we will block the build until our stuff is done)
   const name = `${customWorkerPrefix}-${getContentHash(
@@ -86,7 +86,7 @@ export const buildCustomWorker = ({
   )}.js`;
 
   logger.event(
-    `Building the custom worker to ${path.join(customWorkerDest, name)}...`
+    `Compiling the custom worker to ${path.join(customWorkerDest, name)}...`
   );
 
   const webpackConfig: Configuration = {
@@ -117,16 +117,17 @@ export const buildCustomWorker = ({
 
   webpack(webpackConfig, (error, status) => {
     if (error || status?.hasErrors()) {
-      logger.error("Failed to compile the custom worker.");
+      logger.error("Failed to build the custom worker.");
       logger.error(
         status?.toString({ colors: true }) ?? error?.message ?? "Unknown error"
       );
-      if (!isDev) {
-        process.exit(-1);
-      }
+      if (!isDev)
+        throw new Error(
+          "Failed to build the custom worker due to webpack errors."
+        );
     } else {
       logger.event(
-        `Compiled the custom worker successfully! (${
+        `Built the custom worker successfully! (${
           status?.compilation.modules.size ?? 0
         } modules)`
       );
