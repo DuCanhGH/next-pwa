@@ -26,8 +26,12 @@ export class NextInstanceDev extends NextInstance {
         this._process.stdout.on("data", (chunk: Buffer) => {
           const msg = chunk.toString();
           this._cliOutput += msg;
-          if (msg.includes("started server on") && msg.includes("url:")) {
-            this._url = msg.split("url: ").pop()?.split(/\s/)[0].trim() ?? "";
+          if (msg.includes("- Local:")) {
+            this._url =
+              msg
+                .split(/\s*- Local:/)
+                .pop()
+                ?.trim() ?? "";
             resolve();
           }
         });
