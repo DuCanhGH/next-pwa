@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.7.1
+
+### Patch Changes
+
+- [#96](https://github.com/DuCanhGH/next-pwa/pull/96) [`27d5f20`](https://github.com/DuCanhGH/next-pwa/commit/27d5f20b7b253cd4f55e59a039d07e30cc91147d) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix: remove `lazy` and `importInterop` from `.swcrc`
+
+  - Seems that these values are no longer allowed with `module.type` set to `"es6"` or `"nodenext"`.
+
 ## 9.7.0
 
 ### Minor Changes
