@@ -2,6 +2,7 @@ import type { SpawnOptionsWithoutStdio } from "node:child_process";
 import { spawn } from "node:child_process";
 
 import { NextInstance } from "./next-instance-base";
+import { getURLFromLog } from "./utils";
 
 export class NextInstanceDev extends NextInstance {
   public async setup(sourceDir: string) {
@@ -26,14 +27,12 @@ export class NextInstanceDev extends NextInstance {
         this._process.stdout.on("data", (chunk: Buffer) => {
           const msg = chunk.toString();
           this._cliOutput += msg;
-          if (msg.includes("- Local:")) {
-            this._url =
-              msg
-                .split(/\s*- Local:/)
-                .pop()
-                ?.trim() ?? "";
+          const potentialUrl = getURLFromLog(msg);
+          if (potentialUrl !== undefined) {
+            this._url = potentialUrl;
             resolve();
           }
+          console.log(msg);
         });
         this._process.stderr.on("data", (chunk: Buffer) => {
           const msg = chunk.toString();
