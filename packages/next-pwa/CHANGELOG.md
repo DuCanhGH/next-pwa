@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 9.7.2
+
+### Patch Changes
+
+- [`78ce4fb`](https://github.com/DuCanhGH/next-pwa/commit/78ce4fbafc40e5020710e2e92c403ffba19ed4fa) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(next-pwa): fixed InjectManifest crashing due to `babelPresetEnvTargets` being set
+
+  - I'm still astonished that noone, including me, has noticed this issue all this time 💀. Really unfortunately speaks volumes about how popular this feature is among us, though.
+
 ## 9.7.1
 
 ### Patch Changes
