@@ -53,3 +53,5 @@ coverage/
 # other files
 LICENSE
 CODE_OF_CONDUCT.md
+
+tsconfig.json

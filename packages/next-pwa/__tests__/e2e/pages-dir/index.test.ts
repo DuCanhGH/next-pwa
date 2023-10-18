@@ -1,4 +1,4 @@
-import { createDescribe } from "../../test-utils/index.js";
+import { createDescribe } from "../../test-utils/index.ts";
 
 createDescribe(
   "e2e app-dir",
