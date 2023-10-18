@@ -1,4 +1,4 @@
-This is the documentation for DuCanh's `next-pwa` and `next-sw`!
+This is the documentation for DuCanh's PWA suite!
 
 ## Getting started
 

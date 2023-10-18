@@ -2,7 +2,7 @@ import { allDocs, type Docs } from "contentlayer/generated";
 import { v4 as uuidv4 } from "uuid";
 
 const treePriority: Record<string, string[]> = {
-  "/docs": ["next-pwa", "next-sw"],
+  "/docs": ["next-pwa"],
   "/docs/next-pwa": [
     "getting-started",
     "configuring",

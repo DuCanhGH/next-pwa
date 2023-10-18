@@ -47,7 +47,7 @@ jobs:
         run: pnpm install
         if: ${{ inputs.skipInstallBuild != 'yes' }}
       - name: Build
-        run: pnpm build
+        run: pnpm pwa:build
         if: ${{ inputs.skipInstallBuild != 'yes' }}
       - name: Run after build
         run: /bin/bash -c "${{ inputs.afterBuild }}"
