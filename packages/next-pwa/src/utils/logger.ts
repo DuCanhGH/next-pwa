@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import chalk from "chalk";
 import { coerce as semverCoerce, lt as semverLt } from "semver";
 

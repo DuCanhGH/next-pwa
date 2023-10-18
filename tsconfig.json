@@ -17,11 +17,8 @@
     "isolatedModules": true,
     "removeComments": false,
     "checkJs": true,
-    "noEmit": true,
-    "paths": {
-      "$utils/*": ["./src/utils/*"]
-    }
+    "noEmit": true
   },
-  "include": ["globals.d.ts", "src/**/*.ts", "src/**/*.tsx", "*.js", "*.cjs", "*.mjs"],
+  "include": ["*.js", "*.cjs", "*.mjs"],
   "exclude": ["node_modules", "dist", "__tests__"]
 }

@@ -1,9 +1,12 @@
 {
   "include": [
+    "__tests__/**/*.ts",
+    "__tests__/**/*.tsx",
     "**/*.js",
     "**/*.jsx",
     "**/*.cjs",
     "**/*.mjs",
+    "jest.config.ts",
     "**/.eslintrc.cjs",
     "**/.ncurc.js"
   ]

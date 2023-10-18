@@ -10,5 +10,5 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["@next-pwa-example/*", "tests-utils", "next-pwa-tests", "docs"]
+  "ignore": ["@next-pwa-example/*", "next-pwa-tests", "docs"]
 }

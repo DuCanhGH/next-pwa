@@ -1,65 +1,22 @@
 {
-  "name": "@ducanh2912/next-pwa",
+  "name": "@ducanh2912/next-pwa-project",
   "type": "module",
-  "version": "9.7.2",
-  "description": "PWA for Next.js, powered by Workbox.",
-  "repository": "https://github.com/DuCanhGH/next-pwa",
-  "author": "ShadowWalker <w@weiw.io>, DuCanhGH",
   "license": "MIT",
-  "private": false,
-  "files": [
-    "dist",
-    "!dist/dts"
-  ],
+  "private": true,
   "packageManager": "pnpm@8.7.5",
-  "source": "./src/index.ts",
-  "exports": {
-    ".": {
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      },
-      "default": {
-        "types": "./dist/index.module.d.ts",
-        "default": "./dist/index.module.js"
-      }
-    },
-    "./workbox": {
-      "require": {
-        "types": "./dist/sw-entry.d.cts"
-      },
-      "default": {
-        "types": "./dist/sw-entry.module.d.ts"
-      }
-    }
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "types": "./dist/index.module.d.ts",
-  "typesVersions": {
-    "*": {
-      "workbox": [
-        "./dist/sw-entry.module.d.ts"
-      ]
-    }
-  },
   "workspaces": [
     "docs",
+    "packages/**",
     "examples/**",
     "!examples/**/.next"
   ],
-  "keywords": [
-    "nextjs",
-    "pwa",
-    "workbox",
-    "web",
-    "service-worker"
-  ],
   "scripts": {
+    "build": "cross-env FORCE_COLOR=1 turbo run build --filter=./packages/*",
     "deps": "node ncu.js",
+    "dev": "cross-env FORCE_COLOR=1 turbo run dev --parallel --filter=./packages/*",
     "docs:build": "cross-env FORCE_COLOR=1 turbo run build --filter=./docs",
     "docs:lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./docs",
-    "nochangeset": "changeset --empty",
+    "nochange": "changeset --empty",
     "examples:build": "cross-env FORCE_COLOR=1 turbo run build --filter=./examples/* --concurrency=50%",
     "examples:dev": "cross-env FORCE_COLOR=1 turbo run dev --parallel --filter=./examples/*",
     "examples:lint": "cross-env FORCE_COLOR=1 turbo run lint --parallel --filter=./examples/*",
@@ -70,36 +27,17 @@
     "lint-staged": "lint-staged",
     "prepare": "husky install",
     "publish-packages": "pnpm typecheck && pnpm lint && pnpm build && changeset publish",
-    "pwa:build": "rimraf dist && cross-env NODE_ENV=production rollup --config --compact",
-    "pwa:dev": "rimraf dist && rollup --config --watch",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "clean-webpack-plugin": "4.0.0",
-    "fast-glob": "3.3.1",
-    "semver": "7.5.4",
-    "terser-webpack-plugin": "5.3.9",
-    "workbox-build": "7.0.0",
-    "workbox-core": "7.0.0",
-    "workbox-webpack-plugin": "7.0.0",
-    "workbox-window": "7.0.0"
+    "test": "cross-env FORCE_COLOR=1 turbo run test --filter=./packages/*",
+    "typecheck": "cross-env FORCE_COLOR=1 turbo run typecheck"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.2",
-    "@rollup/plugin-alias": "5.0.1",
-    "@rollup/plugin-json": "6.0.1",
-    "@rollup/plugin-node-resolve": "15.2.3",
-    "@rollup/plugin-swc": "0.2.1",
-    "@rollup/plugin-typescript": "11.1.5",
-    "@swc/core": "1.3.93",
+    "@ducanh2912/next-pwa": "workspace:*",
     "@types/node": "20.8.7",
-    "@types/semver": "7.5.3",
     "@types/shell-quote": "1.7.2",
     "@typescript-eslint/eslint-plugin": "6.8.0",
     "@typescript-eslint/parser": "6.8.0",
-    "chalk": "5.3.0",
     "cross-env": "7.0.3",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.5",
@@ -111,24 +49,13 @@
     "husky": "8.0.3",
     "jest": "29.7.0",
     "lint-staged": "15.0.1",
-    "next": "13.5.5",
     "npm-check-updates": "16.14.6",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "rimraf": "5.0.5",
-    "rollup": "3.28.1",
-    "rollup-plugin-dts": "6.0.2",
     "shell-quote": "1.8.1",
     "tslib": "2.6.2",
     "turbo": "1.10.15",
-    "type-fest": "4.4.0",
-    "typescript": "5.3.0-dev.20231018",
-    "webpack": "5.89.0"
-  },
-  "peerDependencies": {
-    "next": ">=11.0.0",
-    "webpack": ">=5.9.0"
+    "typescript": "5.3.0-dev.20231018"
   }
 }
