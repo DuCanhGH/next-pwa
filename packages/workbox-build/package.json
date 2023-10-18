@@ -1,0 +1,69 @@
+{
+  "name": "@ducanh2912/workbox-build",
+  "version": "7.0.0",
+  "description": "A module that integrates into your build process, helping you generate a manifest of local files that workbox-sw should precache.",
+  "keywords": [
+    "workbox",
+    "workboxjs",
+    "service worker",
+    "caching",
+    "fetch requests",
+    "offline",
+    "file manifest"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "Google's Web DevRel Team",
+  "license": "MIT",
+  "repository": "DuCanhGH/next-pwa",
+  "bugs": "https://github.com/DuCanhGH/next-pwa/issues",
+  "homepage": "https://ducanh-next-pwa.vercel.app",
+  "dependencies": {
+    "@apideck/better-ajv-errors": "0.3.6",
+    "@babel/core": "7.23.2",
+    "@babel/preset-env": "7.23.2",
+    "@babel/runtime": "7.23.2",
+    "@ducanh2912/workbox-background-sync": "workspace:*",
+    "@ducanh2912/workbox-broadcast-update": "workspace:*",
+    "@ducanh2912/workbox-cacheable-response": "workspace:*",
+    "@ducanh2912/workbox-core": "workspace:*",
+    "@ducanh2912/workbox-expiration": "workspace:*",
+    "@ducanh2912/workbox-google-analytics": "workspace:*",
+    "@ducanh2912/workbox-navigation-preload": "workspace:*",
+    "@ducanh2912/workbox-precaching": "workspace:*",
+    "@ducanh2912/workbox-range-requests": "workspace:*",
+    "@ducanh2912/workbox-recipes": "workspace:*",
+    "@ducanh2912/workbox-routing": "workspace:*",
+    "@ducanh2912/workbox-strategies": "workspace:*",
+    "@ducanh2912/workbox-streams": "workspace:*",
+    "@ducanh2912/workbox-sw": "workspace:*",
+    "@ducanh2912/workbox-window": "workspace:*",
+    "@rollup/plugin-babel": "6.0.4",
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-replace": "5.0.4",
+    "@rollup/plugin-terser": "0.4.4",
+    "@surma/rollup-plugin-off-main-thread": "2.2.3",
+    "ajv": "8.12.0",
+    "common-tags": "1.8.2",
+    "fast-json-stable-stringify": "2.1.0",
+    "fs-extra": "11.1.1",
+    "glob": "10.3.10",
+    "lodash": "4.17.21",
+    "pretty-bytes": "6.1.1",
+    "rollup": "3.28.1",
+    "source-map": "0.8.0-beta.0",
+    "stringify-object": "5.0.0",
+    "strip-comments": "2.0.1",
+    "tempy": "3.1.0",
+    "upath": "2.0.1"
+  },
+  "main": "build/index.js",
+  "workbox": {
+    "packageType": "node_ts"
+  },
+  "types": "build/index.d.ts",
+  "devDependencies": {
+    "@types/node": "20.8.7"
+  }
+}
