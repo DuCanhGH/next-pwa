@@ -8,7 +8,7 @@
 
 import prettyBytes from "pretty-bytes";
 
-import type { ManifestTransform } from "../types";
+import type { ManifestTransform } from "../types.js";
 
 export function maximumSizeTransform(
   maximumFileSizeToCacheInBytes: number

@@ -6,15 +6,15 @@
   https://opensource.org/licenses/MIT.
 */
 import { warmStrategyCache } from "./warmStrategyCache";
-import { registerRoute } from "workbox-routing/registerRoute.js";
-import { CacheFirst } from "workbox-strategies/CacheFirst.js";
-import { CacheableResponsePlugin } from "workbox-cacheable-response/CacheableResponsePlugin.js";
-import { ExpirationPlugin } from "workbox-expiration/ExpirationPlugin.js";
+import { registerRoute } from "@serwiss/routing/registerRoute.js";
+import { CacheFirst } from "@serwiss/strategies/CacheFirst.js";
+import { CacheableResponsePlugin } from "@serwiss/cacheable-response/CacheableResponsePlugin.js";
+import { ExpirationPlugin } from "@serwiss/expiration/ExpirationPlugin.js";
 import {
   RouteMatchCallback,
   RouteMatchCallbackOptions,
   WorkboxPlugin,
-} from "workbox-core/types.js";
+} from "@serwiss/core/types.js";
 
 import "./_version.js";
 

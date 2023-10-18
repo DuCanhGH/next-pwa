@@ -6,7 +6,8 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { WorkboxPlugin } from "workbox-core/types.js";
+import { WorkboxPlugin } from "@serwiss/core/types";
+
 import { Queue, QueueOptions } from "./Queue.js";
 import "./_version.js";
 
@@ -20,11 +21,10 @@ class BackgroundSyncPlugin implements WorkboxPlugin {
   private readonly _queue: Queue;
 
   /**
-   * @param {string} name See the {@link workbox-background-sync.Queue}
-   *     documentation for parameter details.
-   * @param {Object} [options] See the
-   *     {@link workbox-background-sync.Queue} documentation for
-   *     parameter details.
+   * @param name See the {@link workbox-background-sync.Queue}
+   * documentation for parameter details.
+   * @param options See the {@link workbox-background-sync.Queue} 
+   * documentation for parameter details.
    */
   constructor(name: string, options?: QueueOptions) {
     this._queue = new Queue(name, options);

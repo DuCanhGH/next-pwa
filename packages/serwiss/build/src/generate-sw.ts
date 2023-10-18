@@ -8,11 +8,11 @@
 
 import upath from "upath";
 
-import { getFileManifestEntries } from "./lib/get-file-manifest-entries";
-import { rebasePath } from "./lib/rebase-path";
-import { validateGenerateSWOptions } from "./lib/validate-options";
-import { writeSWUsingDefaultTemplate } from "./lib/write-sw-using-default-template";
-import type { BuildResult, GenerateSWOptions,GetManifestOptions } from "./types";
+import { getFileManifestEntries } from "./lib/get-file-manifest-entries.js";
+import { rebasePath } from "./lib/rebase-path.js";
+import { validateGenerateSWOptions } from "./lib/validate-options.js";
+import { writeSWUsingDefaultTemplate } from "./lib/write-sw-using-default-template.js";
+import type { BuildResult, GenerateSWOptions,GetManifestOptions } from "./types.js";
 
 /**
  * This method creates a list of URLs to precache, referred to as a "precache

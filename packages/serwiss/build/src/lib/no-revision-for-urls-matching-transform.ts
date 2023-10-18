@@ -6,8 +6,8 @@
   https://opensource.org/licenses/MIT.
 */
 
-import type { ManifestTransform } from "../types";
-import { errors } from "./errors";
+import type { ManifestTransform } from "../types.js";
+import { errors } from "./errors.js";
 
 export function noRevisionForURLsMatchingTransform(
   regexp: RegExp

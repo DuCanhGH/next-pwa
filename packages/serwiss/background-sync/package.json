@@ -7,6 +7,7 @@
   "repository": "DuCanhGH/next-pwa",
   "bugs": "https://github.com/DuCanhGH/next-pwa/issues",
   "homepage": "https://ducanh-next-pwa.vercel.app",
+  "type": "module",
   "keywords": [
     "workbox",
     "workboxjs",
@@ -26,5 +27,9 @@
   "dependencies": {
     "@serwiss/core": "workspace:*",
     "idb": "7.1.1"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./queue": "./src/Queue.ts"
   }
 }

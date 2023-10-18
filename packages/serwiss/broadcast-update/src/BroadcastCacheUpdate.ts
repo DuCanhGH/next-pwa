@@ -6,11 +6,11 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { assert } from "workbox-core/_private/assert.js";
-import { timeout } from "workbox-core/_private/timeout.js";
-import { resultingClientExists } from "workbox-core/_private/resultingClientExists.js";
-import { CacheDidUpdateCallbackParam } from "workbox-core/types.js";
-import { logger } from "workbox-core/_private/logger.js";
+import { assert } from "@serwiss/core/_private/assert.js";
+import { timeout } from "@serwiss/core/_private/timeout.js";
+import { resultingClientExists } from "@serwiss/core/_private/resultingClientExists.js";
+import { CacheDidUpdateCallbackParam } from "@serwiss/core/types";
+import { logger } from "@serwiss/core/_private/logger.js";
 import { responsesAreSame } from "./responsesAreSame.js";
 import {
   CACHE_UPDATED_MESSAGE_META,

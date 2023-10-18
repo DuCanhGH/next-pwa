@@ -16,6 +16,7 @@ import { Route } from "./Route.js";
 import { Router } from "./Router.js";
 import { setCatchHandler } from "./setCatchHandler.js";
 import { setDefaultHandler } from "./setDefaultHandler.js";
+import type { HTTPMethod } from "./utils/constants.js";
 
 import "./_version.js";
 
@@ -31,5 +32,6 @@ export {
   Router,
   setCatchHandler,
   setDefaultHandler,
-  NavigationRouteMatchOptions,
 };
+
+export type { NavigationRouteMatchOptions, HTTPMethod };

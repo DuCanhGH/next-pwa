@@ -1,11 +1,11 @@
 import type { PackageJson } from "type-fest";
-import type { QueueOptions } from "workbox-background-sync/Queue";
-import type { BroadcastCacheUpdateOptions } from "workbox-broadcast-update/BroadcastCacheUpdate";
-import type { CacheableResponseOptions } from "workbox-cacheable-response/CacheableResponse";
-import type { RouteHandler, RouteMatchCallback , WorkboxPlugin } from "workbox-core/types";
-import type { ExpirationPluginOptions } from "workbox-expiration/ExpirationPlugin";
-import type { GoogleAnalyticsInitializeOptions } from "workbox-google-analytics/initialize";
-import type { HTTPMethod } from "workbox-routing/utils/constants";
+import type { QueueOptions } from "@serwiss/background-sync/queue";
+import type { BroadcastCacheUpdateOptions } from "@serwiss/broadcast-update";
+import type { CacheableResponseOptions } from "@serwiss/cacheable-response";
+import type { RouteHandler, RouteMatchCallback , WorkboxPlugin } from "@serwiss/core/types";
+import type { ExpirationPluginOptions } from "@serwiss/expiration";
+import type { GoogleAnalyticsInitializeOptions } from "@serwiss/google-analytics/initialize";
+import type { HTTPMethod } from "@serwiss/routing";
 
 export interface ManifestEntry {
   integrity?: string;
@@ -581,7 +581,7 @@ export type BuildType = "dev" | "prod";
 /**
  * @private
  */
-export interface WorkboxPackageJSON extends PackageJson {
+export type WorkboxPackageJSON = PackageJson & {
   workbox?: {
     browserNamespace?: string;
     packageType?: string;

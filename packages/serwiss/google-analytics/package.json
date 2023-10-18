@@ -2,6 +2,7 @@
   "name": "@serwiss/google-analytics",
   "version": "7.0.0",
   "license": "MIT",
+  "type": "module",
   "author": "Google's Web DevRel Team, DuCanhGH",
   "description": "Queues failed requests and uses the Background Sync API to replay them when the network is available",
   "repository": "DuCanhGH/next-pwa",
@@ -24,6 +25,9 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    "./initialize": "./src/initialize.ts"
+  },
   "dependencies": {
     "@serwiss/background-sync": "workspace:*",
     "@serwiss/core": "workspace:*",

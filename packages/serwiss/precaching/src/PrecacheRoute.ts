@@ -6,13 +6,13 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { logger } from "workbox-core/_private/logger.js";
-import { getFriendlyURL } from "workbox-core/_private/getFriendlyURL.js";
+import { logger } from "@serwiss/core/_private/logger.js";
+import { getFriendlyURL } from "@serwiss/core/_private/getFriendlyURL.js";
 import {
   RouteMatchCallback,
   RouteMatchCallbackOptions,
-} from "workbox-core/types.js";
-import { Route } from "workbox-routing/Route.js";
+} from "@serwiss/core/types.js";
+import { Route } from "@serwiss/routing/Route.js";
 
 import { PrecacheRouteOptions } from "./_types.js";
 import { PrecacheController } from "./PrecacheController.js";

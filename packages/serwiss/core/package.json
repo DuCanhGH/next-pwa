@@ -19,5 +19,10 @@
   },
   "main": "index.js",
   "module": "index.mjs",
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./_private/*.js": "./src/_private/*.ts",
+    "./types": "./src/types.ts"
+  }
 }

@@ -6,19 +6,19 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { assert } from "workbox-core/_private/assert.js";
-import { getFriendlyURL } from "workbox-core/_private/getFriendlyURL.js";
+import { assert } from "@serwiss/core/_private/assert.js";
+import { getFriendlyURL } from "@serwiss/core/_private/getFriendlyURL.js";
 import {
   RouteHandler,
   RouteHandlerObject,
   RouteHandlerCallbackOptions,
   RouteMatchCallbackOptions,
-} from "workbox-core/types.js";
+} from "@serwiss/core/types";
 import { HTTPMethod, defaultMethod } from "./utils/constants.js";
-import { logger } from "workbox-core/_private/logger.js";
+import { logger } from "@serwiss/core/_private/logger.js";
 import { normalizeHandler } from "./utils/normalizeHandler.js";
 import { Route } from "./Route.js";
-import { WorkboxError } from "workbox-core/_private/WorkboxError.js";
+import { WorkboxError } from "@serwiss/core/_private/WorkboxError.js";
 
 import "./_version.js";
 

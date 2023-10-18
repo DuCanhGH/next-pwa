@@ -8,9 +8,9 @@
 
 import { ok } from "assert";
 
-import * as cdn from "../cdn-details.json";
-import type { BuildType, WorkboxPackageJSON } from "../types";
-import { errors } from "./errors";
+import cdn from "../cdn-details.json";
+import type { BuildType, WorkboxPackageJSON } from "../types.js";
+import { errors } from "./errors.js";
 
 function getVersionedURL(): string {
   return `${getCDNPrefix()}/${cdn.latestVersion}`;

@@ -37,10 +37,6 @@ declare global {
 /**
  * @module workbox-background-sync
  */
-export {
-  BackgroundSyncPlugin,
-  Queue,
-  QueueOptions,
-  QueueStore,
-  StorableRequest,
-};
+export { BackgroundSyncPlugin, Queue, QueueStore, StorableRequest };
+
+export type { QueueOptions };

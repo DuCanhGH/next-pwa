@@ -6,14 +6,14 @@
   https://opensource.org/licenses/MIT.
 */
 
-import template from "lodash/template";
+import template from "lodash/template.js";
 
-import { swTemplate } from "../templates/sw-template";
-import type { GeneratePartial, ManifestEntry } from "../types";
-import { errors } from "./errors";
-import { ModuleRegistry } from "./module-registry";
-import { runtimeCachingConverter } from "./runtime-caching-converter";
-import { stringifyWithoutComments } from "./stringify-without-comments";
+import { swTemplate } from "../templates/sw-template.js";
+import type { GeneratePartial, ManifestEntry } from "../types.js";
+import { errors } from "./errors.js";
+import { ModuleRegistry } from "./module-registry.js";
+import { runtimeCachingConverter } from "./runtime-caching-converter.js";
+import { stringifyWithoutComments } from "./stringify-without-comments.js";
 
 export function populateSWTemplate({
   cacheId,

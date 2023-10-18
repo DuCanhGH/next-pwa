@@ -8,12 +8,12 @@
 
 import assert from "assert";
 
-import type { FileDetails, GetManifestOptions,GetManifestResult } from "../types";
-import { errors } from "./errors";
-import { getCompositeDetails } from "./get-composite-details";
-import { getFileDetails } from "./get-file-details";
-import { getStringDetails } from "./get-string-details";
-import { transformManifest } from "./transform-manifest";
+import type { FileDetails, GetManifestOptions,GetManifestResult } from "../types.js";
+import { errors } from "./errors.js";
+import { getCompositeDetails } from "./get-composite-details.js";
+import { getFileDetails } from "./get-file-details.js";
+import { getStringDetails } from "./get-string-details.js";
+import { transformManifest } from "./transform-manifest.js";
 
 export async function getFileManifestEntries({
   additionalManifestEntries,

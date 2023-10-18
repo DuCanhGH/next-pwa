@@ -6,16 +6,16 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { BackgroundSyncPlugin } from "workbox-background-sync/BackgroundSyncPlugin.js";
-import { Queue } from "workbox-background-sync/Queue.js";
-import { cacheNames } from "workbox-core/_private/cacheNames.js";
-import { getFriendlyURL } from "workbox-core/_private/getFriendlyURL.js";
-import { logger } from "workbox-core/_private/logger.js";
-import { RouteMatchCallbackOptions } from "workbox-core/types.js";
-import { Route } from "workbox-routing/Route.js";
-import { Router } from "workbox-routing/Router.js";
-import { NetworkFirst } from "workbox-strategies/NetworkFirst.js";
-import { NetworkOnly } from "workbox-strategies/NetworkOnly.js";
+import { BackgroundSyncPlugin } from "@serwiss/background-sync";
+import { Queue } from "@serwiss/background-sync/queue";
+import { cacheNames } from "@serwiss/core/_private/cacheNames.js";
+import { getFriendlyURL } from "@serwiss/core/_private/getFriendlyURL.js";
+import { logger } from "@serwiss/core/_private/logger.js";
+import { RouteMatchCallbackOptions } from "@serwiss/core/types";
+import { Route } from "@serwiss/routing/Route.js";
+import { Router } from "@serwiss/routing/Router.js";
+import { NetworkFirst } from "@serwiss/strategies/NetworkFirst.js";
+import { NetworkOnly } from "@serwiss/strategies/NetworkOnly.js";
 import {
   QUEUE_NAME,
   MAX_RETENTION_TIME,

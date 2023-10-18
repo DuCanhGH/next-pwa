@@ -8,7 +8,7 @@
 
 import crypto from "crypto";
 
-import type { FileDetails } from "../types";
+import type { FileDetails } from "../types.js";
 
 export function getCompositeDetails(
   compositeURL: string,

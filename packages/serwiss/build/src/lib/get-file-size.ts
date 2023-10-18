@@ -8,7 +8,7 @@
 
 import fse from "fs-extra";
 
-import { errors } from "./errors";
+import { errors } from "./errors.js";
 
 export function getFileSize(file: string): number | null {
   try {

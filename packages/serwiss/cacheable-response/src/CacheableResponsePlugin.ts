@@ -6,7 +6,7 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { WorkboxPlugin } from "workbox-core/types.js";
+import { WorkboxPlugin } from "@serwiss/core/types";
 import {
   CacheableResponse,
   CacheableResponseOptions,

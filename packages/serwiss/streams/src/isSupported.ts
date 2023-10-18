@@ -6,7 +6,7 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { canConstructReadableStream } from "workbox-core/_private/canConstructReadableStream.js";
+import { canConstructReadableStream } from "@serwiss/core/_private/canConstructReadableStream.js";
 import "./_version.js";
 
 /**

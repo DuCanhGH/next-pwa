@@ -6,14 +6,14 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { copyResponse } from "workbox-core/copyResponse.js";
-import { cacheNames } from "workbox-core/_private/cacheNames.js";
-import { getFriendlyURL } from "workbox-core/_private/getFriendlyURL.js";
-import { logger } from "workbox-core/_private/logger.js";
-import { WorkboxError } from "workbox-core/_private/WorkboxError.js";
-import { WorkboxPlugin } from "workbox-core/types.js";
-import { Strategy, StrategyOptions } from "workbox-strategies/Strategy.js";
-import { StrategyHandler } from "workbox-strategies/StrategyHandler.js";
+import { copyResponse } from "@serwiss/core/copyResponse.js";
+import { cacheNames } from "@serwiss/core/_private/cacheNames.js";
+import { getFriendlyURL } from "@serwiss/core/_private/getFriendlyURL.js";
+import { logger } from "@serwiss/core/_private/logger.js";
+import { WorkboxError } from "@serwiss/core/_private/WorkboxError.js";
+import { WorkboxPlugin } from "@serwiss/core/types.js";
+import { Strategy, StrategyOptions } from "@serwiss/strategies/Strategy.js";
+import { StrategyHandler } from "@serwiss/strategies/StrategyHandler.js";
 
 import "./_version.js";
 

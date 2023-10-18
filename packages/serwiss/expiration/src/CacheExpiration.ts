@@ -6,10 +6,10 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { assert } from "workbox-core/_private/assert.js";
-import { dontWaitFor } from "workbox-core/_private/dontWaitFor.js";
-import { logger } from "workbox-core/_private/logger.js";
-import { WorkboxError } from "workbox-core/_private/WorkboxError.js";
+import { assert } from "@serwiss/core/_private/assert.js";
+import { dontWaitFor } from "@serwiss/core/_private/dontWaitFor.js";
+import { logger } from "@serwiss/core/_private/logger.js";
+import { WorkboxError } from "@serwiss/core/_private/WorkboxError.js";
 
 import { CacheTimestampsModel } from "./models/CacheTimestampsModel.js";
 

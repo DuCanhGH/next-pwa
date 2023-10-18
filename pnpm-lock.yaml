@@ -816,9 +816,24 @@ importers:
         specifier: 2.0.1
         version: 2.0.1
     devDependencies:
+      '@types/common-tags':
+        specifier: 1.8.3
+        version: 1.8.3
+      '@types/fs-extra':
+        specifier: 11.0.2
+        version: 11.0.2
+      '@types/lodash':
+        specifier: 4.14.200
+        version: 4.14.200
       '@types/node':
         specifier: 20.8.7
         version: 20.8.7
+      '@types/stringify-object':
+        specifier: 4.0.3
+        version: 4.0.3
+      type-fest:
+        specifier: 4.4.0
+        version: 4.4.0
 
   packages/serwiss/cacheable-response:
     dependencies:
@@ -5437,6 +5452,10 @@ packages:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
       '@types/node': 20.8.7
+    dev: true
+
+  /@types/lodash@4.14.200:
+    resolution: {integrity: sha512-YI/M/4HRImtNf3pJgbF+W6FrXovqj+T+/HpENLTooK9PnkacBsDpeP3IpHab40CClUfhNmdM2WTNP2sa2dni5Q==}
     dev: true
 
   /@types/long@4.0.2:

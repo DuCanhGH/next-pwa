@@ -9,10 +9,10 @@
 import fse from "fs-extra";
 import upath from "upath";
 
-import type { GenerateSWOptions, ManifestEntry } from "../types";
-import { bundle } from "./bundle";
-import { errors } from "./errors";
-import { populateSWTemplate } from "./populate-sw-template";
+import type { GenerateSWOptions, ManifestEntry } from "../types.js";
+import { bundle } from "./bundle.js";
+import { errors } from "./errors.js";
+import { populateSWTemplate } from "./populate-sw-template.js";
 
 export async function writeSWUsingDefaultTemplate({
   babelPresetEnvTargets,

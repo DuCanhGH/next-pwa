@@ -6,8 +6,8 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { dontWaitFor } from "workbox-core/_private/dontWaitFor.js";
-import { WorkboxPlugin } from "workbox-core/types.js";
+import { dontWaitFor } from "@serwiss/core/_private/dontWaitFor.js";
+import { WorkboxPlugin } from "@serwiss/core/types";
 
 import {
   BroadcastCacheUpdate,

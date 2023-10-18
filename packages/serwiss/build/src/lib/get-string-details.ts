@@ -6,8 +6,8 @@
   https://opensource.org/licenses/MIT.
 */
 
-import type { FileDetails } from "../types";
-import { getStringHash } from "./get-string-hash";
+import type { FileDetails } from "../types.js";
+import { getStringHash } from "./get-string-hash.js";
 
 export function getStringDetails(url: string, str: string): FileDetails {
   return {

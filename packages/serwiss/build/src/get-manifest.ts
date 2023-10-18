@@ -6,9 +6,9 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { getFileManifestEntries } from "./lib/get-file-manifest-entries";
-import { validateGetManifestOptions } from "./lib/validate-options";
-import type { GetManifestOptions, GetManifestResult } from "./types";
+import { getFileManifestEntries } from "./lib/get-file-manifest-entries.js";
+import { validateGetManifestOptions } from "./lib/validate-options.js";
+import type { GetManifestOptions, GetManifestResult } from "./types.js";
 
 /**
  * This method returns a list of URLs to precache, referred to as a "precache

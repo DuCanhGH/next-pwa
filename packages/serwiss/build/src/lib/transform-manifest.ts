@@ -11,12 +11,12 @@ import type {
   FileDetails,
   ManifestEntry,
   ManifestTransform,
-} from "../types";
-import { additionalManifestEntriesTransform } from "./additional-manifest-entries-transform";
-import { errors } from "./errors";
-import { maximumSizeTransform } from "./maximum-size-transform";
-import { modifyURLPrefixTransform } from "./modify-url-prefix-transform";
-import { noRevisionForURLsMatchingTransform } from "./no-revision-for-urls-matching-transform";
+} from "../types.js";
+import { additionalManifestEntriesTransform } from "./additional-manifest-entries-transform.js";
+import { errors } from "./errors.js";
+import { maximumSizeTransform } from "./maximum-size-transform.js";
+import { modifyURLPrefixTransform } from "./modify-url-prefix-transform.js";
+import { noRevisionForURLsMatchingTransform } from "./no-revision-for-urls-matching-transform.js";
 
 /**
  * A `ManifestTransform` function can be used to modify the modify the `url` or

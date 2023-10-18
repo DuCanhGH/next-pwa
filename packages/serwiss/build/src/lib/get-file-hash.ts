@@ -8,8 +8,8 @@
 
 import fse from "fs-extra";
 
-import { errors } from "./errors";
-import { getStringHash } from "./get-string-hash";
+import { errors } from "./errors.js";
+import { getStringHash } from "./get-string-hash.js";
 
 export function getFileHash(file: string): string {
   try {

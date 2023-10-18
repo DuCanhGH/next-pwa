@@ -17,8 +17,8 @@ import type {
   InjectManifestOptions,
   WebpackGenerateSWOptions,
   WebpackInjectManifestOptions,
-} from "../types";
-import { errors } from "./errors";
+} from "../types.js";
+import { errors } from "./errors.js";
 
 type MethodNames =
   | "GenerateSW"

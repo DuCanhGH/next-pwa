@@ -12,10 +12,10 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import omt from "@surma/rollup-plugin-off-main-thread";
 import { writeFile } from "fs-extra";
-import type { Plugin} from "rollup";
-import {rollup } from "rollup";
-import { terser } from "rollup-plugin-terser";
-import tempy from "tempy";
+import type { Plugin } from "rollup";
+import { rollup } from "rollup";
+import terser from "@rollup/plugin-terser";
+import * as tempy from "tempy";
 import upath from "upath";
 
 import type { GeneratePartial, RequiredSWDestPartial } from "../types";

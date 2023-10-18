@@ -11,4 +11,4 @@ import "./_version.js";
 // This is a temporary workaround to expose something from ./lib/ via our
 // top-level public API.
 // TODO: In Workbox v7, move the actual code from ./lib/ to this file.
-export { StorableRequest } from "./lib/StorableRequest";
+export { StorableRequest } from "./lib/StorableRequest.js";

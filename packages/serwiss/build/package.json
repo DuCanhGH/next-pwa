@@ -1,6 +1,7 @@
 {
   "name": "@serwiss/build",
   "version": "7.0.0",
+  "type": "module",
   "description": "A module that integrates into your build process, helping you generate a manifest of local files that workbox-sw should precache.",
   "keywords": [
     "workbox",
@@ -24,6 +25,10 @@
     "@babel/core": "7.23.2",
     "@babel/preset-env": "7.23.2",
     "@babel/runtime": "7.23.2",
+    "@rollup/plugin-babel": "6.0.4",
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-replace": "5.0.4",
+    "@rollup/plugin-terser": "0.4.4",
     "@serwiss/background-sync": "workspace:*",
     "@serwiss/broadcast-update": "workspace:*",
     "@serwiss/cacheable-response": "workspace:*",
@@ -40,10 +45,6 @@
     "@serwiss/sw": "workspace:*",
     "@serwiss/window": "workspace:*",
     "@surma/rollup-plugin-off-main-thread": "2.2.3",
-    "@rollup/plugin-babel": "6.0.4",
-    "@rollup/plugin-node-resolve": "15.2.3",
-    "@rollup/plugin-replace": "5.0.4",
-    "@rollup/plugin-terser": "0.4.4",
     "ajv": "8.12.0",
     "common-tags": "1.8.2",
     "fast-json-stable-stringify": "2.1.0",
@@ -64,6 +65,11 @@
   },
   "types": "build/index.d.ts",
   "devDependencies": {
-    "@types/node": "20.8.7"
+    "@types/common-tags": "1.8.3",
+    "@types/fs-extra": "11.0.2",
+    "@types/lodash": "4.14.200",
+    "@types/node": "20.8.7",
+    "@types/stringify-object": "4.0.3",
+    "type-fest": "4.4.0"
   }
 }

@@ -6,9 +6,9 @@
   https://opensource.org/licenses/MIT.
 */
 
-import type { ManifestTransform } from "../types";
-import { errors } from "./errors";
-import { escapeRegExp } from "./escape-regexp";
+import type { ManifestTransform } from "../types.js";
+import { errors } from "./errors.js";
+import { escapeRegExp } from "./escape-regexp.js";
 
 export function modifyURLPrefixTransform(modifyURLPrefix: {
   [key: string]: string;

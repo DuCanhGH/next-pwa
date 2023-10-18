@@ -7,7 +7,7 @@
 */
 
 import { getOrCreatePrecacheController } from "./utils/getOrCreatePrecacheController.js";
-import { RouteHandlerCallback } from "workbox-core/types.js";
+import { RouteHandlerCallback } from "@serwiss/core/types.js";
 import "./_version.js";
 
 /**

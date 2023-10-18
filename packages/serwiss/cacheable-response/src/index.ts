@@ -18,4 +18,6 @@ import "./_version.js";
  * @module workbox-cacheable-response
  */
 
-export { CacheableResponse, CacheableResponseOptions, CacheableResponsePlugin };
+export { CacheableResponse, CacheableResponsePlugin };
+
+export type { CacheableResponseOptions };

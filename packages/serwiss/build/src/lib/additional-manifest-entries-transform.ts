@@ -6,8 +6,8 @@
   https://opensource.org/licenses/MIT.
 */
 
-import type { ManifestEntry } from "../types";
-import { errors } from "./errors";
+import type { ManifestEntry } from "../types.js";
+import { errors } from "./errors.js";
 
 type AdditionalManifestEntriesTransform = {
   (manifest: Array<ManifestEntry & { size: number }>): {

@@ -6,7 +6,7 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { RouteHandler } from "workbox-core/types.js";
+import { RouteHandler } from "@serwiss/core/types";
 
 import { getOrCreateDefaultRouter } from "./utils/getOrCreateDefaultRouter.js";
 

@@ -9,7 +9,7 @@
 import fse from "fs-extra";
 import upath from "upath";
 
-import { errors } from "./errors";
+import { errors } from "./errors.js";
 
 export function translateURLToSourcemapPaths(
   url: string | null,

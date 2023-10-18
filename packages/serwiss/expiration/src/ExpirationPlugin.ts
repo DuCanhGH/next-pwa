@@ -6,14 +6,14 @@
   https://opensource.org/licenses/MIT.
 */
 
-import { assert } from "workbox-core/_private/assert.js";
-import { cacheNames } from "workbox-core/_private/cacheNames.js";
-import { dontWaitFor } from "workbox-core/_private/dontWaitFor.js";
-import { getFriendlyURL } from "workbox-core/_private/getFriendlyURL.js";
-import { logger } from "workbox-core/_private/logger.js";
-import { registerQuotaErrorCallback } from "workbox-core/registerQuotaErrorCallback.js";
-import { WorkboxError } from "workbox-core/_private/WorkboxError.js";
-import { WorkboxPlugin } from "workbox-core/types.js";
+import { assert } from "@serwiss/core/_private/assert.js";
+import { cacheNames } from "@serwiss/core/_private/cacheNames.js";
+import { dontWaitFor } from "@serwiss/core/_private/dontWaitFor.js";
+import { getFriendlyURL } from "@serwiss/core/_private/getFriendlyURL.js";
+import { logger } from "@serwiss/core/_private/logger.js";
+import { registerQuotaErrorCallback } from "@serwiss/core";
+import { WorkboxError } from "@serwiss/core/_private/WorkboxError.js";
+import { WorkboxPlugin } from "@serwiss/core/types";
 
 import { CacheExpiration } from "./CacheExpiration.js";
 

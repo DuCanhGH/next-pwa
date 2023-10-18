@@ -8,10 +8,10 @@
 
 import { oneLine as ol } from "common-tags";
 
-import type { RuntimeCaching } from "../types";
-import { errors } from "./errors";
-import type { ModuleRegistry } from "./module-registry";
-import { stringifyWithoutComments } from "./stringify-without-comments";
+import type { RuntimeCaching } from "../types.js";
+import { errors } from "./errors.js";
+import type { ModuleRegistry } from "./module-registry.js";
+import { stringifyWithoutComments } from "./stringify-without-comments.js";
 
 /**
  * Given a set of options that configures runtime caching behavior, convert it

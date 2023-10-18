@@ -9,8 +9,8 @@
 import fse from "fs-extra";
 import upath from "upath";
 
-import type { WorkboxPackageJSON } from "../types";
-import { errors } from "./errors";
+import type { WorkboxPackageJSON } from "../types.js";
+import { errors } from "./errors.js";
 
 // Used to filter the libraries to copy based on our package.json dependencies.
 const WORKBOX_PREFIX = "workbox-";

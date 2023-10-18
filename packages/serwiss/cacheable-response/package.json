@@ -1,6 +1,7 @@
 {
   "name": "@serwiss/cacheable-response",
   "version": "7.0.0",
+  "type": "module",
   "license": "MIT",
   "author": "Google's Web DevRel Team, DuCanhGH",
   "description": "This library takes a Response object and determines whether it's cacheable based on a specific configuration.",
@@ -21,6 +22,9 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
     "@serwiss/core": "7.0.0"
   }

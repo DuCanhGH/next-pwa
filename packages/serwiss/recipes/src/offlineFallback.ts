@@ -5,12 +5,12 @@
   license that can be found in the LICENSE file or at
   https://opensource.org/licenses/MIT.
 */
-import { setCatchHandler } from "workbox-routing/setCatchHandler.js";
-import { matchPrecache } from "workbox-precaching/matchPrecache.js";
+import { setCatchHandler } from "@serwiss/routing/setCatchHandler.js";
+import { matchPrecache } from "@serwiss/precaching/matchPrecache.js";
 import {
   RouteHandler,
   RouteHandlerCallbackOptions,
-} from "workbox-core/types.js";
+} from "@serwiss/core/types.js";
 
 import "./_version.js";
 

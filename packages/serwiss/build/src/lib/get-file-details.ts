@@ -6,13 +6,13 @@
   https://opensource.org/licenses/MIT.
 */
 
-import glob from "glob";
+import { glob } from "glob";
 import upath from "upath";
 
-import type { GlobPartial } from "../types";
-import { errors } from "./errors";
-import { getFileHash } from "./get-file-hash";
-import { getFileSize } from "./get-file-size";
+import type { GlobPartial } from "../types.js";
+import { errors } from "./errors.js";
+import { getFileHash } from "./get-file-hash.js";
+import { getFileSize } from "./get-file-size.js";
 
 interface FileDetails {
   file: string;
@@ -25,7 +25,6 @@ export function getFileDetails({
   globFollow,
   globIgnores,
   globPattern,
-  globStrict,
 }: Omit<GlobPartial, "globDirectory" | "globPatterns" | "templatedURLs"> & {
   // This will only be called when globDirectory is not undefined.
   globDirectory: string;
@@ -42,7 +41,6 @@ export function getFileDetails({
       cwd: globDirectory,
       follow: globFollow,
       ignore: globIgnores,
-      strict: globStrict,
     });
   } catch (err) {
     throw new Error(

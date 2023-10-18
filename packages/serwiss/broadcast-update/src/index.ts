@@ -19,9 +19,6 @@ import "./_version.js";
  * @module workbox-broadcast-update
  */
 
-export {
-  BroadcastCacheUpdate,
-  BroadcastCacheUpdateOptions,
-  BroadcastUpdatePlugin,
-  responsesAreSame,
-};
+export { BroadcastCacheUpdate, BroadcastUpdatePlugin, responsesAreSame };
+
+export type { BroadcastCacheUpdateOptions };

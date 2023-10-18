@@ -12,15 +12,15 @@ import fse from "fs-extra";
 import type { RawSourceMap } from "source-map";
 import upath from "upath";
 
-import { errors } from "./lib/errors";
-import { escapeRegExp } from "./lib/escape-regexp";
-import { getFileManifestEntries } from "./lib/get-file-manifest-entries";
-import { getSourceMapURL } from "./lib/get-source-map-url";
-import { rebasePath } from "./lib/rebase-path";
-import { replaceAndUpdateSourceMap } from "./lib/replace-and-update-source-map";
-import { translateURLToSourcemapPaths } from "./lib/translate-url-to-sourcemap-paths";
-import { validateInjectManifestOptions } from "./lib/validate-options";
-import type { BuildResult, InjectManifestOptions } from "./types";
+import { errors } from "./lib/errors.js";
+import { escapeRegExp } from "./lib/escape-regexp.js";
+import { getFileManifestEntries } from "./lib/get-file-manifest-entries.js";
+import { getSourceMapURL } from "./lib/get-source-map-url.js";
+import { rebasePath } from "./lib/rebase-path.js";
+import { replaceAndUpdateSourceMap } from "./lib/replace-and-update-source-map.js";
+import { translateURLToSourcemapPaths } from "./lib/translate-url-to-sourcemap-paths.js";
+import { validateInjectManifestOptions } from "./lib/validate-options.js";
+import type { BuildResult, InjectManifestOptions } from "./types.js";
 
 /**
  * This method creates a list of URLs to precache, referred to as a "precache
