@@ -5,20 +5,6 @@ This plugin is powered by [Workbox](https://developer.chrome.com/docs/workbox/) 
 [![Build Size](https://img.shields.io/bundlephobia/minzip/@ducanh2912/next-pwa?label=Bundle%20size&style=flat&color=success)](https://bundlephobia.com/result?p=@ducanh2912/next-pwa)
 [![Version](https://img.shields.io/npm/v/@ducanh2912/next-pwa?style=flat&color=success)](https://www.npmjs.com/package/@ducanh2912/next-pwa)
 
-## Features
-
-- 0️⃣ No configuration needed, but is configurable using Workbox's options and our own options.
-- ✨ Optimized precaching and runtime caching.
-- 💯 Maximal Lighthouse score.
-- 🎈 Easy-to-understand examples.
-- 📴 Offline support [(you can also provide fallbacks for when fetching fails)](/examples/offline-fallback-v2).
-- 🔉 Default range requests for audios and videos.
-- 📐 [Custom worker to run your own code (also supports path aliases, TypeScript and code splitting!).](/examples/custom-worker)
-- 📜 [Public environment variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables) are available in custom workers.
-- 🐞 Debug service worker in development mode.
-- 🌏 [Internationalization support with `next-i18next`.](/examples/next-i18next)
-- ⚡ Supports [blitz.js](https://blitzjs.com/) (simply add `blitz.config.js`) and [GitPod](https://gitpod.io/#https://github.com/DuCanhGH/next-pwa/).
-
 ---
 
 ## Getting Started
