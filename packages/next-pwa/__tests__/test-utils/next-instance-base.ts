@@ -93,7 +93,7 @@ export abstract class NextInstance {
       )
     );
 
-    const origRepoDir = path.join(__dirname, "../../..");
+    const origRepoDir = path.join(__dirname, "../../../..");
 
     const copyRepoPromise: Promise<any>[] = [];
 
@@ -130,11 +130,9 @@ export abstract class NextInstance {
         (error, stdout, stderr) => {
           if (error) {
             console.error(
-              `failed to install dependencies: ${JSON.stringify(
-                error,
-                null,
-                2
-              )}`
+              `failed to install dependencies: ${error} with stdout: ${
+                stdout || "none"
+              } and stderr: ${stderr || "none"}`
             );
             reject();
           } else {
