@@ -39,7 +39,7 @@ export class NextInstanceDev extends NextInstance {
           this._cliOutput += msg;
         });
       } catch (err) {
-        console.error(`next spawn failed: ${JSON.stringify(err, null, 2)}`);
+        console.error(`next spawn failed: ${err}, cli: ${this._cliOutput}`);
       }
     });
   }
