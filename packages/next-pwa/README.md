@@ -5,6 +5,8 @@ This plugin is powered by [Workbox](https://developer.chrome.com/docs/workbox/) 
 [![Build Size](https://img.shields.io/bundlephobia/minzip/@ducanh2912/next-pwa?label=Bundle%20size&style=flat&color=success)](https://bundlephobia.com/result?p=@ducanh2912/next-pwa)
 [![Version](https://img.shields.io/npm/v/@ducanh2912/next-pwa?style=flat&color=success)](https://www.npmjs.com/package/@ducanh2912/next-pwa)
 
+**NOTE:** If there's no specific reason to continue using `@ducanh2912/next-pwa`, consider migrating to [`@serwist/next`](https://github.com/serwist/serwist).
+
 ---
 
 ## Getting Started
