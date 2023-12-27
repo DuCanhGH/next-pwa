@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 10.0.1
+
+### Patch Changes
+
+- [#127](https://github.com/DuCanhGH/next-pwa/pull/127) [`a4b8926`](https://github.com/DuCanhGH/next-pwa/commit/a4b8926b0e4158f7194db38c59f097280d07c324) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(cache-on-front-end-nav): fixed error 'URL object could not be cloned.'
+
+  - This was due to us trying to send the URL object to our worker through `postMessage`.
+
 ## 10.0.0
 
 ### Major Changes
