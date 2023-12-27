@@ -1,5 +1,11 @@
 # @ducanh2912/next-pwa
 
+## 10.0.2
+
+### Patch Changes
+
+- [`9107baa`](https://github.com/DuCanhGH/next-pwa/commit/9107baa56c8609e6d0d6068721a6f654f0755b14) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(cofen): fixed type errors
+
 ## 10.0.1
 
 ### Patch Changes
