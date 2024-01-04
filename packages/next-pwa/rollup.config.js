@@ -28,39 +28,27 @@ const forcedExternals = [
 /** @type {FileEntry[]} */
 const files = [
   {
-    input: "src/index.ts",
+    input: {
+      index: "src/index.ts",
+      fallback: "src/fallback.ts",
+      "sw-entry": "src/sw-entry.ts",
+      "sw-entry-worker": "src/sw-entry-worker.ts",
+    },
     output: [
       {
-        file: "dist/index.cjs",
+        dir: "dist",
+        entryFileNames: "[name].cjs",
+        chunkFileNames: "[name].cjs",
         format: "cjs",
         exports: "named",
       },
       {
-        file: "dist/index.module.js",
+        dir: "dist",
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js",
         format: "esm",
       },
     ],
-  },
-  {
-    input: "src/fallback.ts",
-    output: {
-      file: "dist/fallback.js",
-      format: "cjs",
-    },
-  },
-  {
-    input: "src/sw-entry.ts",
-    output: {
-      file: "dist/sw-entry.js",
-      format: "esm",
-    },
-  },
-  {
-    input: "src/sw-entry-worker.ts",
-    output: {
-      file: "dist/sw-entry-worker.js",
-      format: "esm",
-    },
   },
 ];
 
@@ -97,7 +85,7 @@ for (const { input, output, external = [], plugins } of files) {
             emitDeclarationOnly: true,
             outDir: "dist",
             declaration: true,
-            declarationDir: "dts",
+            declarationDir: "dist/dts",
           }),
         swc({
           swc: {
@@ -115,17 +103,24 @@ if (shouldEmitDeclaration) {
   /** @type {FileEntry[]} */
   const declarations = [
     {
-      input: "dist/dts/src/index.d.ts",
+      input: {
+        index: "dist/dts/src/index.d.ts",
+        "sw-entry": "dist/dts/src/sw-entry.d.ts",
+      },
       output: [
-        { format: "es", file: "dist/index.module.d.ts" },
-        { format: "cjs", file: "dist/index.d.cts" },
-      ],
-    },
-    {
-      input: "dist/dts/src/sw-entry.d.ts",
-      output: [
-        { format: "es", file: "dist/sw-entry.module.d.ts" },
-        { format: "cjs", file: "dist/sw-entry.d.cts" },
+        {
+          dir: "dist",
+          entryFileNames: "[name].d.cts",
+          chunkFileNames: "[name].d.cts",
+          format: "cjs",
+          exports: "named",
+        },
+        {
+          dir: "dist",
+          entryFileNames: "[name].d.ts",
+          chunkFileNames: "[name].d.ts",
+          format: "esm",
+        },
       ],
     },
   ];

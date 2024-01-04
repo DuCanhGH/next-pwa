@@ -119,7 +119,7 @@ export const resolveWorkboxPlugin = ({
       skipWaiting = true,
       clientsClaim = true,
       cleanupOutdatedCaches = true,
-      ignoreURLParametersMatching = [],
+      ignoreURLParametersMatching = [/^utm_/, /^fbclid$/],
       importScripts: userImportScripts,
       runtimeCaching: userRuntimeCaching,
       ...workbox

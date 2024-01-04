@@ -169,7 +169,11 @@ const withPWAInit = (
           additionalManifestEntries,
           modifyURLPrefix = {},
           manifestTransforms = [],
-          exclude = [],
+          exclude = [
+            /\/_next\/static\/.*(?<!\.p)\.woff2/,
+            /\.map$/,
+            /^manifest.*\.js$/,
+          ],
           ...workbox
         } = workboxOptions;
 

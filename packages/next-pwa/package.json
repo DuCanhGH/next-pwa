@@ -19,8 +19,8 @@
         "default": "./dist/index.cjs"
       },
       "default": {
-        "types": "./dist/index.module.d.ts",
-        "default": "./dist/index.module.js"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       }
     },
     "./workbox": {
@@ -28,17 +28,17 @@
         "types": "./dist/sw-entry.d.cts"
       },
       "default": {
-        "types": "./dist/sw-entry.module.d.ts"
+        "types": "./dist/sw-entry.d.ts"
       }
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "types": "./dist/index.module.d.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "workbox": [
-        "./dist/sw-entry.module.d.ts"
+        "./dist/sw-entry.d.ts"
       ]
     }
   },
@@ -60,7 +60,7 @@
     "clean-webpack-plugin": "4.0.0",
     "fast-glob": "3.3.2",
     "semver": "7.5.4",
-    "terser-webpack-plugin": "5.3.9",
+    "terser-webpack-plugin": "5.3.10",
     "workbox-build": "7.0.0",
     "workbox-core": "7.0.0",
     "workbox-webpack-plugin": "7.0.0",
@@ -68,21 +68,21 @@
   },
   "devDependencies": {
     "@rollup/plugin-alias": "5.1.0",
-    "@rollup/plugin-json": "6.0.1",
+    "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-swc": "0.3.0",
     "@rollup/plugin-typescript": "11.1.5",
-    "@swc/core": "1.3.100",
-    "@types/node": "20.10.4",
+    "@swc/core": "1.3.102",
+    "@types/node": "20.10.6",
     "@types/semver": "7.5.6",
     "chalk": "5.3.0",
-    "next": "14.0.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "14.0.5-canary.37",
+    "react": "18.3.0-canary-1d5667a12-20240102",
+    "react-dom": "18.3.0-canary-1d5667a12-20240102",
     "rollup": "3.28.1",
     "rollup-plugin-dts": "6.0.2",
-    "type-fest": "4.8.3",
-    "typescript": "5.4.0-dev.20231210",
+    "type-fest": "4.9.0",
+    "typescript": "5.4.0-dev.20240104",
     "webpack": "5.89.0"
   },
   "peerDependencies": {

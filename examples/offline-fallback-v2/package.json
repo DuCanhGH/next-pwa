@@ -14,12 +14,12 @@
     "next": "14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sharp": "0.33.0"
+    "sharp": "0.33.1"
   },
   "devDependencies": {
-    "@types/node": "20.10.4",
-    "@types/react": "18.2.43",
-    "@types/react-dom": "18.2.17",
+    "@types/node": "20.10.6",
+    "@types/react": "18.2.46",
+    "@types/react-dom": "18.2.18",
     "typescript": "5.3.3"
   }
 }

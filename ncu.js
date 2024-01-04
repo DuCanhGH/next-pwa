@@ -20,6 +20,7 @@ const packageJsonList = await fg("**/package.json", {
 const examplesPackageJsonList = await fg("examples/*/package.json", {
   ignore: ["**/node_modules/**"],
 });
+const excludePackages = ["rollup", "rollup-plugin-dts", "unified"];
 
 /**
  * @type {Promise<any>[]}
@@ -31,12 +32,18 @@ for (const packageFile of packageJsonList) {
     updateAndLog({
       packageFile,
       upgrade: true,
-      target: (dependencyName) => {
+      filter(packageName) {
+        return !excludePackages.includes(packageName);
+      },
+      target(dependencyName) {
         if (dependencyName === "typescript") {
           return "@next";
         }
-        if (/^react(-dom)?$/.test(dependencyName)) {
-          return "@latest";
+        if (
+          /^react(-dom)?$/.test(dependencyName) ||
+          /next$|(^@next\/.*$)/.test(dependencyName)
+        ) {
+          return "@canary";
         }
         return "latest";
       },
@@ -48,6 +55,9 @@ for (const packageFile of examplesPackageJsonList) {
   updatePromise.push(
     updateAndLog({
       packageFile,
+      filter(packageName) {
+        return !excludePackages.includes(packageName);
+      },
       upgrade: true,
     })
   );

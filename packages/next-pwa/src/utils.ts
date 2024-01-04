@@ -23,7 +23,9 @@ export const overrideAfterCalledMethod = (
 export const isInjectManifestConfig = (
   config: WorkboxTypes[keyof WorkboxTypes] | undefined
 ): config is WorkboxTypes["InjectManifest"] => {
-  return typeof config !== "undefined" && typeof config.swSrc === "string";
+  return (
+    typeof config !== "undefined" && typeof (config as any).swSrc === "string"
+  );
 };
 
 /**
