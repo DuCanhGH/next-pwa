@@ -7,7 +7,10 @@
 - [#130](https://github.com/DuCanhGH/next-pwa/pull/130) [`9ff6c29`](https://github.com/DuCanhGH/next-pwa/commit/9ff6c29352cb24f17654e2447f2e547c4243e146) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat(next-pwa): re-adjust `workboxOptions.exclude` defaults
 
   - This was long overdue, so here we are.
-
+  - Why?
+    - This proves to be more sensible than the old defaults.
+  - Would this incur a breaking change?
+    - Technically yes according to my definitions of a breaking change. It will cause a behavioural change in the built app, unexpectedly so for those who don't pinpoint their dependencies' versions. However, I don't believe this has an impact big enough. This... simply improves the user experience, and it won't cause any build to suddenly fail.
 ## 10.0.2
 
 ### Patch Changes
