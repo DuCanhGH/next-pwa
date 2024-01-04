@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 10.1.0
+
+### Minor Changes
+
+- [#130](https://github.com/DuCanhGH/next-pwa/pull/130) [`9ff6c29`](https://github.com/DuCanhGH/next-pwa/commit/9ff6c29352cb24f17654e2447f2e547c4243e146) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - feat(next-pwa): re-adjust `workboxOptions.exclude` defaults
+
+  - This was long overdue, so here we are.
+
 ## 10.0.2
 
 ### Patch Changes
