@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 10.2.1
+
+### Patch Changes
+
+- [`aeb0dc9`](https://github.com/DuCanhGH/next-pwa/commit/aeb0dc998ce3fbd350e90aad2e534d70f98abc4c) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(mjs): fixed the ESM build crashing
+
+  - This was due to us referencing `__dirname`, which was `undefined` in the ESM build...
+
 ## 10.2.0
 
 ### Minor Changes
