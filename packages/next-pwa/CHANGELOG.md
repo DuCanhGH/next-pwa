@@ -1,5 +1,15 @@
 # @ducanh2912/next-pwa
 
+## 10.2.0
+
+### Minor Changes
+
+- [`f65e6ab`](https://github.com/DuCanhGH/next-pwa/commit/f65e6aba279619c2bfb86ed28fe8bf966f6ce11e) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - refactor(core): create a context
+
+  - We now leverage a context to share the user's options for Webpack, Next.js, `next-pwa`, TypeScript, etc. across the codebase. This is better than the old approach, which was similar to props drilling, in that it is more readable and less error-prone.
+    - I'd like to extend my thanks to the `vite-pwa` team for this approach! Learned a lot through forking `vite-plugin-pwa`, that's for sure.
+  - Additionally, the codebase now leverages Biome.js instead of Prettier and ESLint. For now, pre-commit hooks using Husky are not available.
+
 ## 10.1.0
 
 ### Minor Changes
@@ -11,6 +21,7 @@
     - This proves to be more sensible than the old defaults.
   - Would this incur a breaking change?
     - Technically yes according to my definitions of a breaking change. It will cause a behavioural change in the built app, unexpectedly so for those who don't pinpoint their dependencies' versions. However, I don't believe this has an impact big enough. This... simply improves the user experience, and it won't cause any build to suddenly fail.
+
 ## 10.0.2
 
 ### Patch Changes
