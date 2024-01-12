@@ -5,7 +5,6 @@
  *  "input" | "output" | "plugins"
  * > & {
  *   external?: (string | RegExp)[] | string | RegExp;
- *   aliases?: Record<string, string[]>;
  * }} FileEntry
  */
 import alias from "@rollup/plugin-alias";
