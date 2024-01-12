@@ -1,5 +1,14 @@
 # @ducanh2912/next-pwa
 
+## 10.2.2
+
+### Patch Changes
+
+- [`e583be6`](https://github.com/DuCanhGH/next-pwa/commit/e583be60114cb5e0b85adbe50ae608a2665a5d13) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(disable): fixed `disable` not working properly
+
+  - In 10.2.0 and 10.2.1, when `disable` is set, some code is still unintendedly run, causing the resulting app to contain some erroneous JavaScript.
+  - This has been fixed in 10.2.2. Although we still run `parseOptions`, we only do so to get the default options.
+
 ## 10.2.1
 
 ### Patch Changes
