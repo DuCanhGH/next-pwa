@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 10.2.5
+
+### Patch Changes
+
+- [`e6ce949`](https://github.com/DuCanhGH/next-pwa/commit/e6ce949366f7fef9f4fdff7c1baf08da25e1268f) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - fix(core): fixed using fallbacks with files in the public directory
+
+  - Silly mistakes... Sorry for the inconvenience.
+
 ## 10.2.4
 
 ### Patch Changes
