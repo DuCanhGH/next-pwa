@@ -1,5 +1,13 @@
 # @ducanh2912/next-pwa
 
+## 10.2.7
+
+### Patch Changes
+
+- [`a1f09b3`](https://github.com/DuCanhGH/next-pwa/commit/a1f09b3eee624cc1cdf0d751731b460d910002bd) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - chore(next-pwa): removed `clean-webpack-plugin`
+
+  - This plugin is... unmaintained, and we could use `fs.rmSync` anyway.
+
 ## 10.2.6
 
 ### Patch Changes
