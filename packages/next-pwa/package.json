@@ -1,16 +1,25 @@
 {
   "name": "@ducanh2912/next-pwa",
-  "version": "10.2.7",
+  "version": "10.2.8",
   "type": "module",
   "private": false,
   "description": "PWA for Next.js, powered by Workbox.",
-  "keywords": ["nextjs", "pwa", "workbox", "web", "service-worker"],
+  "keywords": [
+    "nextjs",
+    "pwa",
+    "workbox",
+    "web",
+    "service-worker"
+  ],
   "author": "ShadowWalker <w@weiw.io>, DuCanhGH",
   "license": "MIT",
   "repository": "https://github.com/DuCanhGH/next-pwa",
   "bugs": "https://github.com/DuCanhGH/next-pwa/issues",
   "homepage": "https://ducanh-next-pwa.vercel.app",
-  "files": ["dist", "!dist/dts"],
+  "files": [
+    "dist",
+    "!dist/dts"
+  ],
   "source": "./src/index.ts",
   "imports": {
     "#utils/*.js": "./src/utils/*.ts"
@@ -40,7 +49,9 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "workbox": ["./dist/sw-entry.d.ts"]
+      "workbox": [
+        "./dist/sw-entry.d.ts"
+      ]
     }
   },
   "scripts": {

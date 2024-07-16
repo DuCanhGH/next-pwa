@@ -1,5 +1,11 @@
 # @ducanh2912/next-pwa
 
+## 10.2.8
+
+### Patch Changes
+
+- [`d43ba6c`](https://github.com/DuCanhGH/next-pwa/commit/d43ba6c2cd0ed0df0a03d1d5e0eb6b7a733ee8b7) Thanks [@DuCanhGH](https://github.com/DuCanhGH)! - chore(deps): monthly dependencies maintenance
+
 ## 10.2.7
 
 ### Patch Changes
